@@ -1,0 +1,24 @@
+#include "global.h"
+#include "graphics.h"
+#include "lockstep_graphics.h"
+
+Palette lockstep_pal[] = {
+    {
+        TO_RGB555(0xF83888),
+        TO_RGB555(0xF8D8E8),
+        TO_RGB555(0x982860),
+        TO_RGB555(0x707070),
+        TO_RGB555(0xB0B0B0),
+        TO_RGB555(0xA8A8A8),
+        TO_RGB555(0x989898),
+        TO_RGB555(0x909090),
+        TO_RGB555(0x888888),
+        TO_RGB555(0x787878),
+        TO_RGB555(0x707070),
+        TO_RGB555(0x000000),
+        TO_RGB555(0x000000),
+        TO_RGB555(0x982860),
+        TO_RGB555(0xF8F800),
+        TO_RGB555(0xE0C0D0)
+    }
+};

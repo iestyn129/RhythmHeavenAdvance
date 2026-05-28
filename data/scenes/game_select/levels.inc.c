@@ -1,7 +1,7 @@
 // Level Entries Table
 struct LevelData level_data_table[] = {
     /* KARATE_MAN */ {
-        /* Entry Scene   */ &scene_karate_man,
+        /* Entry Scene   */ &scene_lockstep,
         /* Level Name    */ "Karate Man",
         /* Level Desc.   */ "The key to karate,\n"
                             "like all things, is rhythm.\n"

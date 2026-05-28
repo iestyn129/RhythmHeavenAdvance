@@ -768,3 +768,8 @@ char spaceball_tempo_mpart_seqName[] = "";
 char spaceball_tempo_cymbal_seqName[] = "";
 char rhythmtweezers_tempo_seqName[] = "";
 char s_karate_extra_bgm_seqName[] = "";
+
+char s_lockstep_bgm_seqName[] = "";
+char s_f_lockstep_step_seqName[] = "";
+char s_f_lockstep_shot_r_seqName[] = "";
+char s_f_lockstep_shot_l_seqName[] = "";

@@ -2084,3 +2084,12 @@ union Instrument inst_bank_space_dance_en[] = {
     /* 120 */ NULL,                            NULL,                            NULL,                            NULL,
     /* 124 */ NULL,                            NULL,                            NULL,                            NULL
 };
+
+union Instrument inst_bank_lockstep[] = {
+    /* 0 */ { .pcm = &instrument_pcm_lockstep_step },
+    /* 1 */ { .pcm = &instrument_pcm_lockstep_shot_r },
+    /* 2 */ { .pcm = &instrument_pcm_lockstep_shot_l },
+    /* 3 */ { .pcm = &instrument_pcm_lockstep_bass },
+    NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,
+    /* 127 */ { .pcm = &instrument_rhy_drum47 },
+};

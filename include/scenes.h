@@ -46,6 +46,7 @@ extern struct Scene scene_read_error;
 extern struct Scene scene_gbp_handshake;
 
 // Main Games
+extern struct Scene scene_lockstep;
 extern struct Scene scene_karate_man;
 extern struct Scene scene_karate_man_2;
 extern struct Scene scene_clappy_trio;

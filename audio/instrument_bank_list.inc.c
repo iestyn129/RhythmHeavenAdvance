@@ -79,7 +79,7 @@ union Instrument *instrument_banks[] = {
     /* 077 */ inst_bank_45,
     /* 078 */ inst_bank_46,
     /* 079 */ NULL,
-    /* 080 */ NULL,
+    /* 080 */ inst_bank_lockstep,
     /* 081 */ NULL,
     /* 082 */ NULL,
     /* 083 */ NULL,

@@ -14,7 +14,12 @@ tools/agbcc/*
 *.Identifier
 *.reapeaks
 .vscode/*
+.idea/*
 ctx.c
 
 # my handy graphics tool
 bitesthedust.py
+
+.DS_Store
+CMakeLists.txt
+cmake-build-debug/*

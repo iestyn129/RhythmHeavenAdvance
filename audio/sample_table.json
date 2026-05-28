@@ -6104,6 +6104,26 @@
         {
             "sample": "you_are_growing_up_well.wav",
             "pitch": "C5"
+        },
+        {
+            "sample": "lockstep_sample_step.wav",
+            "pitch": "C5"
+        },
+        {
+            "sample": "lockstep_sample_shot_r.wav",
+            "pitch": "C5"
+        },
+        {
+            "sample": "lockstep_sample_shot_l.wav",
+            "pitch": "C5"
+        },
+        {
+            "sample": "lockstep_sample_bass.wav",
+            "pitch": "B2",
+            "loop": [
+                61366,
+                79999
+            ]
         }
     ]
 }

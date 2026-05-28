@@ -1,3 +1,6 @@
+#include "audio/sequence_group/space_dance_song_headers.inc.c"
+#include "audio/sequence_group/lockstep_sequence_data.inc.c"
+
 extern const u8 s_karate_extra_bgm_mid[];
 struct SongHeader s_karate_extra_bgm_seqData = {
     /* MIDI Sequence */ s_karate_extra_bgm_mid,
@@ -3326,8 +3329,6 @@ struct SongHeader s_ghost_rain_seqData = {
     /* Song Title    */ s_ghost_rain_seqName,
     /* Song Number   */ 1506
 };
-
-#include "audio/sequence_group/space_dance_song_headers.inc.c"
 
 extern const u8 s_guntai1_mid[];
 struct SongHeader s_guntai1_seqData = {

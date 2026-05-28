@@ -799,3 +799,8 @@ extern struct SongHeader spaceball_tempo_seqData;
 extern struct SongHeader spaceball_tempo_mpart_seqData;
 extern struct SongHeader spaceball_tempo_cymbal_seqData;
 extern struct SongHeader rhythmtweezers_tempo_seqData;
+
+extern struct SongHeader s_lockstep_bgm_seqData;
+extern struct SongHeader s_f_lockstep_step_seqData;
+extern struct SongHeader s_f_lockstep_shot_r_seqData;
+extern struct SongHeader s_f_lockstep_shot_l_seqData;
