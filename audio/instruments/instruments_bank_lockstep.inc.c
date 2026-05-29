@@ -148,6 +148,21 @@ struct InstrumentPCM instrument_pcm_lockstep_hah = {
     /* ADSR Rel  */ 0x18EA90,
 };
 
+extern struct SampleData sample_435_data;
+struct InstrumentPCM instrument_pcm_lockstep_miss = {
+    /* Type      */ INSTRUMENT_PCM_ALIGNED,
+    /* Key       */ 0x3C,
+    /* Fast Read */ FALSE,
+    /* Panning   */ 127,
+    /* Sample    */ &sample_435_data,
+    /* ADSR Init */ 0x7F0000,
+    /* ADSR Sus  */ 0x7F0000,
+    /* ADSR Atk  */ 0x600000,
+    /* ADSR Dec  */ 0x208000,
+    /* ADSR Fade */ 0x000000,
+    /* ADSR Rel  */ 0x1E7FBA,
+};
+
 extern union Instrument inst_bank_47[];
 struct InstrumentSubRhythm instrument_rhy_drum47 = {
     /* Type      */ INSTRUMENT_SUB_RHYTHM,

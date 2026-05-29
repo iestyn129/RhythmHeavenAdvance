@@ -11,12 +11,19 @@ enum LockstepCuesEnum {
 	LOCKSTEP_CUE_R
 };
 
+enum StepperMissState {
+	MISS_L,
+	MISS_R,
+	MISS_NONE
+};
+
 struct LockstepEngineData {
 	u8 version;
 	u8 awaitingInput;
 
 	struct SwitchStepper {
 		s16 sprite;
+		u8 missState;
 	} stepper;
 	s16 crowdSprite;
 
@@ -45,6 +52,7 @@ extern void lockstep_engine_update(void);
 extern void stepper_init(struct SwitchStepper* stepper);
 extern void stepper_delete(struct SwitchStepper* stepper);
 extern void stepper_update(struct SwitchStepper* stepper);
+extern void stepper_set_anim(struct SwitchStepper* stepper, struct Animation* anim);
 
 extern void lockstep_wait_for_input(void);
 extern void lockstep_beat_anim(u8 play_sfx);

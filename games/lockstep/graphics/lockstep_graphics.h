@@ -7,6 +7,9 @@ extern struct Animation anim_lockstep_stepper_idle[];
 extern struct Animation anim_lockstep_stepper_beat[];
 extern struct Animation anim_lockstep_stepper_shot_r[];
 extern struct Animation anim_lockstep_stepper_shot_l[];
+extern struct Animation anim_lockstep_stepper_miss_r[];
+extern struct Animation anim_lockstep_stepper_miss_l[];
+
 extern struct Animation anim_lockstep_crowd_idle[];
 extern struct Animation anim_lockstep_crowd_beat[];
 extern struct Animation anim_lockstep_crowd_shot_r[];

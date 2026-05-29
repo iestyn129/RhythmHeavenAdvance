@@ -779,3 +779,4 @@ char s_f_lockstep_high_seqName[] = "";
 char s_f_lockstep_hoh_seqName[] = "";
 char s_f_lockstep_mhm_seqName[] = "";
 char s_f_lockstep_hah_seqName[] = "";
+char s_f_lockstep_miss_seqName[] = "";

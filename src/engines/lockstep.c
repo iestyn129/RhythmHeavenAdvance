@@ -74,6 +74,7 @@ void stepper_init(struct SwitchStepper* stepper) {
         72, 40, 0x4900,
         1, 0, 0
     );
+    stepper->missState = MISS_NONE;
 }
 
 
@@ -85,6 +86,15 @@ void stepper_delete(struct SwitchStepper* stepper) {
 void stepper_update(struct SwitchStepper* stepper) {}
 
 
+void stepper_set_anim(struct SwitchStepper* stepper, struct Animation* anim) {
+    sprite_set_anim(gSpriteHandler,
+        stepper->sprite, anim,
+        0, 1, 0x7f, 0
+    );
+    stepper->missState = MISS_NONE;
+}
+
+
 void lockstep_wait_for_input(void) {
     set_pause_beatscript_scene(TRUE);
     gLockstep->awaitingInput = TRUE;
@@ -94,10 +104,7 @@ void lockstep_wait_for_input(void) {
 void lockstep_beat_anim(u8 play_sfx) {
     struct SwitchStepper* stepper = &gLockstep->stepper;
 
-    sprite_set_anim(gSpriteHandler,
-        stepper->sprite, anim_lockstep_stepper_beat,
-        0, 1, 0x7f, 0
-    );
+    stepper_set_anim(stepper, anim_lockstep_stepper_beat);
 
     sprite_set_anim(gSpriteHandler,
         gLockstep->crowdSprite, anim_lockstep_crowd_beat,
@@ -148,10 +155,7 @@ void lockstep_input_event(const u32 pressed, u32 released) {
             break;
     }
 
-    sprite_set_anim(gSpriteHandler,
-        stepper->sprite, anim,
-        0, 1, 0x7f, 0
-    );
+    stepper_set_anim(stepper, anim);
 
     play_sound(&s_witch_donats_seqData);
 }
@@ -203,16 +207,10 @@ void lockstep_cue_hit(struct Cue *cue, struct LockstepCue *info, u32 pressed, u3
 
     switch (info->type) {
         case LOCKSTEP_CUE_L:
-            sprite_set_anim(gSpriteHandler,
-                stepper->sprite, anim_lockstep_stepper_shot_l,
-                0, 1, 0x7f, 0
-            );
+            stepper_set_anim(stepper, anim_lockstep_stepper_shot_l);
             break;
         case LOCKSTEP_CUE_R:
-            sprite_set_anim(gSpriteHandler,
-                stepper->sprite, anim_lockstep_stepper_shot_r,
-                0, 1, 0x7f, 0
-            );
+            stepper_set_anim(stepper, anim_lockstep_stepper_shot_r);
             break;
         default:
             break;
@@ -225,16 +223,10 @@ void lockstep_cue_barely(struct Cue *cue, struct LockstepCue *info, u32 pressed,
 
     switch (info->type) {
         case LOCKSTEP_CUE_L:
-            sprite_set_anim(gSpriteHandler,
-                stepper->sprite, anim_lockstep_stepper_shot_l,
-                0, 1, 0x7f, 0
-            );
+            stepper_set_anim(stepper, anim_lockstep_stepper_shot_l);
             break;
         case LOCKSTEP_CUE_R:
-            sprite_set_anim(gSpriteHandler,
-                stepper->sprite, anim_lockstep_stepper_shot_r,
-                0, 1, 0x7f, 0
-            );
+            stepper_set_anim(stepper, anim_lockstep_stepper_shot_r);
             break;
         default:
             break;
@@ -242,7 +234,30 @@ void lockstep_cue_barely(struct Cue *cue, struct LockstepCue *info, u32 pressed,
 }
 
 
-void lockstep_cue_miss(struct Cue *cue, struct LockstepCue *info) {}
+void lockstep_cue_miss(struct Cue *cue, struct LockstepCue *info) {
+    struct SwitchStepper* stepper = &gLockstep->stepper;
+
+    switch (info->type) {
+        case LOCKSTEP_CUE_L:
+            if (stepper->missState != MISS_L) {
+                stepper_set_anim(stepper, anim_lockstep_stepper_miss_l);
+                play_sound(&s_f_lockstep_miss_seqData);
+            }
+
+            stepper->missState = MISS_L;
+            break;
+        case LOCKSTEP_CUE_R:
+            if (stepper->missState != MISS_R) {
+                stepper_set_anim(stepper, anim_lockstep_stepper_miss_r);
+                play_sound(&s_f_lockstep_miss_seqData);
+            }
+
+            stepper->missState = MISS_R;
+            break;
+        default:
+            break;
+    }
+}
 
 
 void lockstep_update_bg_palette(void) {

@@ -90,7 +90,7 @@
 /* 0087 */ DEFINE_SONG( &s_f_lockstep_hoh_seqData, SFX_PLAYER_2 )
 /* 0088 */ DEFINE_SONG( &s_f_lockstep_mhm_seqData, SFX_PLAYER_2 )
 /* 0089 */ DEFINE_SONG( &s_f_lockstep_hah_seqData, SFX_PLAYER_2 )
-/* 0090 */ DEFINE_SONG( NULL, 0 )
+/* 0090 */ DEFINE_SONG( &s_f_lockstep_miss_seqData, SFX_PLAYER_3 )
 /* 0091 */ DEFINE_SONG( NULL, 0 )
 /* 0092 */ DEFINE_SONG( NULL, 0 )
 /* 0093 */ DEFINE_SONG( NULL, 0 )

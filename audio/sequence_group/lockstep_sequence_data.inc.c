@@ -117,3 +117,15 @@ struct SongHeader s_f_lockstep_hah_seqData = {
 	/* Song Title    */ s_f_lockstep_hah_seqName,
 	/* Song Number   */ 89
 };
+
+extern const u8 s_f_lockstep_miss_mid[];
+struct SongHeader s_f_lockstep_miss_seqData = {
+	/* MIDI Sequence */ s_f_lockstep_miss_mid,
+	/* Sound Player  */ SFX_PLAYER_2,
+	/* Bank Number   */ INST_BANK_LOCKSTEP,
+	/* Volume        */ 115,
+	/* Priority      */ 80,
+	/* unk8          */ 0x40,
+	/* Song Title    */ s_f_lockstep_miss_seqName,
+	/* Song Number   */ 90
+};

@@ -34,6 +34,19 @@ struct Animation anim_lockstep_stepper_shot_l[] = {
     END_ANIMATION
 };
 
+struct Animation anim_lockstep_stepper_miss_r[] = {
+    { lockstep_stepper_miss_r_cel00, 4 },
+    { lockstep_stepper_miss_r_cel01, 20 },
+    END_ANIMATION
+};
+
+struct Animation anim_lockstep_stepper_miss_l[] = {
+    { lockstep_stepper_miss_l_cel00, 4 },
+    { lockstep_stepper_miss_l_cel01, 20 },
+    END_ANIMATION
+};
+
+
 struct Animation anim_lockstep_crowd_idle[] = {
     { lockstep_crowd_idle_cel, 24 },
     END_ANIMATION

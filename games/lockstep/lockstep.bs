@@ -257,7 +257,6 @@ script lockstep_l_direct_trans
     lockstep_flip_bg
     rest 12
     play_sfx s_f_lockstep_hai_seqData
-    lockstep_flip_bg
 		lockstep_set_direction 0
     spawn_cue CUE_L
     rest 24
