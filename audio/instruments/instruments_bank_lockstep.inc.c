@@ -58,6 +58,96 @@ struct InstrumentPCM instrument_pcm_lockstep_shot_l = {
     /* ADSR Rel  */ 0x18EA90,
 };
 
+extern struct SampleData lockstep_sample_hai_data;
+struct InstrumentPCM instrument_pcm_lockstep_hai = {
+    /* Type      */ INSTRUMENT_PCM_FIXED,
+    /* Key       */ 0x3C,
+    /* Fast Read */ FALSE,
+    /* Panning   */ 127,
+    /* Sample    */ &lockstep_sample_hai_data,
+    /* ADSR Init */ 0x7F0000,
+    /* ADSR Sus  */ 0x000000,
+    /* ADSR Atk  */ 0x600000,
+    /* ADSR Dec  */ 0x034867,
+    /* ADSR Fade */ 0x000000,
+    /* ADSR Rel  */ 0x18EA90,
+};
+
+extern struct SampleData lockstep_sample_ah_data;
+struct InstrumentPCM instrument_pcm_lockstep_ah = {
+    /* Type      */ INSTRUMENT_PCM_FIXED,
+    /* Key       */ 0x3C,
+    /* Fast Read */ FALSE,
+    /* Panning   */ 127,
+    /* Sample    */ &lockstep_sample_ah_data,
+    /* ADSR Init */ 0x7F0000,
+    /* ADSR Sus  */ 0x000000,
+    /* ADSR Atk  */ 0x600000,
+    /* ADSR Dec  */ 0x034867,
+    /* ADSR Fade */ 0x000000,
+    /* ADSR Rel  */ 0x18EA90,
+};
+
+extern struct SampleData lockstep_sample_high_data;
+struct InstrumentPCM instrument_pcm_lockstep_high = {
+    /* Type      */ INSTRUMENT_PCM_FIXED,
+    /* Key       */ 0x3C,
+    /* Fast Read */ FALSE,
+    /* Panning   */ 127,
+    /* Sample    */ &lockstep_sample_high_data,
+    /* ADSR Init */ 0x7F0000,
+    /* ADSR Sus  */ 0x000000,
+    /* ADSR Atk  */ 0x600000,
+    /* ADSR Dec  */ 0x034867,
+    /* ADSR Fade */ 0x000000,
+    /* ADSR Rel  */ 0x18EA90,
+};
+
+extern struct SampleData lockstep_sample_hoh_data;
+struct InstrumentPCM instrument_pcm_lockstep_hoh = {
+    /* Type      */ INSTRUMENT_PCM_FIXED,
+    /* Key       */ 0x3C,
+    /* Fast Read */ FALSE,
+    /* Panning   */ 127,
+    /* Sample    */ &lockstep_sample_hoh_data,
+    /* ADSR Init */ 0x7F0000,
+    /* ADSR Sus  */ 0x000000,
+    /* ADSR Atk  */ 0x600000,
+    /* ADSR Dec  */ 0x034867,
+    /* ADSR Fade */ 0x000000,
+    /* ADSR Rel  */ 0x18EA90,
+};
+
+extern struct SampleData lockstep_sample_mhm_data;
+struct InstrumentPCM instrument_pcm_lockstep_mhm = {
+    /* Type      */ INSTRUMENT_PCM_FIXED,
+    /* Key       */ 0x3C,
+    /* Fast Read */ FALSE,
+    /* Panning   */ 127,
+    /* Sample    */ &lockstep_sample_mhm_data,
+    /* ADSR Init */ 0x7F0000,
+    /* ADSR Sus  */ 0x000000,
+    /* ADSR Atk  */ 0x600000,
+    /* ADSR Dec  */ 0x034867,
+    /* ADSR Fade */ 0x000000,
+    /* ADSR Rel  */ 0x18EA90,
+};
+
+extern struct SampleData lockstep_sample_hah_data;
+struct InstrumentPCM instrument_pcm_lockstep_hah = {
+    /* Type      */ INSTRUMENT_PCM_FIXED,
+    /* Key       */ 0x3C,
+    /* Fast Read */ FALSE,
+    /* Panning   */ 127,
+    /* Sample    */ &lockstep_sample_hah_data,
+    /* ADSR Init */ 0x7F0000,
+    /* ADSR Sus  */ 0x000000,
+    /* ADSR Atk  */ 0x600000,
+    /* ADSR Dec  */ 0x034867,
+    /* ADSR Fade */ 0x000000,
+    /* ADSR Rel  */ 0x18EA90,
+};
+
 extern union Instrument inst_bank_47[];
 struct InstrumentSubRhythm instrument_rhy_drum47 = {
     /* Type      */ INSTRUMENT_SUB_RHYTHM,

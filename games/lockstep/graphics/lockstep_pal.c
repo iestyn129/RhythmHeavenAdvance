@@ -2,7 +2,7 @@
 #include "graphics.h"
 #include "lockstep_graphics.h"
 
-Palette lockstep_pal[] = {
+Palette lockstep_obj_pal[] = {
     {
         TO_RGB555(0xF83888),
         TO_RGB555(0xF8D8E8),
@@ -20,5 +20,62 @@ Palette lockstep_pal[] = {
         TO_RGB555(0x982860),
         TO_RGB555(0xF8F800),
         TO_RGB555(0xE0C0D0)
+    }
+};
+
+Palette lockstep_bg_pal[] = {
+    {
+        TO_RGB555(0x000000),
+        TO_RGB555(0x000000),
+        TO_RGB555(0x000000),
+        TO_RGB555(0x000000),
+        TO_RGB555(0x000000),
+        TO_RGB555(0x000000),
+        TO_RGB555(0x000000),
+        TO_RGB555(0x000000),
+        TO_RGB555(0x000000),
+        TO_RGB555(0x000000),
+        TO_RGB555(0x000000),
+        TO_RGB555(0x000000),
+        TO_RGB555(0x000000),
+        TO_RGB555(0x000000),
+        TO_RGB555(0x000000),
+        TO_RGB555(0x000000)
+    },
+    {
+        TO_RGB555(0xF43D8E),
+        TO_RGB555(0x000000),
+        TO_RGB555(0x000000),
+        TO_RGB555(0x000000),
+        TO_RGB555(0x000000),
+        TO_RGB555(0x000000),
+        TO_RGB555(0x000000),
+        TO_RGB555(0x000000),
+        TO_RGB555(0x000000),
+        TO_RGB555(0x000000),
+        TO_RGB555(0x000000),
+        TO_RGB555(0x000000),
+        TO_RGB555(0x000000),
+        TO_RGB555(0x000000),
+        TO_RGB555(0x000000),
+        TO_RGB555(0x000000)
+    },
+    {
+        TO_RGB555(0xE84D9C),
+        TO_RGB555(0x000000),
+        TO_RGB555(0x000000),
+        TO_RGB555(0x000000),
+        TO_RGB555(0x000000),
+        TO_RGB555(0x000000),
+        TO_RGB555(0x000000),
+        TO_RGB555(0x000000),
+        TO_RGB555(0x000000),
+        TO_RGB555(0x000000),
+        TO_RGB555(0x000000),
+        TO_RGB555(0x000000),
+        TO_RGB555(0x000000),
+        TO_RGB555(0x000000),
+        TO_RGB555(0x000000),
+        TO_RGB555(0x000000)
     }
 };

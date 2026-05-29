@@ -3,7 +3,7 @@
 
 
 .section .script.entry
-@ lockstep - Script Entry Point
+@ Lockstep - Script Entry Point
 
 script script_lockstep_entry
     set_tempo 124
@@ -26,7 +26,7 @@ define_gameplay_scene scene_lockstep, script_lockstep_entry
 
 
 .section .script.prologue
-@ lockstep - Prologue
+@ Lockstep - Prologue
 
 script script_lockstep_prologue
     set_game_fade_in_time 8
@@ -83,18 +83,17 @@ script script_lockstep_prologue
     run lockstep_set_frame, 24
     rest 3
     run lockstep_set_frame, 25
-    rest 12
+    rest 24
     rest 24
     rest 24
     rest 24
     run func_08006d80, 0
-    rest 18
     set_game_fade_in_time 16
 return
 
 
 .section .script.main
-@ lockstep - Marking Criteria
+@ Lockstep - Marking Criteria
 
 struct lockstep_marking_criteria_0
     /* Positive Remark */     .word D_0805ab68
@@ -112,25 +111,188 @@ endstruct
 
 
 
-@ lockstep - Main Script
+@ Lockstep - Main Script
 
 script script_lockstep_main
     import_marking_criteria lockstep_marking_criteria
     set_results_header D_0805abdc
-    @start_perfect_campaign
+    disable_play_inputs
     rest 24
     enable_pause_menu
-    run gameplay_set_sound_tempo, 130
-    set_tempo 130
+    run gameplay_set_sound_tempo, 162
+    set_tempo 162
     set_music_volume 200
+    rest 24
+    rest 24
+    lockstep_beat_anim 0
+    rest 24
+    rest 24
     play_music s_lockstep_bgm_seqData
-    set_marking_criteria 0
+    start_perfect_campaign
+    enable_play_inputs
+    lockstep_beat_anim 0
     rest 24
+    rest 24
+    lockstep_beat_anim 0
+    rest 24
+    rest 24
+    lockstep_beat_anim 0
+    rest 24
+    rest 24
+    lockstep_beat_anim 0
+    rest 24
+    rest 24
+    lockstep_beat_anim 0
+    rest 24
+    rest 24
+    lockstep_beat_anim 0
+    rest 24
+    rest 24
+    lockstep_beat_anim 1
+    rest 24
+    lockstep_beat_anim 1
+    rest 24
+    lockstep_beat_anim 1
+    rest 24
+    lockstep_beat_anim 1
+		@ not resting a beat here since the cues are 1 beat ahead
+
+    call lockstep_l_intro
+    call lockstep_l_2bar
+    call lockstep_l_trans
+    call lockstep_r_post_trans
+    call lockstep_r_2bar
+    call lockstep_r_trans
+    call lockstep_l_post_trans
+    call lockstep_l_2bar
+    call lockstep_l_trans
+    call lockstep_r_post_trans
+    call lockstep_r_2bar
+    call lockstep_r_trans
+
     lockstep_wait_for_input
-    @stop_tracking_perfect_campaign
+    stop_tracking_perfect_campaign
     rest 24
     rest 24
     rest 24
+return
+
+script lockstep_l_intro
+    spawn_cue CUE_L
+    rest 24
+    play_sfx s_f_lockstep_hai_seqData
+    spawn_cue CUE_L
+    rest 24
+    spawn_cue CUE_L
+    rest 24
+    spawn_cue CUE_L
+    rest 24
+return
+
+script lockstep_l_trans
+    spawn_cue CUE_L
+    rest 24
+    play_sfx s_f_lockstep_hai_seqData
+    lockstep_flip_bg
+    spawn_cue CUE_L
+    rest 24
+    play_sfx s_f_lockstep_hai_seqData
+    lockstep_flip_bg
+    spawn_cue CUE_L
+    rest 24
+    play_sfx s_f_lockstep_hai_seqData
+    lockstep_flip_bg
+    spawn_cue CUE_L
+    rest 12
+    spawn_cue CUE_R
+    rest 12
+    play_sfx s_f_lockstep_ah_seqData
+    lockstep_flip_bg
+    rest 12
+    play_sfx s_f_lockstep_high_seqData
+    lockstep_flip_bg
+return
+
+script lockstep_l_post_trans
+    spawn_cue CUE_L
+    rest 12
+    play_sfx s_f_lockstep_hah_seqData
+    lockstep_flip_bg
+    rest 12
+    play_sfx s_f_lockstep_hai_seqData
+    lockstep_flip_bg
+    spawn_cue CUE_L
+    rest 24
+    spawn_cue CUE_L
+    rest 24
+    spawn_cue CUE_L
+    rest 24
+return
+
+script lockstep_l_1bar
+    spawn_cue CUE_L
+    rest 24
+    spawn_cue CUE_L
+    rest 24
+    spawn_cue CUE_L
+    rest 24
+    spawn_cue CUE_L
+    rest 24
+return
+
+script lockstep_l_2bar
+		call lockstep_l_1bar
+		call lockstep_l_1bar
+return
+
+script lockstep_r_trans
+		set_marking_criteria 0
+    spawn_cue CUE_R
+    rest 24
+    spawn_cue CUE_R
+    rest 24
+    spawn_cue CUE_R
+    rest 12
+    play_sfx s_f_lockstep_mhm_seqData
+    lockstep_flip_bg
+    rest 12
+    play_sfx s_f_lockstep_hah_seqData
+    lockstep_flip_bg
+    spawn_cue CUE_R
+    rest 12
+    play_sfx s_f_lockstep_mhm_seqData
+    lockstep_flip_bg
+return
+
+script lockstep_r_post_trans
+    spawn_cue CUE_R
+    rest 24
+    play_sfx s_f_lockstep_hoh_seqData
+    spawn_cue CUE_R
+    rest 24
+    play_sfx s_f_lockstep_hoh_seqData
+    spawn_cue CUE_R
+    rest 24
+    play_sfx s_f_lockstep_hoh_seqData
+    spawn_cue CUE_R
+    rest 24
+    play_sfx_vol s_f_lockstep_hoh_seqData, 85
+return
+
+script lockstep_r_1bar
+    spawn_cue CUE_R
+    rest 24
+    spawn_cue CUE_R
+    rest 24
+    spawn_cue CUE_R
+    rest 24
+    spawn_cue CUE_R
+    rest 24
+return
+
+script lockstep_r_2bar
+		call lockstep_r_1bar
+		call lockstep_r_1bar
 return
 
 .end

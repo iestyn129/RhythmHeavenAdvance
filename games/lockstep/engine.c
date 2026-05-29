@@ -7,7 +7,9 @@ EngineEvent lockstep_common_events[] = {
 };
 
 EngineEvent lockstep_engine_events[] = {
-	lockstep_wait_for_input
+	lockstep_wait_for_input,
+	lockstep_beat_anim,
+	lockstep_flip_bg
 };
 
 struct GameEngine lockstep_engine = {
@@ -42,12 +44,12 @@ struct GraphicsTable lockstep_gfx_table[] = {
 		COMPRESSED_GFX_SOURCE
 	},
 	{
-		lockstep_pal,
+		lockstep_bg_pal,
 		BG_PALETTE_BUFFER(0), // bg palette 0
-		0x20
+		0x60
 	},
 	{
-		lockstep_pal,
+		lockstep_obj_pal,
 		OBJ_PALETTE_BUFFER(0), // obj palette 0
 		0x20
 	},
@@ -58,6 +60,58 @@ struct GraphicsTable *lockstep_gfx_tables[] = {
 	lockstep_gfx_table
 };
 
+u8 lockstep_palettes[] = {
+	1, 2
+};
+
+struct CueDefinition lockstep_cue_l = {
+	/* Unknown Param.  */ 0,
+	/* Input Buttons   */ PRESS_BUTTON(A_BUTTON),
+	/* Total Duration  */ 0x18,
+	/* Hit Window      */ -0x03, 0x03,
+	/* Barely Window   */ -0x05, 0x05,
+	/* Tempo-Dependent */ FALSE,
+	/* Force-Delete    */ FALSE,
+	/* Size in Memory  */ sizeof(struct LockstepCue),
+	/* Func. Spawn     */ lockstep_cue_spawn,
+	/* Spawn Parameter */ LOCKSTEP_CUE_L,
+	/* Func. Update    */ lockstep_cue_update,
+	/* Func. Despawn   */ lockstep_cue_despawn,
+	/* Func. Hit       */ lockstep_cue_hit,
+	/* Func. Barely    */ lockstep_cue_barely,
+	/* Func. Miss      */ lockstep_cue_miss,
+	/* SFX Spawn       */ NULL,
+	/* SFX Hit         */ &s_f_lockstep_shot_l_seqData,
+	/* SFX Barely      */ &s_tebyoushi_pati_seqData,
+	/* SFX Miss        */ NULL,
+	/* Miss Condition  */ NULL
+};
+
+struct CueDefinition lockstep_cue_r = {
+	/* Unknown Param.  */ 0,
+	/* Input Buttons   */ PRESS_BUTTON(A_BUTTON),
+	/* Total Duration  */ 0x18,
+	/* Hit Window      */ -0x03, 0x03,
+	/* Barely Window   */ -0x05, 0x05,
+	/* Tempo-Dependent */ FALSE,
+	/* Force-Delete    */ FALSE,
+	/* Size in Memory  */ sizeof(struct LockstepCue),
+	/* Func. Spawn     */ lockstep_cue_spawn,
+	/* Spawn Parameter */ LOCKSTEP_CUE_R,
+	/* Func. Update    */ lockstep_cue_update,
+	/* Func. Despawn   */ lockstep_cue_despawn,
+	/* Func. Hit       */ lockstep_cue_hit,
+	/* Func. Barely    */ lockstep_cue_barely,
+	/* Func. Miss      */ lockstep_cue_miss,
+	/* SFX Spawn       */ NULL,
+	/* SFX Hit         */ &s_f_lockstep_shot_r_seqData,
+	/* SFX Barely      */ &s_tebyoushi_pati_seqData,
+	/* SFX Miss        */ NULL,
+	/* Miss Condition  */ NULL
+};
+
 struct CueDefinition *lockstep_cue_index[] = {
+	&lockstep_cue_l,
+	&lockstep_cue_r,
 	END_OF_CUE_INDEX
 };

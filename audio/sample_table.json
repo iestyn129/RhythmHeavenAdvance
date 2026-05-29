@@ -6118,6 +6118,30 @@
             "pitch": "C5"
         },
         {
+            "sample": "lockstep_sample_hai.wav",
+            "pitch": "C5"
+        },
+        {
+            "sample": "lockstep_sample_ah.wav",
+            "pitch": "C5"
+        },
+        {
+            "sample": "lockstep_sample_high.wav",
+            "pitch": "C5"
+        },
+        {
+            "sample": "lockstep_sample_hoh.wav",
+            "pitch": "C5"
+        },
+        {
+            "sample": "lockstep_sample_mhm.wav",
+            "pitch": "C5"
+        },
+        {
+            "sample": "lockstep_sample_hah.wav",
+            "pitch": "C5"
+        },
+        {
             "sample": "lockstep_sample_bass.wav",
             "pitch": "B2",
             "loop": [
