@@ -4,6 +4,8 @@
     .set WAIT_FOR_INPUT, 0x00
     .set BEAT_ANIM, 0x01
     .set FLIP_BG, 0x02
+    .set SET_DIRECTION, 0x03
+    .set SET_CRITERIA, 0x04
 
     @ Cues
     .set CUE_L, 0x00
@@ -36,4 +38,15 @@ load_lockstep_labels
 @ [Event 0x02] flip bg
 .macro lockstep_flip_bg
     lockstep_event FLIP_BG, 0
+.endm
+
+@ [Event 0x03] set direction
+.macro lockstep_set_direction direction
+    lockstep_event SET_DIRECTION, \direction
+.endm
+
+@ [Event 0x04] set marking criteria
+.macro lockstep_set_criteria criteria
+    lockstep_event SET_CRITERIA, \criteria
+    set_marking_criteria \criteria
 .endm

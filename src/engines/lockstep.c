@@ -71,7 +71,7 @@ void lockstep_engine_update(void) {
 void stepper_init(struct SwitchStepper* stepper) {
     stepper->sprite = sprite_create(gSpriteHandler,
     anim_lockstep_stepper_idle, 0,
-        72, 40, 0x4800,
+        72, 40, 0x4900,
         1, 0, 0
     );
 }
@@ -120,7 +120,41 @@ void lockstep_flip_bg(void) {
 }
 
 
-void lockstep_input_event(const u32 pressed, u32 released) {}
+void lockstep_set_direction(u8 direction) {
+    gLockstep->direction = direction;
+
+    if (gLockstep->direction > LOCKSTEP_CUE_R) {
+        gLockstep->direction = LOCKSTEP_CUE_R;
+    }
+}
+
+
+void lockstep_set_marking_criteria(u8 criteria) {
+    gLockstep->markingCriteria = criteria;
+}
+
+
+void lockstep_input_event(const u32 pressed, u32 released) {
+    struct SwitchStepper* stepper = &gLockstep->stepper;
+    struct Animation* anim;
+
+    switch (gLockstep->direction) {
+        case LOCKSTEP_CUE_R:
+            anim = anim_lockstep_stepper_shot_l;
+            break;
+        case LOCKSTEP_CUE_L:
+        default:
+            anim = anim_lockstep_stepper_shot_r;
+            break;
+    }
+
+    sprite_set_anim(gSpriteHandler,
+        stepper->sprite, anim,
+        0, 1, 0x7f, 0
+    );
+
+    play_sound(&s_witch_donats_seqData);
+}
 
 
 void lockstep_cue_spawn(struct Cue *cue, struct LockstepCue *info, u32 type) {
@@ -132,7 +166,7 @@ void lockstep_cue_spawn(struct Cue *cue, struct LockstepCue *info, u32 type) {
 u32 lockstep_cue_update(struct Cue *cue, struct LockstepCue *info, u32 runningTime, u32 duration) {
     s32 passedBeats = Div(INT_TO_FIXED(runningTime), duration);
 
-    if (!info->hasStepped && passedBeats >= 0x100) {
+    if (!info->hasStepped && passedBeats >= 0xFF) {
         //*(volatile u32*)(ExternWorkRAMBase + 0x3FFF0) = passedBeats;
 
         play_sound(&s_f_lockstep_step_seqData);
