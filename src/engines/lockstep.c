@@ -87,14 +87,25 @@ void stepper_init(struct SwitchStepper* stepper, u8 isCrowd) {
 
     stepper->sprite = sprite_create(gSpriteHandler,
         lockstep_animations[stepper->isCrowd][gLockstep->zoomLevel][stepper->animState], 0,
-        120, 80, 0x4800,
+        120, 80, 0x4800 + (0x100 * (!stepper->isCrowd)),
         1, 0, 0
     );
+
+    if (stepper->isCrowd) {
+        stepper->sprite2 = sprite_create(gSpriteHandler,
+            lockstep_animations[2][gLockstep->zoomLevel][stepper->animState], 0,
+            120, 80, 0x4A00,
+            1, 0, 0
+        );
+    } else {
+        stepper->sprite2 = -1;
+    }
 }
 
 
 void stepper_delete(struct SwitchStepper* stepper) {
     sprite_delete(gSpriteHandler, stepper->sprite);
+    sprite_delete(gSpriteHandler, stepper->sprite2);
 }
 
 
@@ -112,6 +123,13 @@ void stepper_set_anim(struct SwitchStepper* stepper, u8 animIdx) {
         stepper->sprite, lockstep_animations[stepper->isCrowd][gLockstep->zoomLevel][stepper->animState],
         0, 1, 0x7f, 0
     );
+
+    if (stepper->sprite2 != -1) {
+        sprite_set_anim(gSpriteHandler,
+            stepper->sprite2, lockstep_animations[2][gLockstep->zoomLevel][stepper->animState],
+            0, 1, 0x7f, 0
+        );
+    }
 }
 
 
@@ -150,21 +168,23 @@ void lockstep_flip_bg(void) {
 void lockstep_set_zoom(u8 zoomLevel) {
     struct SwitchStepper* stepper = &gLockstep->stepper;
     struct SwitchStepper* crowd = &gLockstep->crowd;
-    u8 animProgressStepper, animProgressCrowd;
+    u8 animProgressStepper, animProgressCrowdLower, animProgressCrowdHigher;
 
     if (zoomLevel > LOCKSTEP_NUM_ZOOM_LEVELS) {
         zoomLevel = LOCKSTEP_NUM_ZOOM_LEVELS - 1;
     }
 
     animProgressStepper = sprite_get_anim_progress(gSpriteHandler, stepper->sprite);
-    animProgressCrowd = sprite_get_anim_progress(gSpriteHandler, crowd->sprite);
+    animProgressCrowdLower = sprite_get_anim_progress(gSpriteHandler, crowd->sprite);
+    animProgressCrowdHigher = sprite_get_anim_progress(gSpriteHandler, crowd->sprite2);
 
     gLockstep->zoomLevel = zoomLevel;
 
     stepper_set_anim(stepper, stepper->animState);
     sprite_set_anim_progress(gSpriteHandler, stepper->sprite, animProgressStepper);
     stepper_set_anim(crowd, crowd->animState);
-    sprite_set_anim_progress(gSpriteHandler, crowd->sprite, animProgressCrowd);
+    sprite_set_anim_progress(gSpriteHandler, crowd->sprite, animProgressCrowdLower);
+    sprite_set_anim_progress(gSpriteHandler, crowd->sprite2, animProgressCrowdHigher);
 }
 
 

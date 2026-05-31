@@ -6,106 +6,157 @@
 #include "lockstep_anim_cells.inc.c"
 
 struct Animation anim_lockstep_stepper_idle_z00[] = {
-    /* 000 */ { lockstep_stepper_idle_cel, 24 },
+    /* 000 */ { lockstep_stepper_idle_z00_cel, 24 },
     /* 001 */ END_ANIMATION,
 };
 
 struct Animation anim_lockstep_stepper_beat_z00[] = {
-    /* 000 */ { lockstep_stepper_beat_cel00, 8 },
-    /* 001 */ { lockstep_stepper_beat_cel01, 2 },
-    /* 002 */ { lockstep_stepper_beat_cel02, 4 },
-    /* 003 */ { lockstep_stepper_beat_cel03, 10 },
+    /* 000 */ { lockstep_stepper_beat_z00_cel00, 8 },
+    /* 001 */ { lockstep_stepper_beat_z00_cel01, 2 },
+    /* 002 */ { lockstep_stepper_beat_z00_cel02, 4 },
+    /* 003 */ { lockstep_stepper_beat_z00_cel03, 10 },
     /* 004 */ END_ANIMATION,
 };
 
 struct Animation anim_lockstep_stepper_shot_r_z00[] = {
-    /* 000 */ { lockstep_stepper_shot_r_cel00, 3 },
-    /* 001 */ { lockstep_stepper_shot_r_cel01, 9 },
-    /* 002 */ { lockstep_stepper_shot_r_cel02, 1 },
-    /* 003 */ { lockstep_stepper_shot_r_cel03, 1 },
-    /* 004 */ { lockstep_stepper_idle_cel, 10 },
+    /* 000 */ { lockstep_stepper_shot_r_z00_cel00, 3 },
+    /* 001 */ { lockstep_stepper_shot_r_z00_cel01, 9 },
+    /* 002 */ { lockstep_stepper_shot_r_z00_cel02, 1 },
+    /* 003 */ { lockstep_stepper_shot_r_z00_cel03, 1 },
+    /* 004 */ { lockstep_stepper_idle_z00_cel, 10 },
     /* 005 */ END_ANIMATION,
 };
 
 struct Animation anim_lockstep_stepper_shot_l_z00[] = {
-    /* 000 */ { lockstep_stepper_shot_l_cel00, 3 },
-    /* 001 */ { lockstep_stepper_shot_l_cel01, 9 },
-    /* 002 */ { lockstep_stepper_shot_l_cel02, 1 },
-    /* 003 */ { lockstep_stepper_shot_l_cel03, 1 },
-    /* 004 */ { lockstep_stepper_idle_cel, 10 },
+    /* 000 */ { lockstep_stepper_shot_l_z00_cel00, 3 },
+    /* 001 */ { lockstep_stepper_shot_l_z00_cel01, 9 },
+    /* 002 */ { lockstep_stepper_shot_l_z00_cel02, 1 },
+    /* 003 */ { lockstep_stepper_shot_l_z00_cel03, 1 },
+    /* 004 */ { lockstep_stepper_idle_z00_cel, 10 },
     /* 005 */ END_ANIMATION,
 };
 
 struct Animation anim_lockstep_stepper_miss_r_z00[] = {
-    /* 000 */ { lockstep_stepper_miss_r_cel00, 4 },
-    /* 001 */ { lockstep_stepper_miss_r_cel01, 20 },
+    /* 000 */ { lockstep_stepper_miss_r_z00_cel00, 4 },
+    /* 001 */ { lockstep_stepper_miss_r_z00_cel01, 20 },
     /* 002 */ END_ANIMATION,
 };
 
 struct Animation anim_lockstep_stepper_miss_l_z00[] = {
-    /* 000 */ { lockstep_stepper_miss_l_cel00, 4 },
-    /* 001 */ { lockstep_stepper_miss_l_cel01, 20 },
+    /* 000 */ { lockstep_stepper_miss_l_z00_cel00, 4 },
+    /* 001 */ { lockstep_stepper_miss_l_z00_cel01, 20 },
     /* 002 */ END_ANIMATION,
 };
 
-struct Animation anim_lockstep_crowd_idle_zP[] = {
-    /* 000 */ { lockstep_crowd_practice_idle_cel, 24 },
+struct Animation anim_lockstep_crowd_lower_idle_zP[] = {
+    /* 000 */ { lockstep_crowd_lower_idle_zP_cel, 24 },
     /* 001 */ END_ANIMATION,
 };
 
-struct Animation anim_lockstep_crowd_beat_zP[] = {
-    /* 000 */ { lockstep_crowd_practice_beat_cel00, 8 },
-    /* 001 */ { lockstep_crowd_practice_beat_cel01, 2 },
-    /* 002 */ { lockstep_crowd_practice_beat_cel02, 4 },
-    /* 003 */ { lockstep_crowd_practice_beat_cel03, 10 },
+struct Animation anim_lockstep_crowd_lower_beat_zP[] = {
+    /* 000 */ { lockstep_crowd_lower_beat_zP_cel00, 8 },
+    /* 001 */ { lockstep_crowd_lower_beat_zP_cel01, 2 },
+    /* 002 */ { lockstep_crowd_lower_beat_zP_cel02, 4 },
+    /* 003 */ { lockstep_crowd_lower_beat_zP_cel03, 10 },
     /* 004 */ END_ANIMATION,
 };
 
-struct Animation anim_lockstep_crowd_shot_r_zP[] = {
-    /* 000 */ { lockstep_crowd_practice_shot_r_cel00, 3 },
-    /* 001 */ { lockstep_crowd_practice_shot_r_cel01, 9 },
-    /* 002 */ { lockstep_crowd_practice_shot_r_cel02, 1 },
-    /* 003 */ { lockstep_crowd_practice_shot_r_cel03, 1 },
-    /* 004 */ { lockstep_crowd_practice_idle_cel, 10 },
+struct Animation anim_lockstep_crowd_lower_shot_r_zP[] = {
+    /* 000 */ { lockstep_crowd_lower_shot_r_zP_cel00, 3 },
+    /* 001 */ { lockstep_crowd_lower_shot_r_zP_cel01, 9 },
+    /* 002 */ { lockstep_crowd_lower_shot_r_zP_cel02, 1 },
+    /* 003 */ { lockstep_crowd_lower_shot_r_zP_cel03, 1 },
+    /* 004 */ { lockstep_crowd_lower_idle_zP_cel, 10 },
     /* 005 */ END_ANIMATION,
 };
 
-struct Animation anim_lockstep_crowd_shot_l_zP[] = {
-    /* 000 */ { lockstep_crowd_practice_shot_l_cel00, 3 },
-    /* 001 */ { lockstep_crowd_practice_shot_l_cel01, 9 },
-    /* 002 */ { lockstep_crowd_practice_shot_l_cel02, 1 },
-    /* 003 */ { lockstep_crowd_practice_shot_l_cel03, 1 },
-    /* 004 */ { lockstep_crowd_practice_idle_cel, 10 },
+struct Animation anim_lockstep_crowd_lower_shot_l_zP[] = {
+    /* 000 */ { lockstep_crowd_lower_shot_l_zP_cel00, 3 },
+    /* 001 */ { lockstep_crowd_lower_shot_l_zP_cel01, 9 },
+    /* 002 */ { lockstep_crowd_lower_shot_l_zP_cel02, 1 },
+    /* 003 */ { lockstep_crowd_lower_shot_l_zP_cel03, 1 },
+    /* 004 */ { lockstep_crowd_lower_idle_zP_cel, 10 },
     /* 005 */ END_ANIMATION,
 };
 
-struct Animation anim_lockstep_crowd_idle_z00[] = {
-    /* 000 */ { lockstep_crowd_idle_cel, 24 },
+struct Animation anim_lockstep_crowd_lower_idle_z00[] = {
+    /* 000 */ { lockstep_crowd_lower_idle_z00_cel, 24 },
     /* 001 */ END_ANIMATION,
 };
 
-struct Animation anim_lockstep_crowd_beat_z00[] = {
-    /* 000 */ { lockstep_crowd_beat_cel00, 8 },
-    /* 001 */ { lockstep_crowd_beat_cel01, 2 },
-    /* 002 */ { lockstep_crowd_beat_cel02, 4 },
-    /* 003 */ { lockstep_crowd_beat_cel03, 10 },
+struct Animation anim_lockstep_crowd_lower_beat_z00[] = {
+    /* 000 */ { lockstep_crowd_lower_beat_z00_cel00, 8 },
+    /* 001 */ { lockstep_crowd_lower_beat_z00_cel01, 2 },
+    /* 002 */ { lockstep_crowd_lower_beat_z00_cel02, 4 },
+    /* 003 */ { lockstep_crowd_lower_beat_z00_cel03, 10 },
     /* 004 */ END_ANIMATION,
 };
 
-struct Animation anim_lockstep_crowd_shot_r_z00[] = {
-    /* 000 */ { lockstep_crowd_shot_r_cel00, 3 },
-    /* 001 */ { lockstep_crowd_shot_r_cel01, 9 },
-    /* 002 */ { lockstep_crowd_shot_r_cel02, 1 },
-    /* 003 */ { lockstep_crowd_shot_r_cel03, 1 },
-    /* 004 */ { lockstep_crowd_idle_cel, 10 },
+struct Animation anim_lockstep_crowd_lower_shot_r_z00[] = {
+    /* 000 */ { lockstep_crowd_lower_shot_r_z00_cel00, 3 },
+    /* 001 */ { lockstep_crowd_lower_shot_r_z00_cel01, 9 },
+    /* 002 */ { lockstep_crowd_lower_shot_r_z00_cel02, 1 },
+    /* 003 */ { lockstep_crowd_lower_shot_r_z00_cel03, 1 },
+    /* 004 */ { lockstep_crowd_lower_idle_z00_cel, 10 },
     /* 005 */ END_ANIMATION,
 };
 
-struct Animation anim_lockstep_crowd_shot_l_z00[] = {
-    /* 000 */ { lockstep_crowd_shot_l_cel00, 3 },
-    /* 001 */ { lockstep_crowd_shot_l_cel01, 9 },
-    /* 002 */ { lockstep_crowd_shot_l_cel02, 1 },
-    /* 003 */ { lockstep_crowd_shot_l_cel03, 1 },
-    /* 004 */ { lockstep_crowd_idle_cel, 10 },
+struct Animation anim_lockstep_crowd_lower_shot_l_z00[] = {
+    /* 000 */ { lockstep_crowd_lower_shot_l_z00_cel00, 3 },
+    /* 001 */ { lockstep_crowd_lower_shot_l_z00_cel01, 9 },
+    /* 002 */ { lockstep_crowd_lower_shot_l_z00_cel02, 1 },
+    /* 003 */ { lockstep_crowd_lower_shot_l_z00_cel03, 1 },
+    /* 004 */ { lockstep_crowd_lower_idle_z00_cel, 10 },
+    /* 005 */ END_ANIMATION,
+};
+
+struct Animation anim_lockstep_crowd_higher_idle_zP[] = {
+    /* 000 */ { lockstep_blank_cel, 24 },
+    END_ANIMATION
+};
+
+struct Animation anim_lockstep_crowd_higher_beat_zP[] = {
+    /* 000 */ { lockstep_blank_cel, 24 },
+    END_ANIMATION
+};
+
+struct Animation anim_lockstep_crowd_higher_shot_r_zP[] = {
+    /* 000 */ { lockstep_blank_cel, 24 },
+    END_ANIMATION
+};
+
+struct Animation anim_lockstep_crowd_higher_shot_l_zP[] = {
+    /* 000 */ { lockstep_blank_cel, 24 },
+    END_ANIMATION
+};
+
+struct Animation anim_lockstep_crowd_higher_idle_z00[] = {
+    /* 000 */ { lockstep_crowd_higher_idle_z00_cel, 24 },
+    /* 001 */ END_ANIMATION,
+};
+
+struct Animation anim_lockstep_crowd_higher_beat_z00[] = {
+    /* 000 */ { lockstep_crowd_higher_beat_z00_cel00, 8 },
+    /* 001 */ { lockstep_crowd_higher_beat_z00_cel01, 2 },
+    /* 002 */ { lockstep_crowd_higher_beat_z00_cel02, 4 },
+    /* 003 */ { lockstep_crowd_higher_beat_z00_cel03, 10 },
+    /* 004 */ END_ANIMATION,
+};
+
+struct Animation anim_lockstep_crowd_higher_shot_r_z00[] = {
+    /* 000 */ { lockstep_crowd_higher_shot_r_z00_cel00, 3 },
+    /* 001 */ { lockstep_crowd_higher_shot_r_z00_cel01, 9 },
+    /* 002 */ { lockstep_crowd_higher_shot_r_z00_cel02, 1 },
+    /* 003 */ { lockstep_crowd_higher_shot_r_z00_cel03, 1 },
+    /* 004 */ { lockstep_crowd_higher_idle_z00_cel, 10 },
+    /* 005 */ END_ANIMATION,
+};
+
+struct Animation anim_lockstep_crowd_higher_shot_l_z00[] = {
+    /* 000 */ { lockstep_crowd_higher_shot_l_z00_cel00, 3 },
+    /* 001 */ { lockstep_crowd_higher_shot_l_z00_cel01, 9 },
+    /* 002 */ { lockstep_crowd_higher_shot_l_z00_cel02, 1 },
+    /* 003 */ { lockstep_crowd_higher_shot_l_z00_cel03, 1 },
+    /* 004 */ { lockstep_crowd_higher_idle_z00_cel, 10 },
     /* 005 */ END_ANIMATION,
 };

@@ -40,6 +40,7 @@ struct LockstepEngineData {
 
 	struct SwitchStepper {
 		s16 sprite;
+		s16 sprite2;
 		u8 animState;
 		u8 isCrowd;
 	} stepper;
@@ -58,8 +59,8 @@ extern struct CompressedData *lockstep_buffered_textures[];
 extern struct GraphicsTable *lockstep_gfx_tables[];
 
 extern struct Animation* lockstep_stepper_animations[LOCKSTEP_NUM_ZOOM_LEVELS][LOCKSTEP_NUM_ANIMS];
-extern struct Animation* lockstep_crowd_animations[LOCKSTEP_NUM_ZOOM_LEVELS][LOCKSTEP_NUM_ANIMS];
-extern struct Animation* (*lockstep_animations[2])[LOCKSTEP_NUM_ANIMS];
+extern struct Animation* lockstep_crowd_animations_lower[LOCKSTEP_NUM_ZOOM_LEVELS][LOCKSTEP_NUM_ANIMS];
+extern struct Animation* (*lockstep_animations[3])[LOCKSTEP_NUM_ANIMS];
 extern u8 lockstep_bg_palettes[];
 
 extern void lockstep_init_gfx3(void);

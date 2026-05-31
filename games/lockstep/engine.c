@@ -140,19 +140,19 @@ struct Animation* lockstep_stepper_animations[LOCKSTEP_NUM_ZOOM_LEVELS][LOCKSTEP
 	{ NULL, NULL, NULL, NULL, NULL, NULL },
 };
 
-struct Animation* lockstep_crowd_animations[LOCKSTEP_NUM_ZOOM_LEVELS][LOCKSTEP_NUM_ANIMS] = {
+struct Animation* lockstep_crowd_animations_lower[LOCKSTEP_NUM_ZOOM_LEVELS][LOCKSTEP_NUM_ANIMS] = {
 	{
-		anim_lockstep_crowd_idle_zP,
-		anim_lockstep_crowd_beat_zP,
-		anim_lockstep_crowd_shot_l_zP,
-		anim_lockstep_crowd_shot_r_zP,
+		anim_lockstep_crowd_lower_idle_zP,
+		anim_lockstep_crowd_lower_beat_zP,
+		anim_lockstep_crowd_lower_shot_l_zP,
+		anim_lockstep_crowd_lower_shot_r_zP,
 		NULL, NULL
 	},
 	{
-		anim_lockstep_crowd_idle_z00,
-		anim_lockstep_crowd_beat_z00,
-		anim_lockstep_crowd_shot_l_z00,
-		anim_lockstep_crowd_shot_r_z00,
+		anim_lockstep_crowd_lower_idle_z00,
+		anim_lockstep_crowd_lower_beat_z00,
+		anim_lockstep_crowd_lower_shot_l_z00,
+		anim_lockstep_crowd_lower_shot_r_z00,
 		NULL, NULL
 	},
 	{ NULL, NULL, NULL, NULL, NULL, NULL },
@@ -161,9 +161,31 @@ struct Animation* lockstep_crowd_animations[LOCKSTEP_NUM_ZOOM_LEVELS][LOCKSTEP_N
 	{ NULL, NULL, NULL, NULL, NULL, NULL },
 };
 
-struct Animation* (*lockstep_animations[2])[LOCKSTEP_NUM_ANIMS] = {
+struct Animation* lockstep_crowd_animations_higher[LOCKSTEP_NUM_ZOOM_LEVELS][LOCKSTEP_NUM_ANIMS] = {
+	{
+		anim_lockstep_crowd_higher_idle_zP,
+		anim_lockstep_crowd_higher_beat_zP,
+		anim_lockstep_crowd_higher_shot_l_zP,
+		anim_lockstep_crowd_higher_shot_r_zP,
+		NULL, NULL
+	},
+	{
+		anim_lockstep_crowd_higher_idle_z00,
+		anim_lockstep_crowd_higher_beat_z00,
+		anim_lockstep_crowd_higher_shot_l_z00,
+		anim_lockstep_crowd_higher_shot_r_z00,
+		NULL, NULL
+	},
+	{ NULL, NULL, NULL, NULL, NULL, NULL },
+	{ NULL, NULL, NULL, NULL, NULL, NULL },
+	{ NULL, NULL, NULL, NULL, NULL, NULL },
+	{ NULL, NULL, NULL, NULL, NULL, NULL },
+};
+
+struct Animation* (*lockstep_animations[3])[LOCKSTEP_NUM_ANIMS] = {
 	lockstep_stepper_animations,
-	lockstep_crowd_animations
+	lockstep_crowd_animations_lower,
+	lockstep_crowd_animations_higher
 };
 
 u8 lockstep_bg_palettes[] = {
