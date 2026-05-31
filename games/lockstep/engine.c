@@ -134,10 +134,10 @@ struct Animation* lockstep_stepper_animations[LOCKSTEP_NUM_ZOOM_LEVELS][LOCKSTEP
 		anim_lockstep_stepper_miss_l_z00,
 		anim_lockstep_stepper_miss_r_z00
 	},
-	{ NULL, NULL, NULL, NULL, NULL, NULL },
-	{ NULL, NULL, NULL, NULL, NULL, NULL },
-	{ NULL, NULL, NULL, NULL, NULL, NULL },
-	{ NULL, NULL, NULL, NULL, NULL, NULL },
+	//{ NULL, NULL, NULL, NULL, NULL, NULL },
+	//{ NULL, NULL, NULL, NULL, NULL, NULL },
+	//{ NULL, NULL, NULL, NULL, NULL, NULL },
+	//{ NULL, NULL, NULL, NULL, NULL, NULL },
 };
 
 struct Animation* lockstep_crowd_animations_lower[LOCKSTEP_NUM_ZOOM_LEVELS][LOCKSTEP_NUM_ANIMS] = {
@@ -155,10 +155,10 @@ struct Animation* lockstep_crowd_animations_lower[LOCKSTEP_NUM_ZOOM_LEVELS][LOCK
 		anim_lockstep_crowd_lower_shot_r_z00,
 		NULL, NULL
 	},
-	{ NULL, NULL, NULL, NULL, NULL, NULL },
-	{ NULL, NULL, NULL, NULL, NULL, NULL },
-	{ NULL, NULL, NULL, NULL, NULL, NULL },
-	{ NULL, NULL, NULL, NULL, NULL, NULL },
+	//{ NULL, NULL, NULL, NULL, NULL, NULL },
+	//{ NULL, NULL, NULL, NULL, NULL, NULL },
+	//{ NULL, NULL, NULL, NULL, NULL, NULL },
+	//{ NULL, NULL, NULL, NULL, NULL, NULL },
 };
 
 struct Animation* lockstep_crowd_animations_higher[LOCKSTEP_NUM_ZOOM_LEVELS][LOCKSTEP_NUM_ANIMS] = {
@@ -176,10 +176,10 @@ struct Animation* lockstep_crowd_animations_higher[LOCKSTEP_NUM_ZOOM_LEVELS][LOC
 		anim_lockstep_crowd_higher_shot_r_z00,
 		NULL, NULL
 	},
-	{ NULL, NULL, NULL, NULL, NULL, NULL },
-	{ NULL, NULL, NULL, NULL, NULL, NULL },
-	{ NULL, NULL, NULL, NULL, NULL, NULL },
-	{ NULL, NULL, NULL, NULL, NULL, NULL },
+	//{ NULL, NULL, NULL, NULL, NULL, NULL },
+	//{ NULL, NULL, NULL, NULL, NULL, NULL },
+	//{ NULL, NULL, NULL, NULL, NULL, NULL },
+	//{ NULL, NULL, NULL, NULL, NULL, NULL },
 };
 
 struct Animation* (*lockstep_animations[3])[LOCKSTEP_NUM_ANIMS] = {
