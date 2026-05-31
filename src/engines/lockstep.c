@@ -36,30 +36,31 @@ void lockstep_init_gfx1(void) {
 void lockstep_engine_start(const u32 ver) {
     gLockstep->version = ver;
     gLockstep->awaitingInput = FALSE;
+    gLockstep->zoomLevel = LOCKSTEP_ZOOM_LEVEL_PRACTICE;
     gLockstep->isBgOff = FALSE;
 
     lockstep_init_gfx1();
     scene_show_obj_layer();
     scene_set_bg_layer_display(BG_LAYER_1, TRUE, 0, 0, 0, 24, 1);
 
-    stepper_init(&gLockstep->stepper);
-    gLockstep->crowdSprite = sprite_create(gSpriteHandler,
-        anim_lockstep_crowd_idle, 0,
-        0, 0, 0x4800,
-        1, 0, 0
-    );
+    stepper_init(&gLockstep->stepper, FALSE);
+    stepper_init(&gLockstep->crowd, TRUE);
 
-    gameplay_set_input_buttons(A_BUTTON, 0);
+    gameplay_set_input_buttons(LOCKSTEP_INPUTS, 0);
 }
 
 
 void lockstep_engine_stop(void) {
+    stepper_delete(&gLockstep->stepper);
+    stepper_delete(&gLockstep->crowd);
     scene_hide_bg_layer(1);
 }
 
 
 void lockstep_engine_update(void) {
-    if (gLockstep->awaitingInput && D_03004afc & SELECT_BUTTON) {
+    if (gLockstep->awaitingInput && D_03004afc & LOCKSTEP_INPUTS) {
+        //sprite_set_visible(gSpriteHandler, gKarateMan->textButtonSprite, FALSE);
+        gameplay_set_input_buttons(LOCKSTEP_INPUTS, 0);
         set_pause_beatscript_scene(FALSE);
         gLockstep->awaitingInput = FALSE;
     }
@@ -68,13 +69,27 @@ void lockstep_engine_update(void) {
 }
 
 
-void stepper_init(struct SwitchStepper* stepper) {
+void lockstep_common_init_tutorial(struct Scene *scene) {
+    if (scene != NULL) {
+        gameplay_enable_tutorial(TRUE);
+        gameplay_set_skip_destination(scene);
+        gameplay_set_skip_icon(1, TRUE);
+    } else {
+        gameplay_enable_tutorial(FALSE);
+        gameplay_set_skip_icon(0, FALSE);
+    }
+}
+
+
+void stepper_init(struct SwitchStepper* stepper, u8 isCrowd) {
+    stepper->isCrowd = isCrowd;
+    stepper->animState = LOCKSTEP_ANIM_IDLE;
+
     stepper->sprite = sprite_create(gSpriteHandler,
-    anim_lockstep_stepper_idle, 0,
-        72, 40, 0x4900,
+        lockstep_animations[stepper->isCrowd][gLockstep->zoomLevel][stepper->animState], 0,
+        120, 80, 0x4800,
         1, 0, 0
     );
-    stepper->missState = MISS_NONE;
 }
 
 
@@ -86,16 +101,24 @@ void stepper_delete(struct SwitchStepper* stepper) {
 void stepper_update(struct SwitchStepper* stepper) {}
 
 
-void stepper_set_anim(struct SwitchStepper* stepper, struct Animation* anim) {
+void stepper_set_anim(struct SwitchStepper* stepper, u8 animIdx) {
+    if (animIdx >= LOCKSTEP_NUM_ANIMS) {
+        return;
+    }
+
+    stepper->animState = animIdx;
+
     sprite_set_anim(gSpriteHandler,
-        stepper->sprite, anim,
+        stepper->sprite, lockstep_animations[stepper->isCrowd][gLockstep->zoomLevel][stepper->animState],
         0, 1, 0x7f, 0
     );
-    stepper->missState = MISS_NONE;
 }
 
 
 void lockstep_wait_for_input(void) {
+    //sprite_set_anim_cel(gSpriteHandler, gKarateMan->textButtonSprite, 0);
+    //sprite_set_visible(gSpriteHandler, gKarateMan->textButtonSprite, TRUE);
+    gameplay_set_input_buttons(0, 0);
     set_pause_beatscript_scene(TRUE);
     gLockstep->awaitingInput = TRUE;
 }
@@ -103,13 +126,10 @@ void lockstep_wait_for_input(void) {
 
 void lockstep_beat_anim(u8 play_sfx) {
     struct SwitchStepper* stepper = &gLockstep->stepper;
+    struct SwitchStepper* crowd = &gLockstep->crowd;
 
-    stepper_set_anim(stepper, anim_lockstep_stepper_beat);
-
-    sprite_set_anim(gSpriteHandler,
-        gLockstep->crowdSprite, anim_lockstep_crowd_beat,
-        0, 1, 0x7f, 0
-    );
+    stepper_set_anim(stepper, LOCKSTEP_ANIM_BEAT);
+    stepper_set_anim(crowd, LOCKSTEP_ANIM_BEAT);
 
     if (play_sfx) {
         play_sound(&s_dontan_count_seqData);
@@ -127,35 +147,42 @@ void lockstep_flip_bg(void) {
 }
 
 
-void lockstep_set_direction(u8 direction) {
-    gLockstep->direction = direction;
+void lockstep_set_zoom(u8 zoomLevel) {
+    struct SwitchStepper* stepper = &gLockstep->stepper;
+    struct SwitchStepper* crowd = &gLockstep->crowd;
+    u8 animProgressStepper, animProgressCrowd;
 
-    if (gLockstep->direction > LOCKSTEP_CUE_R) {
-        gLockstep->direction = LOCKSTEP_CUE_R;
+    if (zoomLevel > LOCKSTEP_NUM_ZOOM_LEVELS) {
+        zoomLevel = LOCKSTEP_NUM_ZOOM_LEVELS - 1;
     }
-}
 
+    animProgressStepper = sprite_get_anim_progress(gSpriteHandler, stepper->sprite);
+    animProgressCrowd = sprite_get_anim_progress(gSpriteHandler, crowd->sprite);
 
-void lockstep_set_marking_criteria(u8 criteria) {
-    gLockstep->markingCriteria = criteria;
+    gLockstep->zoomLevel = zoomLevel;
+
+    stepper_set_anim(stepper, stepper->animState);
+    sprite_set_anim_progress(gSpriteHandler, stepper->sprite, animProgressStepper);
+    stepper_set_anim(crowd, crowd->animState);
+    sprite_set_anim_progress(gSpriteHandler, crowd->sprite, animProgressCrowd);
 }
 
 
 void lockstep_input_event(const u32 pressed, u32 released) {
     struct SwitchStepper* stepper = &gLockstep->stepper;
-    struct Animation* anim;
+    u8 isOffBeat = FIXED_TO_INT(Div(
+        INT_TO_FIXED(D_030053c0.runningTime),
+        INT_TO_FIXED(0x0C) // divide by half a beat (in ticks)
+    ) % INT_TO_FIXED(0x02)); // mod to get 0 for an on beat and 1 for an off beat
+    u8 animIdx;
 
-    switch (gLockstep->direction) {
-        case LOCKSTEP_CUE_R:
-            anim = anim_lockstep_stepper_shot_l;
-            break;
-        case LOCKSTEP_CUE_L:
-        default:
-            anim = anim_lockstep_stepper_shot_r;
-            break;
+    if (isOffBeat) {
+        animIdx = LOCKSTEP_ANIM_SHOT_R;
+    } else {
+        animIdx = LOCKSTEP_ANIM_SHOT_L;
     }
 
-    stepper_set_anim(stepper, anim);
+    stepper_set_anim(stepper, animIdx);
 
     play_sound(&s_witch_donats_seqData);
 }
@@ -168,6 +195,7 @@ void lockstep_cue_spawn(struct Cue *cue, struct LockstepCue *info, u32 type) {
 
 
 u32 lockstep_cue_update(struct Cue *cue, struct LockstepCue *info, u32 runningTime, u32 duration) {
+    struct SwitchStepper* crowd = &gLockstep->crowd;
     s32 passedBeats = Div(INT_TO_FIXED(runningTime), duration);
 
     if (!info->hasStepped && passedBeats >= 0xFF) {
@@ -177,16 +205,10 @@ u32 lockstep_cue_update(struct Cue *cue, struct LockstepCue *info, u32 runningTi
 
         switch (info->type) {
             case LOCKSTEP_CUE_L:
-                sprite_set_anim(gSpriteHandler,
-                    gLockstep->crowdSprite, anim_lockstep_crowd_shot_l,
-                    0, 1, 0x7f, 0
-                );
+                stepper_set_anim(crowd, LOCKSTEP_ANIM_SHOT_L);
                 break;
             case LOCKSTEP_CUE_R:
-                sprite_set_anim(gSpriteHandler,
-                    gLockstep->crowdSprite, anim_lockstep_crowd_shot_r,
-                    0, 1, 0x7f, 0
-                );
+                stepper_set_anim(crowd, LOCKSTEP_ANIM_SHOT_R);
                 break;
             default:
                 break;
@@ -207,10 +229,10 @@ void lockstep_cue_hit(struct Cue *cue, struct LockstepCue *info, u32 pressed, u3
 
     switch (info->type) {
         case LOCKSTEP_CUE_L:
-            stepper_set_anim(stepper, anim_lockstep_stepper_shot_l);
+            stepper_set_anim(stepper, LOCKSTEP_ANIM_SHOT_L);
             break;
         case LOCKSTEP_CUE_R:
-            stepper_set_anim(stepper, anim_lockstep_stepper_shot_r);
+            stepper_set_anim(stepper, LOCKSTEP_ANIM_SHOT_R);
             break;
         default:
             break;
@@ -223,10 +245,10 @@ void lockstep_cue_barely(struct Cue *cue, struct LockstepCue *info, u32 pressed,
 
     switch (info->type) {
         case LOCKSTEP_CUE_L:
-            stepper_set_anim(stepper, anim_lockstep_stepper_shot_l);
+            stepper_set_anim(stepper, LOCKSTEP_ANIM_SHOT_L);
             break;
         case LOCKSTEP_CUE_R:
-            stepper_set_anim(stepper, anim_lockstep_stepper_shot_r);
+            stepper_set_anim(stepper, LOCKSTEP_ANIM_SHOT_R);
             break;
         default:
             break;
@@ -239,20 +261,20 @@ void lockstep_cue_miss(struct Cue *cue, struct LockstepCue *info) {
 
     switch (info->type) {
         case LOCKSTEP_CUE_L:
-            if (stepper->missState != MISS_L) {
-                stepper_set_anim(stepper, anim_lockstep_stepper_miss_l);
+            if (stepper->animState != LOCKSTEP_ANIM_MISS_L) {
+                stepper_set_anim(stepper, LOCKSTEP_ANIM_MISS_L);
                 play_sound(&s_f_lockstep_miss_seqData);
             }
 
-            stepper->missState = MISS_L;
+            stepper->animState = LOCKSTEP_ANIM_MISS_L;
             break;
         case LOCKSTEP_CUE_R:
-            if (stepper->missState != MISS_R) {
-                stepper_set_anim(stepper, anim_lockstep_stepper_miss_r);
+            if (stepper->animState != LOCKSTEP_ANIM_MISS_R) {
+                stepper_set_anim(stepper, LOCKSTEP_ANIM_MISS_R);
                 play_sound(&s_f_lockstep_miss_seqData);
             }
 
-            stepper->missState = MISS_R;
+            stepper->animState = LOCKSTEP_ANIM_MISS_R;
             break;
         default:
             break;
@@ -261,5 +283,5 @@ void lockstep_cue_miss(struct Cue *cue, struct LockstepCue *info) {
 
 
 void lockstep_update_bg_palette(void) {
-    (BG_PALETTE_BUFFER(0))[0] = (BG_PALETTE_BUFFER(lockstep_palettes[gLockstep->isBgOff]))[0];
+    (BG_PALETTE_BUFFER(0))[0] = (BG_PALETTE_BUFFER(lockstep_bg_palettes[gLockstep->isBgOff]))[0];
 }

@@ -13,10 +13,23 @@ script script_lockstep_entry
     load_lockstep
     enable_play_inputs
     start_tracking_inputs
-    call script_lockstep_main
+    call script_lockstep_practice
 stop
 
 define_gameplay_scene scene_lockstep, script_lockstep_entry
+
+@ Lockstep - Script Entry Point (Skipped Practice)
+
+script script_lockstep_skipped_practice_entry
+    set_tempo 124
+    set_game_fade_in_time 0
+    load_lockstep
+    enable_play_inputs
+    start_tracking_inputs
+    call script_lockstep_skipped_practice
+stop
+
+define_gameplay_scene scene_lockstep_skipped_practice, script_lockstep_skipped_practice_entry
 
 
 .section .script.prologue
@@ -112,8 +125,8 @@ script script_lockstep_main
     import_marking_criteria lockstep_marking_criteria
     set_results_header D_0805abdc
     disable_play_inputs
+    lockstep_set_zoom 1
     rest 24
-    enable_pause_menu
     set_tempo 162
     set_music_volume 200
     rest 24
@@ -213,7 +226,6 @@ script script_lockstep_main
 return
 
 script lockstep_l_intro
-		lockstep_set_direction 0
     spawn_cue CUE_L
     rest 24
     play_sfx s_f_lockstep_hai_seqData
@@ -244,7 +256,6 @@ script lockstep_l_trans
     rest 12
     play_sfx s_f_lockstep_ah_seqData
     lockstep_flip_bg
-		lockstep_set_direction 1
     rest 12
     play_sfx s_f_lockstep_high_seqData
     lockstep_flip_bg
@@ -257,7 +268,6 @@ script lockstep_l_direct_trans
     lockstep_flip_bg
     rest 12
     play_sfx s_f_lockstep_hai_seqData
-		lockstep_set_direction 0
     spawn_cue CUE_L
     rest 24
     play_sfx s_f_lockstep_hai_seqData
@@ -272,7 +282,6 @@ script lockstep_l_direct_trans
     rest 12
     play_sfx s_f_lockstep_ah_seqData
     lockstep_flip_bg
-		lockstep_set_direction 1
     rest 12
     play_sfx s_f_lockstep_high_seqData
     lockstep_flip_bg
@@ -286,7 +295,6 @@ script lockstep_l_post_trans
     rest 12
     play_sfx s_f_lockstep_hai_seqData
     lockstep_flip_bg
-		lockstep_set_direction 0
     spawn_cue CUE_L
     rest 24
     spawn_cue CUE_L
@@ -395,5 +403,34 @@ script lockstep_r_2bar
 		call lockstep_r_1bar
 		call lockstep_r_1bar
 return
+
+
+script script_lockstep_practice
+    set_tempo 130
+    set_music_volume 150
+    play_music s_renshu_bgm1_seqData
+    lockstep_set_zoom 0
+    stop_tracking_inputs
+    rest 24
+    enable_pause_menu
+    rest 24
+    init_tutorial scene_lockstep_skipped_practice
+    lockstep_wait_for_input
+    rest 24
+    stop_tutorial
+    mod_music_volume 0, 72
+    rest 24
+    rest 24
+    rest 24
+    run scene_stop_music
+    goto script_lockstep_main
+
+script script_lockstep_skipped_practice
+    set_tempo 162
+    set_music_volume 200
+    rest 24
+    enable_pause_menu
+    rest 24
+    goto script_lockstep_main
 
 .end

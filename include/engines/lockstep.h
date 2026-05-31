@@ -3,18 +3,35 @@
 #include "global.h"
 #include "engines.h"
 #include "src/main.h"
-
 #include "games/lockstep/graphics/lockstep_graphics.h"
+
+#define LOCKSTEP_INPUTS A_BUTTON
+
+enum LockstepAnimType {
+	LOCKSTEP_ANIM_IDLE,
+	LOCKSTEP_ANIM_BEAT,
+	LOCKSTEP_ANIM_SHOT_L,
+	LOCKSTEP_ANIM_SHOT_R,
+	LOCKSTEP_ANIM_MISS_L,
+	LOCKSTEP_ANIM_MISS_R,
+
+	LOCKSTEP_NUM_ANIMS
+};
+
+enum LockstepZoomLevel {
+	LOCKSTEP_ZOOM_LEVEL_PRACTICE,
+	LOCKSTEP_ZOOM_LEVEL_1,
+	LOCKSTEP_ZOOM_LEVEL_2,
+	LOCKSTEP_ZOOM_LEVEL_3,
+	LOCKSTEP_ZOOM_LEVEL_4,
+	LOCKSTEP_ZOOM_LEVEL_5,
+
+	LOCKSTEP_NUM_ZOOM_LEVELS
+};
 
 enum LockstepCuesEnum {
 	LOCKSTEP_CUE_L,
 	LOCKSTEP_CUE_R
-};
-
-enum StepperMissState {
-	MISS_L,
-	MISS_R,
-	MISS_NONE
 };
 
 struct LockstepEngineData {
@@ -23,13 +40,13 @@ struct LockstepEngineData {
 
 	struct SwitchStepper {
 		s16 sprite;
-		u8 missState;
+		u8 animState;
+		u8 isCrowd;
 	} stepper;
-	s16 crowdSprite;
+	struct SwitchStepper crowd;
 
+	u8 zoomLevel;
 	u8 isBgOff;
-	u8 direction;
-	u8 markingCriteria;
 };
 
 struct LockstepCue {
@@ -39,7 +56,11 @@ struct LockstepCue {
 
 extern struct CompressedData *lockstep_buffered_textures[];
 extern struct GraphicsTable *lockstep_gfx_tables[];
-extern u8 lockstep_palettes[];
+
+extern struct Animation* lockstep_stepper_animations[LOCKSTEP_NUM_ZOOM_LEVELS][LOCKSTEP_NUM_ANIMS];
+extern struct Animation* lockstep_crowd_animations[LOCKSTEP_NUM_ZOOM_LEVELS][LOCKSTEP_NUM_ANIMS];
+extern struct Animation* (*lockstep_animations[2])[LOCKSTEP_NUM_ANIMS];
+extern u8 lockstep_bg_palettes[];
 
 extern void lockstep_init_gfx3(void);
 extern void lockstep_init_gfx2(void);
@@ -49,16 +70,17 @@ extern void lockstep_engine_start(u32 version);
 extern void lockstep_engine_stop(void);
 extern void lockstep_engine_update(void);
 
-extern void stepper_init(struct SwitchStepper* stepper);
+extern void lockstep_common_init_tutorial(struct Scene*);
+
+extern void stepper_init(struct SwitchStepper* stepper, u8 isCrowd);
 extern void stepper_delete(struct SwitchStepper* stepper);
 extern void stepper_update(struct SwitchStepper* stepper);
-extern void stepper_set_anim(struct SwitchStepper* stepper, struct Animation* anim);
+extern void stepper_set_anim(struct SwitchStepper* stepper, u8 animIdx);
 
 extern void lockstep_wait_for_input(void);
 extern void lockstep_beat_anim(u8 play_sfx);
 extern void lockstep_flip_bg(void);
-extern void lockstep_set_direction(u8 direction);
-extern void lockstep_set_marking_criteria(u8 criteria);
+extern void lockstep_set_zoom(u8 zoomLevel);
 
 extern void lockstep_input_event(u32 pressed, u32 released);
 

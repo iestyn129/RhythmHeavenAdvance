@@ -3,6 +3,9 @@
 extern struct CueDefinition *lockstep_cue_index[];
 
 EngineEvent lockstep_common_events[] = {
+	NULL,
+	NULL,
+	lockstep_common_init_tutorial,
 	END_OF_COMMON_EVENT_LIST
 };
 
@@ -10,8 +13,7 @@ EngineEvent lockstep_engine_events[] = {
 	lockstep_wait_for_input,
 	lockstep_beat_anim,
 	lockstep_flip_bg,
-	lockstep_set_direction,
-	lockstep_set_marking_criteria
+	lockstep_set_zoom
 };
 
 struct GameEngine lockstep_engine = {
@@ -60,10 +62,6 @@ struct GraphicsTable lockstep_gfx_table[] = {
 
 struct GraphicsTable *lockstep_gfx_tables[] = {
 	lockstep_gfx_table
-};
-
-u8 lockstep_palettes[] = {
-	1, 2
 };
 
 struct CueDefinition lockstep_cue_l = {
@@ -117,3 +115,58 @@ struct CueDefinition *lockstep_cue_index[] = {
 	&lockstep_cue_r,
 	END_OF_CUE_INDEX
 };
+
+
+struct Animation* lockstep_stepper_animations[LOCKSTEP_NUM_ZOOM_LEVELS][LOCKSTEP_NUM_ANIMS] = {
+	{
+		anim_lockstep_stepper_idle_z00,
+		anim_lockstep_stepper_beat_z00,
+		anim_lockstep_stepper_shot_l_z00,
+		anim_lockstep_stepper_shot_r_z00,
+		anim_lockstep_stepper_miss_r_z00,
+		anim_lockstep_stepper_miss_l_z00
+	},
+	{
+		anim_lockstep_stepper_idle_z00,
+		anim_lockstep_stepper_beat_z00,
+		anim_lockstep_stepper_shot_l_z00,
+		anim_lockstep_stepper_shot_r_z00,
+		anim_lockstep_stepper_miss_l_z00,
+		anim_lockstep_stepper_miss_r_z00
+	},
+	{ NULL, NULL, NULL, NULL, NULL, NULL },
+	{ NULL, NULL, NULL, NULL, NULL, NULL },
+	{ NULL, NULL, NULL, NULL, NULL, NULL },
+	{ NULL, NULL, NULL, NULL, NULL, NULL },
+};
+
+struct Animation* lockstep_crowd_animations[LOCKSTEP_NUM_ZOOM_LEVELS][LOCKSTEP_NUM_ANIMS] = {
+	{
+		anim_lockstep_crowd_idle_zP,
+		anim_lockstep_crowd_beat_zP,
+		anim_lockstep_crowd_shot_l_zP,
+		anim_lockstep_crowd_shot_r_zP,
+		NULL, NULL
+	},
+	{
+		anim_lockstep_crowd_idle_z00,
+		anim_lockstep_crowd_beat_z00,
+		anim_lockstep_crowd_shot_l_z00,
+		anim_lockstep_crowd_shot_r_z00,
+		NULL, NULL
+	},
+	{ NULL, NULL, NULL, NULL, NULL, NULL },
+	{ NULL, NULL, NULL, NULL, NULL, NULL },
+	{ NULL, NULL, NULL, NULL, NULL, NULL },
+	{ NULL, NULL, NULL, NULL, NULL, NULL },
+};
+
+struct Animation* (*lockstep_animations[2])[LOCKSTEP_NUM_ANIMS] = {
+	lockstep_stepper_animations,
+	lockstep_crowd_animations
+};
+
+u8 lockstep_bg_palettes[] = {
+	1, 2
+};
+
