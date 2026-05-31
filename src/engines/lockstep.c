@@ -196,6 +196,8 @@ void lockstep_input_event(const u32 pressed, u32 released) {
     ) % INT_TO_FIXED(0x02)); // mod to get 0 for an on beat and 1 for an off beat
     u8 animIdx;
 
+    gameplay_add_cue_result(gameplay_get_marking_criteria(), CUE_RESULT_MISS, 0);
+
     if (isOffBeat) {
         animIdx = LOCKSTEP_ANIM_SHOT_R;
     } else {

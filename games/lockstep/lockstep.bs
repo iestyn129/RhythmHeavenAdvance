@@ -104,16 +104,36 @@ return
 @ Lockstep - Marking Criteria
 
 struct lockstep_marking_criteria_0
-    /* Positive Remark */     .word D_0805ab68
-    /* Negative Remark */     .word D_0805ab50
-    /* Flags */               .hword CHECK_AVERAGE_HITS | OVERRIDE_COMMENTS | CHECK_AVERAGE_MISSES
-    /* Pos: Required Hits */  .hword 0x00 @ 0%
-    /* Neg: Minimum Hits */   .hword 0xB3 @ 70%
-    /* Neg: Maximum Misses */ .hword 0x4C @ 30%
+    /* Positive Remark */     .word D_lockstep_onbeat_pos
+    /* Negative Remark */     .word D_lockstep_onbeat_neg
+    /* Flags */               .hword CHECK_AVERAGE_HITS | CHECK_AVERAGE_MISSES
+    /* Pos: Required Hits */  .hword 0xD9 @ 85%
+    /* Neg: Minimum Hits */   .hword 0x00 @ 0%
+    /* Neg: Maximum Misses */ .hword 0x40 @ 25%
+endstruct
+
+struct lockstep_marking_criteria_1
+    /* Positive Remark */     .word D_lockstep_offbeat_pos
+    /* Negative Remark */     .word D_lockstep_offbeat_neg
+    /* Flags */               .hword CHECK_AVERAGE_HITS | CHECK_AVERAGE_MISSES
+    /* Pos: Required Hits */  .hword 0xD9 @ 85%
+    /* Neg: Minimum Hits */   .hword 0x00 @ 0%
+    /* Neg: Maximum Misses */ .hword 0x5A @ 35%
+endstruct
+
+struct lockstep_marking_criteria_2
+    /* Positive Remark */     .word D_lockstep_trans_pos
+    /* Negative Remark */     .word D_lockstep_trans_neg
+    /* Flags */               .hword CHECK_AVERAGE_HITS | CHECK_AVERAGE_MISSES
+    /* Pos: Required Hits */  .hword 0xE6 @ 90%
+    /* Neg: Minimum Hits */   .hword 0x00 @ 0%
+    /* Neg: Maximum Misses */ .hword 0x40 @ 25%
 endstruct
 
 struct lockstep_marking_criteria
     .word lockstep_marking_criteria_0
+    .word lockstep_marking_criteria_1
+    .word lockstep_marking_criteria_2
     .word END_OF_CRITERIA
 endstruct
 
@@ -123,7 +143,7 @@ endstruct
 
 script script_lockstep_main
     import_marking_criteria lockstep_marking_criteria
-    set_results_header D_0805abdc
+    set_results_header D_lockstep_header
     disable_play_inputs
     lockstep_set_zoom 1
     rest 24
@@ -226,6 +246,7 @@ script script_lockstep_main
 return
 
 script lockstep_l_intro
+    set_marking_criteria 0
     spawn_cue CUE_L
     rest 24
     play_sfx s_f_lockstep_hai_seqData
@@ -238,6 +259,7 @@ script lockstep_l_intro
 return
 
 script lockstep_l_trans
+    set_marking_criteria 2
     spawn_cue CUE_L
     rest 24
     play_sfx s_f_lockstep_hai_seqData
@@ -262,6 +284,7 @@ script lockstep_l_trans
 return
 
 script lockstep_l_direct_trans
+    set_marking_criteria 2
     spawn_cue CUE_L
     rest 12
     play_sfx s_f_lockstep_hah_seqData
@@ -293,6 +316,7 @@ script lockstep_l_post_trans
     play_sfx s_f_lockstep_hah_seqData
     lockstep_flip_bg
     rest 12
+    set_marking_criteria 0
     play_sfx s_f_lockstep_hai_seqData
     lockstep_flip_bg
     spawn_cue CUE_L
@@ -304,6 +328,7 @@ script lockstep_l_post_trans
 return
 
 script lockstep_l_halfbar
+    set_marking_criteria 0
     spawn_cue CUE_L
     rest 24
     spawn_cue CUE_L
@@ -322,6 +347,7 @@ return
 
 
 script lockstep_r_trans
+    set_marking_criteria 2
     spawn_cue CUE_R
     rest 24
     spawn_cue CUE_R
@@ -340,6 +366,7 @@ script lockstep_r_trans
 return
 
 script lockstep_r_direct_trans
+    set_marking_criteria 2
     spawn_cue CUE_R
     rest 24
     play_sfx s_f_lockstep_hoh_seqData
@@ -360,6 +387,7 @@ script lockstep_r_direct_trans
 return
 
 script lockstep_r_quick_trans
+    set_marking_criteria 2
     spawn_cue CUE_R
     rest 12
     play_sfx s_f_lockstep_mhm_seqData
@@ -374,6 +402,7 @@ script lockstep_r_quick_trans
 return
 
 script lockstep_r_post_trans
+    set_marking_criteria 1
     spawn_cue CUE_R
     rest 24
     play_sfx s_f_lockstep_hoh_seqData
@@ -389,6 +418,7 @@ script lockstep_r_post_trans
 return
 
 script lockstep_r_1bar
+    set_marking_criteria 1
     spawn_cue CUE_R
     rest 24
     spawn_cue CUE_R
