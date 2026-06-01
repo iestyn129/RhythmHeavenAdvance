@@ -239,7 +239,7 @@ u32 lockstep_cue_update(struct Cue *cue, struct LockstepCue *info, u32 runningTi
         info->hasStepped = TRUE;
     }
 
-    return FALSE;
+    return cue->hasExpired;
 }
 
 

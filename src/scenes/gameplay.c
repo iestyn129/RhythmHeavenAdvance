@@ -197,6 +197,9 @@ void gameplay_start_scene(void) {
         set_next_scene(&scene_results_ver_rank);
     }
     score_results_set_grade_thresholds(NULL);
+
+    gGameplay->qBarData = mem_heap_alloc(sizeof (struct QBarData));
+    qbar_init(gGameplay->qBarData);
 }
 
 
@@ -315,6 +318,8 @@ void gameplay_update_scene(void) {
             gameplay_skip_tutorial(); // Skip Tutorial
         }
     }
+
+    qbar_update(gGameplay->qBarData, gGameplay->cues);
 }
 
 
@@ -468,6 +473,8 @@ s32 gameplay_run_engine_event(const struct GameEngine *engine, s32 id) {
 // [func_080173c4] Enable Play Inputs
 void gameplay_inputs_enabled(u32 enable) {
     gGameplay->playInputsEnabled = enable;
+
+    qbar_show_bar(gGameplay->qBarData, gGameplay->playInputsEnabled);
 }
 
 
@@ -722,6 +729,11 @@ void gameplay_stop_scene(void) {
         }
     }
 
+    if (gGameplay->qBarData != NULL) {
+        qbar_delete(gGameplay->qBarData);
+        mem_heap_dealloc(gGameplay->qBarData);
+    }
+
     func_08008628();
     func_08004058();
     midi_player_set_reverb(35, 2, 2, 4);
@@ -761,6 +773,8 @@ void gameplay_init_cues(void) {
 // [func_08017908] Set Current Marking Criteria
 void gameplay_set_marking_criteria(u32 criteria) {
     gGameplay->currentMarkingCriteria = criteria;
+
+    qbar_set_marking_criteria(gGameplay->qBarData, criteria);
 }
 
 

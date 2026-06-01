@@ -5,6 +5,7 @@
 #include "engines.h"
 #include "src/main.h"
 #include "riq_main_scene.h"
+#include "src/qbar.h"
 
 // Scene Macros/Enums:
 
@@ -73,6 +74,7 @@ struct GameplaySceneData {
     u8  mercyEnabled;
     u8  forgivableMisses;
     u8  autoplayEnabled;
+	struct QBarData* qBarData;
 };
 
 
