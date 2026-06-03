@@ -5,6 +5,11 @@
 
 #include "lockstep_anim_cells.inc.c"
 
+struct Animation anim_lockstep_blank[] = {
+    /* 000 */ { lockstep_blank_cel, 24 },
+    /* 001 */ END_ANIMATION,
+};
+
 struct Animation anim_lockstep_stepper_idle_z00[] = {
     /* 000 */ { lockstep_stepper_idle_z00_cel, 24 },
     /* 001 */ END_ANIMATION,
@@ -108,26 +113,6 @@ struct Animation anim_lockstep_crowd_lower_shot_l_z00[] = {
     /* 003 */ { lockstep_crowd_lower_shot_l_z00_cel03, 1 },
     /* 004 */ { lockstep_crowd_lower_idle_z00_cel, 10 },
     /* 005 */ END_ANIMATION,
-};
-
-struct Animation anim_lockstep_crowd_higher_idle_zP[] = {
-    /* 000 */ { lockstep_blank_cel, 24 },
-    END_ANIMATION
-};
-
-struct Animation anim_lockstep_crowd_higher_beat_zP[] = {
-    /* 000 */ { lockstep_blank_cel, 24 },
-    END_ANIMATION
-};
-
-struct Animation anim_lockstep_crowd_higher_shot_r_zP[] = {
-    /* 000 */ { lockstep_blank_cel, 24 },
-    END_ANIMATION
-};
-
-struct Animation anim_lockstep_crowd_higher_shot_l_zP[] = {
-    /* 000 */ { lockstep_blank_cel, 24 },
-    END_ANIMATION
 };
 
 struct Animation anim_lockstep_crowd_higher_idle_z00[] = {

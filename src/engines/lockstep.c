@@ -46,7 +46,7 @@ void lockstep_engine_start(const u32 ver) {
     stepper_init(&gLockstep->stepper, FALSE);
     stepper_init(&gLockstep->crowd, TRUE);
 
-    gameplay_set_input_buttons(LOCKSTEP_INPUTS, 0);
+    gameplay_set_input_buttons(A_BUTTON, 0);
 }
 
 
@@ -58,9 +58,9 @@ void lockstep_engine_stop(void) {
 
 
 void lockstep_engine_update(void) {
-    if (gLockstep->awaitingInput && D_03004afc & LOCKSTEP_INPUTS) {
+    if (gLockstep->awaitingInput && D_03004afc & A_BUTTON) {
         //sprite_set_visible(gSpriteHandler, gKarateMan->textButtonSprite, FALSE);
-        gameplay_set_input_buttons(LOCKSTEP_INPUTS, 0);
+        gameplay_set_input_buttons(A_BUTTON, 0);
         set_pause_beatscript_scene(FALSE);
         gLockstep->awaitingInput = FALSE;
     }

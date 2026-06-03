@@ -5,8 +5,6 @@
 #include "src/main.h"
 #include "games/lockstep/graphics/lockstep_graphics.h"
 
-#define LOCKSTEP_INPUTS A_BUTTON
-
 enum LockstepAnimType {
 	LOCKSTEP_ANIM_IDLE,
 	LOCKSTEP_ANIM_BEAT,
@@ -60,6 +58,7 @@ extern struct GraphicsTable *lockstep_gfx_tables[];
 
 extern struct Animation* lockstep_stepper_animations[LOCKSTEP_NUM_ZOOM_LEVELS][LOCKSTEP_NUM_ANIMS];
 extern struct Animation* lockstep_crowd_animations_lower[LOCKSTEP_NUM_ZOOM_LEVELS][LOCKSTEP_NUM_ANIMS];
+extern struct Animation* lockstep_crowd_animations_higher[LOCKSTEP_NUM_ZOOM_LEVELS][LOCKSTEP_NUM_ANIMS];
 extern struct Animation* (*lockstep_animations[3])[LOCKSTEP_NUM_ANIMS];
 extern u8 lockstep_bg_palettes[];
 
