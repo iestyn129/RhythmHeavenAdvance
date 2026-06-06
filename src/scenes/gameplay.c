@@ -525,6 +525,11 @@ void gameplay_enable_tutorial(u32 isTutorial) {
 }
 
 
+u32 gameplay_is_tutorial_enabled() {
+    return gGameplay->isTutorial;
+}
+
+
 // [func_08017458] Set skipDestination
 void gameplay_set_skip_destination(struct Scene *scene) {
     gGameplay->skipDestination = scene;

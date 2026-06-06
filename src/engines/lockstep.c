@@ -8,14 +8,14 @@
 #define gLockstep ((struct LockstepEngineData*)gCurrentEngineData)
 
 
-void lockstep_init_gfx3(void) {
+void lockstep_init_gfx3() {
 	func_0800c604(0);
 	gameplay_start_screen_fade_in();
     lockstep_update_bg_palette();
 }
 
 
-void lockstep_init_gfx2(void) {
+void lockstep_init_gfx2() {
     u32 temp;
 
     func_0800c604(0);
@@ -24,9 +24,9 @@ void lockstep_init_gfx2(void) {
 }
 
 
-void lockstep_init_gfx1(void) {
+void lockstep_init_gfx1() {
     u32 temp;
-    
+
     func_0800c604(0);
     temp = start_new_texture_loader(get_current_mem_id(), lockstep_buffered_textures);
     run_func_after_task(temp, lockstep_init_gfx2, 0);
@@ -46,26 +46,41 @@ void lockstep_engine_start(const u32 ver) {
     stepper_init(&gLockstep->stepper, FALSE);
     stepper_init(&gLockstep->crowd, TRUE);
 
+    gLockstep->textPrinter = text_printer_create_new(get_current_mem_id(), 2, 208, 30);
+    text_printer_set_colors(gLockstep->textPrinter, 0);
+    text_printer_set_x_y(gLockstep->textPrinter, 16, 16);
+    text_printer_set_layer(gLockstep->textPrinter, 0x4700);
+    text_printer_center_by_content(gLockstep->textPrinter, TRUE);
+
+    gLockstep->aButtonSprite = sprite_create(gSpriteHandler,
+        anim_lockstep_a_button, 0,
+        120, 80, 0x4700,
+        1, 0, 0x8000
+    );
+
     gameplay_set_input_buttons(A_BUTTON, 0);
 }
 
 
-void lockstep_engine_stop(void) {
+void lockstep_engine_stop() {
     stepper_delete(&gLockstep->stepper);
     stepper_delete(&gLockstep->crowd);
+    sprite_delete(gSpriteHandler, gLockstep->aButtonSprite);
+    // should i delete the textbox here?
     scene_hide_bg_layer(1);
 }
 
 
-void lockstep_engine_update(void) {
+void lockstep_engine_update() {
     if (gLockstep->awaitingInput && D_03004afc & A_BUTTON) {
-        //sprite_set_visible(gSpriteHandler, gKarateMan->textButtonSprite, FALSE);
+        sprite_set_visible(gSpriteHandler, gLockstep->aButtonSprite, FALSE);
         gameplay_set_input_buttons(A_BUTTON, 0);
         set_pause_beatscript_scene(FALSE);
         gLockstep->awaitingInput = FALSE;
     }
 
     stepper_update(&gLockstep->stepper);
+    text_printer_update(gLockstep->textPrinter);
 }
 
 
@@ -133,11 +148,13 @@ void stepper_set_anim(struct SwitchStepper* stepper, u8 animIdx) {
 }
 
 
-void lockstep_wait_for_input(void) {
-    //sprite_set_anim_cel(gSpriteHandler, gKarateMan->textButtonSprite, 0);
-    //sprite_set_visible(gSpriteHandler, gKarateMan->textButtonSprite, TRUE);
+void lockstep_wait_for_input() {
+    sprite_set_anim_cel(gSpriteHandler, gLockstep->aButtonSprite, 0);
+    sprite_set_visible(gSpriteHandler, gLockstep->aButtonSprite, TRUE);
+
     gameplay_set_input_buttons(0, 0);
     set_pause_beatscript_scene(TRUE);
+
     gLockstep->awaitingInput = TRUE;
 }
 
@@ -155,7 +172,7 @@ void lockstep_beat_anim(u8 play_sfx) {
 }
 
 
-void lockstep_flip_bg(void) {
+void lockstep_flip_bg() {
     gLockstep->isBgOff = !gLockstep->isBgOff;
     if (gLockstep->isBgOff > 1) {
         gLockstep->isBgOff = 1;
@@ -188,13 +205,23 @@ void lockstep_set_zoom(u8 zoomLevel) {
 }
 
 
+void lockstep_print_text(const char* text) {
+	text_printer_set_string(gLockstep->textPrinter, text);
+}
+
+
 void lockstep_input_event(const u32 pressed, u32 released) {
     struct SwitchStepper* stepper = &gLockstep->stepper;
-    u8 isOffBeat = FIXED_TO_INT(Div(
+    u8 isOffBeat, animIdx;
+
+    if (gameplay_is_tutorial_enabled()) {
+        return;
+    }
+
+    isOffBeat = FIXED_TO_INT(Div(
         INT_TO_FIXED(D_030053c0.runningTime),
         INT_TO_FIXED(0x0C) // divide by half a beat (in ticks)
     ) % INT_TO_FIXED(0x02)); // mod to get 0 for an on beat and 1 for an off beat
-    u8 animIdx;
 
     gameplay_add_cue_result(gameplay_get_marking_criteria(), CUE_RESULT_MISS, 0);
 
@@ -304,6 +331,6 @@ void lockstep_cue_miss(struct Cue *cue, struct LockstepCue *info) {
 }
 
 
-void lockstep_update_bg_palette(void) {
+void lockstep_update_bg_palette() {
     (BG_PALETTE_BUFFER(0))[0] = (BG_PALETTE_BUFFER(lockstep_bg_palettes[gLockstep->isBgOff]))[0];
 }

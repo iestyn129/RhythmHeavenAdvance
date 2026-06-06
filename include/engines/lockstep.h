@@ -35,6 +35,8 @@ enum LockstepCuesEnum {
 struct LockstepEngineData {
 	u8 version;
 	u8 awaitingInput;
+	struct TextPrinter *textPrinter;
+	s16 aButtonSprite;
 
 	struct SwitchStepper {
 		s16 sprite;
@@ -62,13 +64,13 @@ extern struct Animation* lockstep_crowd_animations_higher[LOCKSTEP_NUM_ZOOM_LEVE
 extern struct Animation* (*lockstep_animations[3])[LOCKSTEP_NUM_ANIMS];
 extern u8 lockstep_bg_palettes[];
 
-extern void lockstep_init_gfx3(void);
-extern void lockstep_init_gfx2(void);
-extern void lockstep_init_gfx1(void);
+extern void lockstep_init_gfx3();
+extern void lockstep_init_gfx2();
+extern void lockstep_init_gfx1();
 
 extern void lockstep_engine_start(u32 version);
-extern void lockstep_engine_stop(void);
-extern void lockstep_engine_update(void);
+extern void lockstep_engine_stop();
+extern void lockstep_engine_update();
 
 extern void lockstep_common_init_tutorial(struct Scene*);
 
@@ -77,10 +79,11 @@ extern void stepper_delete(struct SwitchStepper* stepper);
 extern void stepper_update(struct SwitchStepper* stepper);
 extern void stepper_set_anim(struct SwitchStepper* stepper, u8 animIdx);
 
-extern void lockstep_wait_for_input(void);
+extern void lockstep_wait_for_input();
 extern void lockstep_beat_anim(u8 play_sfx);
-extern void lockstep_flip_bg(void);
+extern void lockstep_flip_bg();
 extern void lockstep_set_zoom(u8 zoomLevel);
+extern void lockstep_print_text(const char* text);
 
 extern void lockstep_input_event(u32 pressed, u32 released);
 
@@ -91,4 +94,4 @@ extern void lockstep_cue_hit(struct Cue *cue, struct LockstepCue *info, u32 pres
 extern void lockstep_cue_barely(struct Cue *cue, struct LockstepCue *info, u32 pressed, u32 released);
 extern void lockstep_cue_miss(struct Cue *cue, struct LockstepCue *info);
 
-extern void lockstep_update_bg_palette(void);
+extern void lockstep_update_bg_palette();

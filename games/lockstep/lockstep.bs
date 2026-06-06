@@ -437,18 +437,29 @@ return
 
 script script_lockstep_practice
     set_tempo 130
-    set_music_volume 150
-    play_music s_renshu_bgm1_seqData
+    @set_music_volume 150
+    @play_music s_renshu_bgm1_seqData
     lockstep_set_zoom 0
     stop_tracking_inputs
     rest 24
     enable_pause_menu
     rest 24
     init_tutorial scene_lockstep_skipped_practice
+
+    lockstep_print_text D_lockstep_practice_loop_01
+    rest 12
     lockstep_wait_for_input
+    lockstep_clear_text
+    rest 24
+
+    lockstep_print_text D_lockstep_practice_off_03
+    rest 12
+    lockstep_wait_for_input
+    lockstep_clear_text
+
     rest 24
     stop_tutorial
-    mod_music_volume 0, 72
+    @mod_music_volume 0, 72
     rest 24
     rest 24
     rest 24

@@ -28,6 +28,8 @@ extern struct Animation anim_lockstep_crowd_higher_beat_z00[];
 extern struct Animation anim_lockstep_crowd_higher_shot_r_z00[];
 extern struct Animation anim_lockstep_crowd_higher_shot_l_z00[];
 
+extern struct Animation anim_lockstep_a_button[];
+
 extern struct CompressedData lockstep_bg_tiles;
 extern struct CompressedData lockstep_bg_map;
 extern struct CompressedData lockstep_obj;

@@ -13,7 +13,8 @@ EngineEvent lockstep_engine_events[] = {
 	lockstep_wait_for_input,
 	lockstep_beat_anim,
 	lockstep_flip_bg,
-	lockstep_set_zoom
+	lockstep_set_zoom,
+	lockstep_print_text
 };
 
 struct GameEngine lockstep_engine = {

@@ -145,3 +145,9 @@ struct Animation anim_lockstep_crowd_higher_shot_l_z00[] = {
     /* 004 */ { lockstep_crowd_higher_idle_z00_cel, 10 },
     /* 005 */ END_ANIMATION,
 };
+
+struct Animation anim_lockstep_a_button[] = {
+    /* 000 */ { lockstep_blank_cel, 10 },
+    /* 001 */ { lockstep_a_button_cel, 30 },
+    /* 002 */ END_ANIMATION,
+};

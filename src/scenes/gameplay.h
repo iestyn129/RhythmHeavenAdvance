@@ -119,6 +119,7 @@ extern void gameplay_set_next_cue_barely_sfx(struct SongHeader *sfx); // [func_0
 extern void gameplay_set_next_cue_miss_sfx(struct SongHeader *sfx); // [func_08017400] Set Next Cue Miss SFX
 extern void gameplay_force_stop_music_midi_track(s32 midiTrack); // [func_0801740c] Force-Stop Music MIDI Track
 extern void gameplay_enable_tutorial(u32 isTutorial); // [func_08017448] Set isTutorial
+extern u32 gameplay_is_tutorial_enabled(); // did this already exist somewhere? remove if so
 extern void gameplay_set_skip_destination(struct Scene *scene); // [func_08017458] Set skipDestination
 extern void gameplay_set_skip_button(u32 buttons); // [func_08017468] Set Skip Tutorial Button
 extern void gameplay_set_tutorial(struct Scene *scene); // [func_0801747c] Set Skip Destination (i.e. if Select is pressed in a tutorial)

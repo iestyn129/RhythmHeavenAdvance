@@ -5,6 +5,7 @@
     .set BEAT_ANIM, 0x01
     .set FLIP_BG, 0x02
     .set SET_ZOOM, 0x03
+    .set PRINT_TEXT, 0x04
 
     @ Cues
     .set CUE_L, 0x00
@@ -42,4 +43,13 @@ load_lockstep_labels
 @ [Event 0x03] set zoom
 .macro lockstep_set_zoom level
     lockstep_event SET_ZOOM, \level
+.endm
+
+@ [Event 0x04] print text
+.macro lockstep_print_text string
+    lockstep_event PRINT_TEXT, \string
+.endm
+
+.macro lockstep_clear_text
+    lockstep_print_text NULL
 .endm

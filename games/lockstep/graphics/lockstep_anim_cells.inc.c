@@ -1035,3 +1035,8 @@ AnimationCel lockstep_crowd_higher_shot_l_z00_cel03[] = {
     /* 011 */ 0x8080, 0xc04c, 0x0114,
     /* 012 */ 0x8080, 0xc07a, 0x0114
 };
+
+AnimationCel lockstep_a_button_cel[] = {
+    /* Len */ 1,
+    /* 000 */ 0x00c0, 0x4050, 0x0100
+};
