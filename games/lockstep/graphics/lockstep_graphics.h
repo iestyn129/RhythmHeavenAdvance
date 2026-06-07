@@ -33,7 +33,6 @@ extern struct Animation anim_lockstep_a_button[];
 extern struct CompressedData lockstep_bg_tiles;
 extern struct CompressedData lockstep_bg_map;
 extern struct CompressedData lockstep_obj;
-extern struct CompressedData lockstep_extra_obj;
 
 extern Palette lockstep_obj_pal[];
 extern Palette lockstep_bg_pal[];

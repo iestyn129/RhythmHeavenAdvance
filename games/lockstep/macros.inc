@@ -15,7 +15,7 @@
 
 @ Load Game: Lockstep
 .macro load_lockstep
-load_lockstep_labels
+    load_lockstep_labels
     load_game lockstep_engine, 0
 .endm
 

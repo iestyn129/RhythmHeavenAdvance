@@ -1,0 +1,98 @@
+.include "include/beatscript.inc"
+.include "games/shootem/macros.inc"
+
+
+.section .script.entry
+@ Shoot-'em-up - Script Entry Point
+
+script script_shootem_entry
+    set_tempo 124
+    rest 24
+    call script_shootem_prologue
+    set_game_fade_in_time 16
+    load_shootem
+    enable_play_inputs
+    start_tracking_inputs
+    call script_shootem_main
+    disable_pause_menu
+    disable_play_inputs
+    fade_music_out 48
+    fade_screen_out 12, BLACK
+    rest 24
+    rest 24
+stop
+
+define_gameplay_scene scene_shootem, script_shootem_entry
+
+
+.section .script.prologue
+@ Shoot-'em-up - Prologue
+
+script script_shootem_prologue
+    set_game_fade_in_time 8
+    load_game shootem_prologue_engine, 0
+    run stop_all_soundplayers
+    rest 24
+    play_sfx s_jingle_rat_seqData
+    rest 24
+    rest 24
+    rest 24
+    rest 24
+    rest 24
+    rest 24
+    rest 24
+    run func_08006d80, 0
+    set_game_fade_in_time 16
+return
+
+
+.section .script.main
+@ Shoot-'em-up - Marking Criteria
+
+struct shootem_marking_criteria_0
+    /* Positive Remark */     .word D_lockstep_onbeat_pos
+    /* Negative Remark */     .word D_lockstep_onbeat_neg
+    /* Flags */               .hword CHECK_AVERAGE_HITS | CHECK_AVERAGE_MISSES
+    /* Pos: Required Hits */  .hword 0x80 @ 50%
+    /* Neg: Minimum Hits */   .hword 0x33 @ 20%
+    /* Neg: Maximum Misses */ .hword 0x4C @ 30%
+endstruct
+
+struct shootem_marking_criteria
+    .word shootem_marking_criteria_0
+    .word END_OF_CRITERIA
+endstruct
+
+
+@ Shoot-'em-up - Main Script
+
+script script_shootem_main
+    import_marking_criteria shootem_marking_criteria
+    set_results_header D_lockstep_header
+    disable_play_inputs
+    rest 24
+    set_tempo 162
+    set_music_volume 200
+    rest 24
+    rest 24
+    rest 24
+    rest 24
+    play_music s_lockstep_bgm_seqData
+    start_perfect_campaign
+    enable_play_inputs
+
+    rest 24
+    rest 24
+    rest 24
+    rest 24
+    rest 24
+    rest 24
+    rest 24
+    rest 24
+
+    stop_tracking_perfect_campaign
+    disable_pause_menu
+    rest 24
+return
+
+.end

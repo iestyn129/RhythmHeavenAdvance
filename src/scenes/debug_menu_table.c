@@ -520,10 +520,15 @@ struct DebugMenuEntry debug_menu_entry_table[] = {
         /* Label */ "‚s‚‚@‚s‚’‚‰‚‚Œ@‚Q",
         /* Epil. */ TRUE
     },
-    {
+    /* Lockstep */ {
         &scene_lockstep,
         "‚k‚‚ƒ‚‹‚“‚”‚…‚",
         TRUE
+    },
+    /* Shoot-'em-up */ {
+        /* Scene */ &scene_shootem,
+        /* Label */ "‚r‚ˆ‚‚‚”|f‚…‚|‚•‚",
+        /* Epil. */ TRUE
     },
     /* Remix 1 */ {
         /* Scene */ &scene_remix_1,
