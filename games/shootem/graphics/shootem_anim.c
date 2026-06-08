@@ -9,3 +9,37 @@ struct Animation anim_shootem_cannon_idle[] = {
     /* 000 */ { shootem_cannon_idle_cel, 24 },
     /* 001 */ END_ANIMATION,
 };
+
+struct Animation anim_shootem_cannon_shoot[] = {
+    /* 000 */ { shootem_cannon_shoot_cel00, 3 },
+    /* 001 */ { shootem_cannon_shoot_cel01, 1 },
+    /* 002 */ { shootem_cannon_shoot_cel02, 2 },
+    /* 003 */ { shootem_cannon_shoot_cel03, 2 },
+    /* 004 */ { shootem_cannon_idle_cel, 18 },
+    /* 005 */ END_ANIMATION,
+};
+
+struct Animation anim_shootem_cannon_face[] = {
+    /* 000 */ { shootem_cannon_face_idle_cel, 1 },
+    /* 001 */ { shootem_cannon_face_hurt_cel, 1 },
+    /* 002 */ END_ANIMATION,
+};
+
+struct Animation anim_shootem_laser_idle[] = {
+    /* 000 */ { shootem_empty_cel, 24 },
+    /* 001 */ END_ANIMATION,
+};
+
+struct Animation anim_shootem_laser_shoot[] = {
+    /* 000 */ { shootem_laser_shoot_cel00, 3 },
+    /* 001 */ { shootem_laser_shoot_cel01, 2 },
+    /* 002 */ { shootem_laser_shoot_cel02, 2 },
+    /* 003 */ { shootem_laser_shoot_cel03, 2 },
+    /* 004 */ { shootem_laser_shoot_cel04, 2 },
+    /* 005 */ { shootem_laser_shoot_cel05, 2 },
+    /* 006 */ { shootem_laser_shoot_cel06, 2 },
+    /* 007 */ { shootem_laser_shoot_cel07, 2 },
+    /* 008 */ { shootem_laser_shoot_cel08, 2 },
+    /* 009 */ { shootem_empty_cel, 5 },
+    /* 010 */ END_ANIMATION,
+};

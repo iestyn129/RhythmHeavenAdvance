@@ -1,7 +1,7 @@
 @ Load Data
 .macro load_shootem_labels
     @ Game Events
-    @.set EVENT, 0x00
+    .set WAIT_FOR_INPUT, 0x00
 
     @ Cues
     @.set CUE, 0x00
@@ -21,6 +21,6 @@
 .endm
 
 @ [Event 0x00]
-@.macro shootem_wait_for_input
-@    shootem_event WAIT_FOR_INPUT, 0
-@.endm
+.macro shootem_wait_for_input
+    shootem_event WAIT_FOR_INPUT, 0
+.endm

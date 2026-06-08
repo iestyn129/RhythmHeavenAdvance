@@ -33,7 +33,7 @@ script script_shootem_prologue
     load_game shootem_prologue_engine, 0
     run stop_all_soundplayers
     rest 24
-    play_sfx s_jingle_rat_seqData
+    play_sfx s_jingle_march_seqData
     rest 24
     rest 24
     rest 24
@@ -71,24 +71,14 @@ script script_shootem_main
     set_results_header D_lockstep_header
     disable_play_inputs
     rest 24
-    set_tempo 162
+    set_tempo 142
     set_music_volume 200
-    rest 24
-    rest 24
-    rest 24
-    rest 24
-    play_music s_lockstep_bgm_seqData
+    play_music s_renshu_bgm1_seqData
     start_perfect_campaign
     enable_play_inputs
+    enable_pause_menu
 
-    rest 24
-    rest 24
-    rest 24
-    rest 24
-    rest 24
-    rest 24
-    rest 24
-    rest 24
+    shootem_wait_for_input
 
     stop_tracking_perfect_campaign
     disable_pause_menu

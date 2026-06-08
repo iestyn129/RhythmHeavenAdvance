@@ -6,7 +6,9 @@ EngineEvent shootem_common_events[] = {
 	END_OF_COMMON_EVENT_LIST
 };
 
-EngineEvent shootem_engine_events[] = {};
+EngineEvent shootem_engine_events[] = {
+	shootem_wait_for_input
+};
 
 struct GameEngine shootem_engine = {
 	sizeof(struct ShootemEngineData),
@@ -42,12 +44,12 @@ struct GraphicsTable shootem_gfx_table[] = {
 	{
 		shootem_bg_pal,
 		BG_PALETTE_BUFFER(0), // bg palette 0
-		0x60
+		0x20
 	},
 	{
 		shootem_obj_pal,
 		OBJ_PALETTE_BUFFER(0), // obj palette 0
-		0x20
+		0x80
 	},
 	END_OF_GRAPHICS_TABLE
 };
