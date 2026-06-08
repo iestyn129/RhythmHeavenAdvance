@@ -811,3 +811,8 @@ extern struct SongHeader s_f_lockstep_hoh_seqData;
 extern struct SongHeader s_f_lockstep_mhm_seqData;
 extern struct SongHeader s_f_lockstep_hah_seqData;
 extern struct SongHeader s_f_lockstep_miss_seqData;
+
+extern struct SongHeader s_f_shootem_shot_seqData;
+extern struct SongHeader s_f_shootem_spawn_seqData;
+extern struct SongHeader s_f_shootem_hit_seqData;
+extern struct SongHeader s_f_shootem_miss_seqData;

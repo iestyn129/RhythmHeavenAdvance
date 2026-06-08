@@ -6148,6 +6148,22 @@
                 61366,
                 79999
             ]
+        },
+        {
+            "sample": "shootem_sample_shot.wav",
+            "pitch": "C5"
+        },
+        {
+            "sample": "shootem_sample_spawn.wav",
+            "pitch": "C5"
+        },
+        {
+            "sample": "shootem_sample_hit.wav",
+            "pitch": "C5"
+        },
+        {
+            "sample": "shootem_sample_miss.wav",
+            "pitch": "C5"
         }
     ]
 }

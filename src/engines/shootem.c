@@ -114,5 +114,5 @@ void shootem_input_event(const u32 pressed, u32 released) {
         0, 1, 0x7f, 0
     );
 
-    //play_sound(&s_witch_donats_seqData);
+    play_sound(&s_f_shootem_shot_seqData);
 }
