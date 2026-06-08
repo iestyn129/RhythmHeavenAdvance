@@ -7,7 +7,10 @@ EngineEvent shootem_common_events[] = {
 };
 
 EngineEvent shootem_engine_events[] = {
-	shootem_wait_for_input
+	shootem_wait_for_input,
+	shootem_start_loop,
+	shootem_end_loop,
+	shootem_set_cue_pos
 };
 
 struct GameEngine shootem_engine = {
@@ -58,6 +61,37 @@ struct GraphicsTable *shootem_gfx_tables[] = {
 	shootem_gfx_table
 };
 
+s16 shootem_cue_positions[4][2] = {
+	{-64, -48},
+	{64, -48},
+	{-64, 16},
+	{64, 16}
+};
+
+struct CueDefinition shootem_cue_target = {
+	/* Unknown Param.  */ 0,
+	/* Input Buttons   */ PRESS_BUTTON(A_BUTTON),
+	/* Total Duration  */ 0x60,
+	/* Hit Window      */ -0x03, 0x03,
+	/* Barely Window   */ -0x05, 0x05,
+	/* Tempo-Dependent */ FALSE,
+	/* Force-Delete    */ FALSE,
+	/* Size in Memory  */ sizeof(struct ShootemCue),
+	/* Func. Spawn     */ shootem_cue_spawn,
+	/* Spawn Parameter */ SHOOTEM_CUE_TARGET,
+	/* Func. Update    */ shootem_cue_update,
+	/* Func. Despawn   */ shootem_cue_despawn,
+	/* Func. Hit       */ shootem_cue_hit,
+	/* Func. Barely    */ shootem_cue_barely,
+	/* Func. Miss      */ shootem_cue_miss,
+	/* SFX Spawn       */ &s_f_shootem_spawn_seqData,
+	/* SFX Hit         */ &s_f_shootem_hit_seqData,
+	/* SFX Barely      */ &s_f_shootem_hit_seqData,
+	/* SFX Miss        */ &s_f_shootem_miss_seqData,
+	/* Miss Condition  */ NULL
+};
+
 struct CueDefinition *shootem_cue_index[] = {
+	&shootem_cue_target,
 	END_OF_CUE_INDEX
 };

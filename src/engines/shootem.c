@@ -35,6 +35,9 @@ void shootem_init_gfx1() {
 void shootem_engine_start(const u32 version) {
     gShootem->version = version;
     gShootem->awaitingInput = FALSE;
+    gShootem->loopCounter = 0;
+    gShootem->cueX = 0;
+    gShootem->cueY = 0;
 
     shootem_init_gfx1();
     scene_show_obj_layer();
@@ -53,10 +56,14 @@ void shootem_engine_stop() {
 
 
 void shootem_engine_update() {
-    if (gShootem->awaitingInput && D_03004afc & SELECT_BUTTON) {
-        //gameplay_set_input_buttons(A_BUTTON, 0);
-        set_pause_beatscript_scene(FALSE);
-        gShootem->awaitingInput = FALSE;
+    if (D_03004afc & SELECT_BUTTON) {
+        gShootem->loopCounter++;
+
+        if (gShootem->awaitingInput) {
+            gameplay_set_input_buttons(A_BUTTON, 0);
+            set_pause_beatscript_scene(FALSE);
+            gShootem->awaitingInput = FALSE;
+        }
     }
 
     cannon_update(&gShootem->cannon);
@@ -78,7 +85,7 @@ void cannon_init(struct Cannon* cannon) {
 
     cannon->laserSprite = sprite_create(gSpriteHandler,
         anim_shootem_laser_idle, 0,
-        120, 80, 0x4900,
+        120, 80, 0x4A00,
         1, 0, 0
     );
 }
@@ -94,17 +101,7 @@ void cannon_delete(struct Cannon* cannon) {
 void cannon_update(struct Cannon* cannon) {}
 
 
-void shootem_wait_for_input() {
-    //gameplay_set_input_buttons(0, 0);
-    set_pause_beatscript_scene(TRUE);
-
-    gShootem->awaitingInput = TRUE;
-}
-
-
-void shootem_input_event(const u32 pressed, u32 released) {
-    struct Cannon* cannon = &gShootem->cannon;
-
+void cannon_shoot(const struct Cannon* cannon) {
     sprite_set_anim(gSpriteHandler,
         cannon->cannonSprite, anim_shootem_cannon_shoot,
         0, 1, 0x7f, 0
@@ -114,5 +111,90 @@ void shootem_input_event(const u32 pressed, u32 released) {
         0, 1, 0x7f, 0
     );
 
-    play_sound(&s_f_shootem_shot_seqData);
+    play_sound(&s_f_shootem_shot_seqData);\
+}
+
+
+void shootem_wait_for_input() {
+    gameplay_set_input_buttons(0, 0);
+    set_pause_beatscript_scene(TRUE);
+
+    gShootem->awaitingInput = TRUE;
+}
+
+
+void shootem_start_loop() {
+    gShootem->loopCounter = 0;
+}
+
+
+void shootem_end_loop() {
+    if (gShootem->loopCounter == 0) {
+        beatscript_enable_loops();
+    }
+}
+
+
+void shootem_set_cue_pos(const u16 pos_idx) {
+    gShootem->cueX = shootem_cue_positions[pos_idx][0];
+    gShootem->cueY = shootem_cue_positions[pos_idx][1];
+}
+
+
+void shootem_input_event(const u32 pressed, u32 released) {
+    struct Cannon* cannon = &gShootem->cannon;
+
+    cannon_shoot(cannon);
+}
+
+
+void shootem_cue_spawn(struct Cue *cue, struct ShootemCue *info, u32 type) {
+    info->type = type;
+    info->sprite = sprite_create(gSpriteHandler,
+        anim_shootem_cue_target_idle, 0,
+        (s16)(120 + gShootem->cueX), (s16)(80 + gShootem->cueY), 0x4700,
+        1, 0, 1
+    );
+}
+
+
+u32 shootem_cue_update(struct Cue *cue, struct ShootemCue *info, u32 runningTime, u32 duration) {
+    return sprite_is_invalid(gSpriteHandler, info->sprite);
+}
+
+
+void shootem_cue_despawn(struct Cue *cue, struct ShootemCue *info) {
+    sprite_delete(gSpriteHandler, info->sprite);
+}
+
+
+void shootem_cue_hit(struct Cue *cue, struct ShootemCue *info, u32 pressed, u32 released) {
+    struct Cannon* cannon = &gShootem->cannon;
+
+    cannon_shoot(cannon);
+
+    sprite_set_anim(gSpriteHandler,
+        info->sprite, anim_shootem_cue_target_hit,
+        0, 1, 0x7f, 3
+    );
+}
+
+
+void shootem_cue_barely(struct Cue *cue, struct ShootemCue *info, u32 pressed, u32 released) {
+    struct Cannon* cannon = &gShootem->cannon;
+
+    cannon_shoot(cannon);
+
+    sprite_set_anim(gSpriteHandler,
+        info->sprite, anim_shootem_cue_target_barely,
+        0, 1, 0x7f, 3
+    );
+}
+
+
+void shootem_cue_miss(struct Cue *cue, struct ShootemCue *info) {
+    sprite_set_anim(gSpriteHandler,
+        info->sprite, anim_shootem_cue_target_miss,
+        0, 1, 0x7f, 3
+    );
 }

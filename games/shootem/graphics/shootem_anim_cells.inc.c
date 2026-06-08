@@ -217,3 +217,48 @@ AnimationCel shootem_laser_shoot_cel08[] = {
     /* Len */ 1,
     /* 000 */ 0x80a8, 0x0000, 0x00f9
 };
+
+AnimationCel shootem_cue_target_idle_cel00[] = {
+    /* Len */ 1,
+    /* 000 */ 0x00ec, 0x81f0, 0x011c
+};
+
+AnimationCel shootem_cue_target_idle_cel01[] = {
+    /* Len */ 1,
+    /* 000 */ 0x00ed, 0x81f0, 0x011c
+};
+
+AnimationCel shootem_cue_target_idle_cel02[] = {
+    /* Len */ 1,
+    /* 000 */ 0x00ee, 0x81f0, 0x011c
+};
+
+AnimationCel shootem_cue_target_idle_cel03[] = {
+    /* Len */ 1,
+    /* 000 */ 0x00ef, 0x81f0, 0x011c
+};
+
+AnimationCel shootem_cue_target_idle_cel04[] = {
+    /* Len */ 1,
+    /* 000 */ 0x00f0, 0x81f0, 0x011c
+};
+
+AnimationCel shootem_cue_target_idle_cel05[] = {
+    /* Len */ 1,
+    /* 000 */ 0x00f1, 0x81f0, 0x011c
+};
+
+AnimationCel shootem_cue_target_idle_cel06[] = {
+    /* Len */ 1,
+    /* 000 */ 0x00f2, 0x81f0, 0x011c
+};
+
+AnimationCel shootem_cue_target_idle_cel07[] = {
+    /* Len */ 1,
+    /* 000 */ 0x00f3, 0x81f0, 0x011c
+};
+
+AnimationCel shootem_cue_target_idle_cel08[] = {
+    /* Len */ 1,
+    /* 000 */ 0x00f4, 0x81f0, 0x011c
+};

@@ -77,8 +77,28 @@ script script_shootem_main
     start_perfect_campaign
     enable_play_inputs
     enable_pause_menu
+    rest 6
 
-    shootem_wait_for_input
+    loop_start
+        run beatscript_disable_loops
+        shootem_start_loop
+
+				shootem_spawn_cue_pos CUE_TARGET, 0
+    		rest 24
+				shootem_spawn_cue_pos CUE_TARGET, 1
+    		rest 24
+				shootem_spawn_cue_pos CUE_TARGET, 2
+    		rest 24
+				shootem_spawn_cue_pos CUE_TARGET, 3
+    		rest 24
+
+    		rest 24
+    		rest 24
+    		rest 24
+    		rest 24
+
+        shootem_end_loop
+    loop_end
 
     stop_tracking_perfect_campaign
     disable_pause_menu
