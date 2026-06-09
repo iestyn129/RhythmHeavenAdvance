@@ -45,33 +45,47 @@ struct Animation anim_shootem_laser_shoot[] = {
 };
 
 struct Animation anim_shootem_cue_target_idle[] = {
-    /* 000 */ { shootem_cue_target_idle_cel00, 16 },
-    /* 001 */ { shootem_cue_target_idle_cel01, 16 },
-    /* 002 */ { shootem_cue_target_idle_cel02, 16 },
-    /* 003 */ { shootem_cue_target_idle_cel03, 16 },
-    /* 004 */ { shootem_cue_target_idle_cel04, 16 },
-    /* 005 */ { shootem_cue_target_idle_cel05, 16 },
-    /* 006 */ { shootem_cue_target_idle_cel06, 16 },
-    /* 007 */ { shootem_cue_target_idle_cel07, 16 },
-    /* 008 */ { shootem_cue_target_idle_cel08, 16 },
-    // /* 009 */ { shootem_cue_target_idle_cel07, 16 },
-    // /* 010 */ { shootem_cue_target_idle_cel06, 16 },
-    // /* 011 */ { shootem_cue_target_idle_cel05, 16 },
-    // /* 012 */ { shootem_cue_target_idle_cel04, 16 },
-    // /* 013 */ { shootem_cue_target_idle_cel03, 16 },
-    // /* 014 */ { shootem_cue_target_idle_cel02, 16 },
-    // /* 015 */ { shootem_cue_target_idle_cel01, 16 },
-    /* 016 */ END_ANIMATION,
+    /* 000 */ { shootem_cue_target_idle_cel00, 32 },
+    /* 001 */ { shootem_cue_target_idle_cel01, 32 },
+    /* 002 */ { shootem_cue_target_idle_cel02, 32 },
+    /* 003 */ { shootem_cue_target_idle_cel03, 32 },
+    /* 004 */ { shootem_cue_target_idle_cel04, 32 },
+    /* 005 */ END_ANIMATION,
 };
 
 struct Animation anim_shootem_cue_target_hit[] = {
-    /* 000 */ { shootem_empty_cel, 24 },
-    /* 001 */ END_ANIMATION,
+    /* 000 */ { shootem_cue_hit_cel_target, 4 },
+    /* 001 */ { shootem_cue_hit_cel01, 3 },
+    /* 002 */ { shootem_cue_hit_cel02, 3 },
+    /* 003 */ { shootem_cue_hit_cel03, 3 },
+    /* 004 */ { shootem_cue_hit_cel04, 1 },
+    /* 005 */ { shootem_cue_hit_cel05, 1 },
+    /* 006 */ { shootem_empty_cel, 9 },
+    /* 007 */ END_ANIMATION,
+};
+
+struct Animation anim_shootem_cue_target_near[] = {
+    /* 000 */ { shootem_cue_target_near_cel00, 2 },
+    /* 001 */ { shootem_cue_target_near_cel01, 2 },
+    /* 002 */ { shootem_cue_target_near_cel02, 2 },
+    /* 003 */ { shootem_empty_cel, 18 },
+    /* 004 */ END_ANIMATION,
 };
 
 struct Animation anim_shootem_cue_target_barely[] = {
-    /* 000 */ { shootem_empty_cel, 24 },
-    /* 001 */ END_ANIMATION,
+    /* 000 */ { shootem_cue_target_barely_cel00, 4 },
+    /* 001 */ { shootem_cue_target_barely_cel01, 4 },
+    /* 002 */ { shootem_cue_target_barely_cel02, 4 },
+    /* 003 */ { shootem_cue_target_barely_cel03, 4 },
+    /* 004 */ { shootem_cue_target_barely_cel04, 4 },
+    /* 005 */ { shootem_cue_target_barely_cel05, 4 },
+    /* 006 */ { shootem_cue_target_barely_cel06, 4 },
+    /* 007 */ { shootem_cue_target_barely_cel07, 4 },
+    /* 008 */ { shootem_cue_target_barely_cel08, 4 },
+    /* 009 */ { shootem_cue_barely_cel09, 4 },
+    /* 010 */ { shootem_cue_barely_cel10, 4 },
+    /* 011 */ { shootem_empty_cel, 4 },
+    /* 012 */ END_ANIMATION,
 };
 
 struct Animation anim_shootem_cue_target_miss[] = {

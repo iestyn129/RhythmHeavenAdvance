@@ -52,7 +52,7 @@ struct GraphicsTable shootem_gfx_table[] = {
 	{
 		shootem_obj_pal,
 		OBJ_PALETTE_BUFFER(0), // obj palette 0
-		0x80
+		0xA0
 	},
 	END_OF_GRAPHICS_TABLE
 };
@@ -62,10 +62,10 @@ struct GraphicsTable *shootem_gfx_tables[] = {
 };
 
 s16 shootem_cue_positions[4][2] = {
-	{-64, -48},
-	{64, -48},
-	{-64, 16},
-	{64, 16}
+	{-80, -48},
+	{80, -48},
+	{-80, 16},
+	{80, 16}
 };
 
 struct CueDefinition shootem_cue_target = {

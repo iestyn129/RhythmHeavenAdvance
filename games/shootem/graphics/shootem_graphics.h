@@ -11,6 +11,7 @@ extern struct Animation anim_shootem_laser_shoot[];
 
 extern struct Animation anim_shootem_cue_target_idle[];
 extern struct Animation anim_shootem_cue_target_hit[];
+extern struct Animation anim_shootem_cue_target_near[];
 extern struct Animation anim_shootem_cue_target_barely[];
 extern struct Animation anim_shootem_cue_target_miss[];
 

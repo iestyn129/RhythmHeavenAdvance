@@ -9,12 +9,22 @@ enum ShootemCuesEnum {
 	SHOOTEM_CUE_TARGET
 };
 
+enum ShootemCueState {
+	SHOOTEM_CUE_STATE_FAR,
+	SHOOTEM_CUE_STATE_NEAR,
+	SHOOTEM_CUE_STATE_HIT,
+	SHOOTEM_CUE_STATE_BARELY,
+	SHOOTEM_CUE_STATE_MISS
+};
+
 struct ShootemEngineData {
 	u8 version;
 	u8 awaitingInput;
 	s32 loopCounter;
+	u16 shootCooldown;
 	s16 cueX;
 	s16 cueY;
+	u8 cueBarelyDirection;
 
 	struct Cannon {
 		s16 cannonSprite;
@@ -26,6 +36,12 @@ struct ShootemEngineData {
 struct ShootemCue {
 	u32 type;
 	s16 sprite;
+
+	u32 state;
+	s32 barelyXOffset;
+	s32 barelyYOffset;
+	s32 barelyXAcceleration;
+	s32 barelyYAcceleration;
 };
 
 extern struct CompressedData *shootem_buffered_textures[];
