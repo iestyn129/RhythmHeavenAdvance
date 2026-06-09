@@ -92,3 +92,15 @@ struct Animation anim_shootem_cue_target_miss[] = {
     /* 000 */ { shootem_empty_cel, 24 },
     /* 001 */ END_ANIMATION,
 };
+
+struct Animation anim_shootem_trajectory_hit[] = {
+    /* 000 */ { shootem_trajectory_hit_cel, 4 },
+    /* 001 */ { shootem_empty_cel, 20 },
+    /* 002 */ END_ANIMATION
+};
+
+struct Animation anim_shootem_trajectory_miss[] = {
+    /* 000 */ { shootem_trajectory_miss_cel, 4 },
+    /* 001 */ { shootem_empty_cel, 20 },
+    /* 002 */ END_ANIMATION
+};

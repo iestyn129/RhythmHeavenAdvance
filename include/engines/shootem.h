@@ -22,8 +22,7 @@ struct ShootemEngineData {
 	u8 awaitingInput;
 	s32 loopCounter;
 	u16 shootCooldown;
-	s16 cueX;
-	s16 cueY;
+	u16 nextCuePosIdx;
 	u8 cueBarelyDirection;
 
 	struct Cannon {
@@ -42,12 +41,16 @@ struct ShootemCue {
 	s32 barelyYOffset;
 	s32 barelyXAcceleration;
 	s32 barelyYAcceleration;
+
+	s8 trajectoryAffineGroup;
+	s16 trajectorySprite;
 };
 
 extern struct CompressedData *shootem_buffered_textures[];
 extern struct GraphicsTable *shootem_gfx_tables[];
 
 extern s16 shootem_cue_positions[9][2];
+extern s16 shootem_cue_trajectories[9][3][2];
 
 extern void shootem_init_gfx3();
 extern void shootem_init_gfx2();
@@ -65,7 +68,7 @@ extern void cannon_shoot(const struct Cannon* cannon);
 extern void shootem_wait_for_input();
 extern void shootem_start_loop();
 extern void shootem_end_loop();
-extern void shootem_set_cue_pos(u16 pos_idx);
+extern void shootem_set_cue_pos(u16 posIdx);
 
 extern void shootem_input_event(u32 pressed, u32 released);
 

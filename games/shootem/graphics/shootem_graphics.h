@@ -15,6 +15,9 @@ extern struct Animation anim_shootem_cue_target_near[];
 extern struct Animation anim_shootem_cue_target_barely[];
 extern struct Animation anim_shootem_cue_target_miss[];
 
+extern struct Animation anim_shootem_trajectory_hit[];
+extern struct Animation anim_shootem_trajectory_miss[];
+
 extern struct CompressedData shootem_bg_tiles;
 extern struct CompressedData shootem_bg_map;
 extern struct CompressedData shootem_obj;

@@ -37,8 +37,7 @@ void shootem_engine_start(const u32 version) {
     gShootem->awaitingInput = FALSE;
     gShootem->loopCounter = 0;
     gShootem->shootCooldown = 0;
-    gShootem->cueX = 0;
-    gShootem->cueY = 0;
+    gShootem->nextCuePosIdx = 0;
     gShootem->cueBarelyDirection = 0;
 
     shootem_init_gfx1();
@@ -147,9 +146,8 @@ void shootem_end_loop() {
 }
 
 
-void shootem_set_cue_pos(const u16 pos_idx) {
-    gShootem->cueX = shootem_cue_positions[pos_idx][0];
-    gShootem->cueY = shootem_cue_positions[pos_idx][1];
+void shootem_set_cue_pos(const u16 posIdx) {
+    gShootem->nextCuePosIdx = posIdx;
 }
 
 
@@ -161,10 +159,15 @@ void shootem_input_event(const u32 pressed, u32 released) {
 
 
 void shootem_cue_spawn(struct Cue *cue, struct ShootemCue *info, u32 type) {
+    const s16 cueX = shootem_cue_positions[gShootem->nextCuePosIdx][0];
+    const s16 cueY = shootem_cue_positions[gShootem->nextCuePosIdx][1];
+    const s16 trajectoryScaleY = shootem_cue_trajectories[gShootem->nextCuePosIdx][0][0];
+    const s16 trajectoryRotation = shootem_cue_trajectories[gShootem->nextCuePosIdx][0][1];
+
     info->type = type;
     info->sprite = sprite_create(gSpriteHandler,
         anim_shootem_cue_target_idle, 0,
-        (s16)(120 + gShootem->cueX), (s16)(80 + gShootem->cueY), 0x4700,
+        (s16)(120 + cueX), (s16)(80 + cueY), 0x4700,
         1, 0, 1
     );
 
@@ -173,6 +176,19 @@ void shootem_cue_spawn(struct Cue *cue, struct ShootemCue *info, u32 type) {
     info->barelyYOffset = 0;
     info->barelyXAcceleration = 0;
     info->barelyYAcceleration = 0;
+
+    info->trajectoryAffineGroup = (s8)scene_affine_group_alloc();
+    info->trajectorySprite = sprite_create(gSpriteHandler,
+        anim_shootem_trajectory_hit, 0,
+        (s16)(120 + cueX), (s16)(80 + cueY), 0x4800,
+        1, 0x7f, 0
+    );
+    assign_sprite_affine_param(info->trajectorySprite, info->trajectoryAffineGroup);
+
+    set_affine_stretch_rotation(info->trajectoryAffineGroup,
+        0x100, trajectoryScaleY,
+        trajectoryRotation
+    );
 }
 
 
@@ -221,6 +237,8 @@ u32 shootem_cue_update(struct Cue *cue, struct ShootemCue *info, u32 runningTime
 
 void shootem_cue_despawn(struct Cue *cue, struct ShootemCue *info) {
     sprite_delete(gSpriteHandler, info->sprite);
+    sprite_delete(gSpriteHandler, info->trajectorySprite);
+    func_080021b8(info->trajectoryAffineGroup);
 }
 
 
