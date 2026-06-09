@@ -84,12 +84,23 @@ script script_shootem_main
         shootem_start_loop
 
 				shootem_spawn_cue_pos CUE_TARGET, 0
-    		rest 24
+    		rest 6
 				shootem_spawn_cue_pos CUE_TARGET, 1
-    		rest 24
+    		rest 6
 				shootem_spawn_cue_pos CUE_TARGET, 2
-    		rest 24
+    		rest 6
 				shootem_spawn_cue_pos CUE_TARGET, 3
+    		rest 6
+				shootem_spawn_cue_pos CUE_TARGET, 4
+    		rest 6
+				shootem_spawn_cue_pos CUE_TARGET, 5
+    		rest 6
+				shootem_spawn_cue_pos CUE_TARGET, 6
+    		rest 6
+				shootem_spawn_cue_pos CUE_TARGET, 7
+    		rest 6
+				shootem_spawn_cue_pos CUE_TARGET, 8
+    		rest 24
     		rest 24
 
     		rest 24

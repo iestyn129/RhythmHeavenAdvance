@@ -111,7 +111,7 @@ void cannon_update(struct Cannon* cannon) {}
 
 
 void cannon_shoot(const struct Cannon* cannon) {
-    gShootem->shootCooldown = ticks_to_frames(6);
+    gShootem->shootCooldown = ticks_to_frames(4);
     gameplay_set_input_buttons(0, 0);
 
     sprite_set_anim(gSpriteHandler,

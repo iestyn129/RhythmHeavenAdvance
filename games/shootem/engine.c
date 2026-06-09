@@ -61,11 +61,16 @@ struct GraphicsTable *shootem_gfx_tables[] = {
 	shootem_gfx_table
 };
 
-s16 shootem_cue_positions[4][2] = {
+s16 shootem_cue_positions[9][2] = {
 	{-80, -48},
 	{80, -48},
-	{-80, 16},
-	{80, 16}
+	{-80, 24},
+	{80, 24},
+	{-40, -32},
+	{40, -32},
+	{-40, 8},
+	{40, 8},
+	{0, -8},
 };
 
 struct CueDefinition shootem_cue_target = {

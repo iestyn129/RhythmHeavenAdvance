@@ -47,7 +47,7 @@ struct ShootemCue {
 extern struct CompressedData *shootem_buffered_textures[];
 extern struct GraphicsTable *shootem_gfx_tables[];
 
-extern s16 shootem_cue_positions[4][2];
+extern s16 shootem_cue_positions[9][2];
 
 extern void shootem_init_gfx3();
 extern void shootem_init_gfx2();
