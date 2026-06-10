@@ -71,7 +71,7 @@ script script_shootem_main
     set_results_header D_lockstep_header
     disable_play_inputs
     rest 24
-    set_tempo 124@142
+    set_tempo 142
     set_music_volume 200
     play_music s_renshu_bgm1_seqData
     start_perfect_campaign
@@ -83,30 +83,20 @@ script script_shootem_main
         run beatscript_disable_loops
         shootem_start_loop
 
-				shootem_spawn_cue_pos CUE_ENEMY, 0
-    		rest 6
-				shootem_spawn_cue_pos CUE_ENEMY, 1
-    		rest 6
-				shootem_spawn_cue_pos CUE_ENEMY, 2
-    		rest 6
-				shootem_spawn_cue_pos CUE_ENEMY, 3
-    		rest 6
-				shootem_spawn_cue_pos CUE_TARGET, 4
-    		rest 6
-				shootem_spawn_cue_pos CUE_TARGET, 5
-    		rest 6
-				shootem_spawn_cue_pos CUE_TARGET, 6
-    		rest 6
-				shootem_spawn_cue_pos CUE_TARGET, 7
-    		rest 6
-				shootem_spawn_cue_pos CUE_ENEMY, 8
-    		rest 24
-    		rest 24
-
-    		rest 24
-    		rest 24
-    		rest 24
-    		rest 24
+				call shootem_practice_pat01
+				call shootem_practice_pat02
+				call shootem_4_pat01
+				call shootem_2_pat01
+				call shootem_4_pat02
+				call shootem_5_pat01
+				call shootem_8_pat01
+				call shootem_6_pat01
+				call shootem_4_pat03
+				call shootem_7_pat01
+				call shootem_4_pat04
+				call shootem_5_pat02
+				call shootem_6_pat02
+				call shootem_3_pat01
 
         shootem_end_loop
     loop_end
@@ -114,6 +104,217 @@ script script_shootem_main
     stop_tracking_perfect_campaign
     disable_pause_menu
     rest 24
+return
+
+script shootem_practice_pat01
+		shootem_spawn_cue_pos CUE_TARGET, 0
+    rest 24
+		shootem_spawn_cue_pos CUE_TARGET, 1
+    rest 24
+		shootem_spawn_cue_pos CUE_TARGET, 2
+    rest 24
+		shootem_spawn_cue_pos CUE_TARGET, 3
+    rest 24
+
+    rest 96
+return
+
+script shootem_practice_pat02
+		shootem_spawn_cue_pos CUE_TARGET, 0
+    rest 12
+		shootem_spawn_cue_pos CUE_TARGET, 1
+    rest 12
+		shootem_spawn_cue_pos CUE_TARGET, 2
+    rest 12
+		shootem_spawn_cue_pos CUE_TARGET, 3
+    rest 12
+		shootem_spawn_cue_pos CUE_TARGET, 6
+    rest 12
+		shootem_spawn_cue_pos CUE_TARGET, 7
+    rest 12
+		shootem_spawn_cue_pos CUE_TARGET, 8
+    rest 24
+
+    rest 96
+return
+
+script shootem_4_pat01
+		shootem_spawn_cue_pos CUE_ENEMY, 0
+    rest 24
+		shootem_spawn_cue_pos CUE_ENEMY, 1
+    rest 24
+		shootem_spawn_cue_pos CUE_ENEMY, 2
+    rest 24
+		shootem_spawn_cue_pos CUE_ENEMY, 3
+    rest 24
+
+    rest 96
+return
+
+script shootem_2_pat01
+    rest 24
+		shootem_spawn_cue_pos CUE_ENEMY, 4
+    rest 48
+		shootem_spawn_cue_pos CUE_ENEMY, 5
+    rest 24
+
+    rest 96
+return
+
+script shootem_4_pat02
+		shootem_spawn_cue_pos CUE_ENEMY, 0
+    rest 24
+		shootem_spawn_cue_pos CUE_ENEMY, 1
+    rest 12
+		shootem_spawn_cue_pos CUE_ENEMY, 2
+    rest 24
+		shootem_spawn_cue_pos CUE_ENEMY, 3
+    rest 36
+
+    rest 96
+return
+
+script shootem_5_pat01
+		shootem_spawn_cue_pos CUE_ENEMY, 0
+    rest 12
+		shootem_spawn_cue_pos CUE_ENEMY, 1
+    rest 12
+		shootem_spawn_cue_pos CUE_ENEMY, 2
+    rest 12
+		shootem_spawn_cue_pos CUE_ENEMY, 3
+    rest 24
+		shootem_spawn_cue_pos CUE_ENEMY, 8
+    rest 36
+
+    rest 96
+return
+
+script shootem_8_pat01
+		shootem_spawn_cue_pos CUE_ENEMY, 0
+    rest 12
+		shootem_spawn_cue_pos CUE_ENEMY, 1
+    rest 12
+		shootem_spawn_cue_pos CUE_ENEMY, 2
+    rest 12
+		shootem_spawn_cue_pos CUE_ENEMY, 3
+    rest 12
+		shootem_spawn_cue_pos CUE_ENEMY, 4
+    rest 12
+		shootem_spawn_cue_pos CUE_ENEMY, 5
+    rest 12
+		shootem_spawn_cue_pos CUE_ENEMY, 6
+    rest 12
+		shootem_spawn_cue_pos CUE_ENEMY, 7
+    rest 12
+
+    rest 96
+return
+
+script shootem_6_pat01
+		shootem_spawn_cue_pos CUE_ENEMY, 0
+    rest 12
+		shootem_spawn_cue_pos CUE_ENEMY, 1
+    rest 12
+		shootem_spawn_cue_pos CUE_ENEMY, 6
+    rest 24
+		shootem_spawn_cue_pos CUE_ENEMY, 2
+    rest 12
+		shootem_spawn_cue_pos CUE_ENEMY, 3
+    rest 12
+		shootem_spawn_cue_pos CUE_ENEMY, 7
+    rest 24
+
+    rest 96
+return
+
+script shootem_4_pat03
+		shootem_spawn_cue_pos CUE_ENEMY, 0
+    rest 24
+		shootem_spawn_cue_pos CUE_ENEMY, 1
+    rest 24
+		shootem_spawn_cue_pos CUE_ENEMY, 2
+    rest 12
+		shootem_spawn_cue_pos CUE_ENEMY, 3
+    rest 36
+
+    rest 96
+return
+
+script shootem_7_pat01
+		shootem_spawn_cue_pos CUE_ENEMY, 0
+    rest 12
+		shootem_spawn_cue_pos CUE_ENEMY, 1
+    rest 12
+		shootem_spawn_cue_pos CUE_ENEMY, 2
+    rest 12
+		shootem_spawn_cue_pos CUE_ENEMY, 3
+    rest 12
+		shootem_spawn_cue_pos CUE_ENEMY, 4
+    rest 12
+		shootem_spawn_cue_pos CUE_ENEMY, 5
+    rest 12
+		shootem_spawn_cue_pos CUE_ENEMY, 8
+    rest 24
+
+    rest 96
+return
+
+script shootem_4_pat04
+		shootem_spawn_cue_pos CUE_ENEMY, 0
+    rest 18
+		shootem_spawn_cue_pos CUE_ENEMY, 1
+    rest 18
+		shootem_spawn_cue_pos CUE_ENEMY, 4
+    rest 12
+		shootem_spawn_cue_pos CUE_ENEMY, 5
+    rest 24
+    rest 24
+
+    rest 96
+return
+
+script shootem_5_pat02
+		shootem_spawn_cue_pos CUE_ENEMY, 0
+    rest 18
+		shootem_spawn_cue_pos CUE_ENEMY, 1
+    rest 18
+		shootem_spawn_cue_pos CUE_ENEMY, 4
+    rest 12
+		shootem_spawn_cue_pos CUE_ENEMY, 5
+    rest 24
+		shootem_spawn_cue_pos CUE_ENEMY, 8
+    rest 24
+
+    rest 96
+return
+
+script shootem_6_pat02
+		shootem_spawn_cue_pos CUE_ENEMY, 0
+    rest 18
+		shootem_spawn_cue_pos CUE_ENEMY, 1
+    rest 18
+		shootem_spawn_cue_pos CUE_ENEMY, 4
+    rest 12
+		shootem_spawn_cue_pos CUE_ENEMY, 2
+    rest 18
+		shootem_spawn_cue_pos CUE_ENEMY, 3
+    rest 18
+		shootem_spawn_cue_pos CUE_ENEMY, 5
+    rest 12
+
+    rest 96
+return
+
+script shootem_3_pat01
+    rest 60
+		shootem_spawn_cue_pos CUE_ENEMY, 0
+    rest 12
+		shootem_spawn_cue_pos CUE_ENEMY, 1
+    rest 12
+		shootem_spawn_cue_pos CUE_ENEMY, 8
+    rest 12
+
+    rest 96
 return
 
 .end
