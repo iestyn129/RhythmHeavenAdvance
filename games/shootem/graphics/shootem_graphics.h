@@ -19,7 +19,8 @@ extern struct Animation anim_shootem_trajectory_hit[];
 extern struct Animation anim_shootem_trajectory_miss[];
 
 extern struct CompressedData shootem_bg_tiles;
-extern struct CompressedData shootem_bg_map;
+extern struct CompressedData shootem_bg0_map;
+extern struct CompressedData shootem_bg2_map;
 extern struct CompressedData shootem_obj;
 
 extern Palette shootem_obj_pal[];

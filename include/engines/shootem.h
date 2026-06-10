@@ -4,7 +4,7 @@
 #include "engines.h"
 #include "games/shootem/graphics/shootem_graphics.h"
 
-#define SHOOTEM_HURT_LEN ticks_to_frames(0x24)
+#define SHOOTEM_HURT_LEN ticks_to_frames(0x24) + 1
 
 enum ShootemCuesEnum {
 	SHOOTEM_CUE_TARGET

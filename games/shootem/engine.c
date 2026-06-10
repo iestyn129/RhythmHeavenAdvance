@@ -31,27 +31,32 @@ struct CompressedData *shootem_buffered_textures[] = {
 struct GraphicsTable shootem_gfx_table[] = {
 	{
 		&shootem_bg_tiles,
-		BG_TILESET_BASE(0), // bg tileset 0
+		BG_TILESET_BASE(0),
 		COMPRESSED_GFX_SOURCE
 	},
 	{
-		&shootem_bg_map,
-		BG_MAP_BASE(0xC000), // bg tilemap 24
+		&shootem_bg0_map,
+		BG_MAP_BASE(28 * 0x800),
+		COMPRESSED_GFX_SOURCE
+	},
+	{
+		&shootem_bg2_map,
+		BG_MAP_BASE(30 * 0x800),
 		COMPRESSED_GFX_SOURCE
 	},
 	{
 		&shootem_obj,
-		OBJ_TILESET_BASE(0), // obj tileset 0
+		OBJ_TILESET_BASE(0),
 		COMPRESSED_GFX_SOURCE
 	},
 	{
 		shootem_bg_pal,
-		BG_PALETTE_BUFFER(0), // bg palette 0
+		BG_PALETTE_BUFFER(0),
 		0x20
 	},
 	{
 		shootem_obj_pal,
-		OBJ_PALETTE_BUFFER(0), // obj palette 0
+		OBJ_PALETTE_BUFFER(0),
 		0xA0
 	},
 	END_OF_GRAPHICS_TABLE

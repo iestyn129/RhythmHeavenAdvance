@@ -42,7 +42,8 @@ void shootem_engine_start(const u32 version) {
 
     shootem_init_gfx1();
     scene_show_obj_layer();
-    scene_set_bg_layer_display(BG_LAYER_1, TRUE, 0, 0, 0, 24, 1);
+    scene_set_bg_layer_display(BG_LAYER_0, TRUE, 0, 0, 0, 28, 3);
+    scene_set_bg_layer_display(BG_LAYER_2, FALSE, 0, 0, 0, 30, 1);
 
     cannon_init(&gShootem->cannon);
 
@@ -52,7 +53,7 @@ void shootem_engine_start(const u32 version) {
 
 void shootem_engine_stop() {
     cannon_delete(&gShootem->cannon);
-    scene_hide_bg_layer(1);
+    scene_hide_bg_layer(0);
 }
 
 
@@ -114,6 +115,12 @@ void cannon_update(struct Cannon* cannon) {
 
     if (cannon->hurt != 0) {
         cannon->hurt--;
+
+        if (cannon->hurt <= (SHOOTEM_HURT_LEN - 2)) {
+            scene_hide_bg_layer(2);
+        } else {
+            scene_show_bg_layer(2);
+        }
 
         time = FIXED_POINT_DIV(cannon->hurt, SHOOTEM_HURT_LEN);
         count = ARRAY_COUNT(shootem_cannon_hurt_offsets);
@@ -204,7 +211,7 @@ void shootem_set_cue_pos(const u16 posIdx) {
 void shootem_input_event(const u32 pressed, u32 released) {
     struct Cannon* cannon = &gShootem->cannon;
 
-    cannon_shoot(cannon, 8);
+    cannon_shoot(cannon, 6);
 }
 
 
