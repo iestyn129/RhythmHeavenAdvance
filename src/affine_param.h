@@ -6,7 +6,7 @@
 // extern ? func_080020ec(?);
 // extern ? func_08002150(?);
 // extern ? func_08002194(?); // Allocate New
-// extern ? func_080021b8(?); // Delete
+extern void func_080021b8(s16); // Delete
 // extern ? func_0800222c(?); // Delete by Mem. ID
 extern void func_08002260(s16, u32); // Update Horizontal & Vertical Flip (and probably more)
 // extern ? func_08002280(?);

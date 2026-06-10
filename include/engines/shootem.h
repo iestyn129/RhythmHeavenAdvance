@@ -2,7 +2,6 @@
 
 #include "global.h"
 #include "engines.h"
-#include "src/main.h"
 #include "games/shootem/graphics/shootem_graphics.h"
 
 enum ShootemCuesEnum {
