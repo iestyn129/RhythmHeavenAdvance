@@ -109,8 +109,8 @@ void cannon_delete(struct Cannon* cannon) {
 void cannon_update(struct Cannon* cannon) {}
 
 
-void cannon_shoot(const struct Cannon* cannon) {
-    gShootem->shootCooldown = ticks_to_frames(4);
+void cannon_shoot(const struct Cannon* cannon, u32 cooldown) {
+    gShootem->shootCooldown = ticks_to_frames(cooldown);
     gameplay_set_input_buttons(0, 0);
 
     sprite_set_anim(gSpriteHandler,
@@ -154,17 +154,21 @@ void shootem_set_cue_pos(const u16 posIdx) {
 void shootem_input_event(const u32 pressed, u32 released) {
     struct Cannon* cannon = &gShootem->cannon;
 
-    cannon_shoot(cannon);
+    cannon_shoot(cannon, 8);
 }
 
 
 void shootem_cue_spawn(struct Cue *cue, struct ShootemCue *info, u32 type) {
-    const s16 cueX = shootem_cue_positions[gShootem->nextCuePosIdx][0];
-    const s16 cueY = shootem_cue_positions[gShootem->nextCuePosIdx][1];
-    const s16 trajectoryScaleY = shootem_cue_trajectories[gShootem->nextCuePosIdx][0][0];
-    const s16 trajectoryRotation = shootem_cue_trajectories[gShootem->nextCuePosIdx][0][1];
+    s16 cueX, cueY, trajectoryScaleY, trajectoryRotation;
 
     info->type = type;
+    info->posIdx = gShootem->nextCuePosIdx;
+
+    cueX = shootem_cue_positions[info->posIdx][0];
+    cueY = shootem_cue_positions[info->posIdx][1];
+    trajectoryScaleY = shootem_cue_trajectories[info->posIdx][0][0];
+    trajectoryRotation = shootem_cue_trajectories[info->posIdx][0][1];
+
     info->sprite = sprite_create(gSpriteHandler,
         anim_shootem_cue_target_idle, 0,
         (s16)(120 + cueX), (s16)(80 + cueY), 0x4700,
@@ -243,21 +247,38 @@ void shootem_cue_despawn(struct Cue *cue, struct ShootemCue *info) {
 
 
 void shootem_cue_hit(struct Cue *cue, struct ShootemCue *info, u32 pressed, u32 released) {
+    s16 trajectoryScaleY, trajectoryRotation;
     struct Cannon* cannon = &gShootem->cannon;
-    cannon_shoot(cannon);
+    cannon_shoot(cannon, 4);
 
     info->state = SHOOTEM_CUE_STATE_HIT;
+
     sprite_set_x_y(gSpriteHandler, info->sprite, 120, 64);
     sprite_set_anim(gSpriteHandler,
         info->sprite, anim_shootem_cue_target_hit,
         0, 1, 0x7f, 3
     );
+
+    sprite_set_x_y(gSpriteHandler, info->trajectorySprite, 120, 64);
+    sprite_set_anim(gSpriteHandler,
+        info->trajectorySprite, anim_shootem_trajectory_hit,
+        0, 1, 0x7f, 3
+    );
+
+    trajectoryScaleY = shootem_cue_trajectories[info->posIdx][1][0];
+    trajectoryRotation = shootem_cue_trajectories[info->posIdx][1][1];
+
+    set_affine_stretch_rotation(info->trajectoryAffineGroup,
+        0x100, trajectoryScaleY,
+        trajectoryRotation
+    );
 }
 
 
 void shootem_cue_barely(struct Cue *cue, struct ShootemCue *info, u32 pressed, u32 released) {
+    s16 trajectoryScaleY, trajectoryRotation;
     struct Cannon* cannon = &gShootem->cannon;
-    cannon_shoot(cannon);
+    cannon_shoot(cannon, 4);
 
     info->state = SHOOTEM_CUE_STATE_NEAR;
     sprite_set_x_y(gSpriteHandler, info->sprite, 120, 64);
@@ -265,14 +286,44 @@ void shootem_cue_barely(struct Cue *cue, struct ShootemCue *info, u32 pressed, u
         info->sprite, anim_shootem_cue_target_near,
         0, 1, 0x03, 2
     );
+
+    sprite_set_x_y(gSpriteHandler, info->trajectorySprite, 120, 64);
+    sprite_set_anim(gSpriteHandler,
+        info->trajectorySprite, anim_shootem_trajectory_hit,
+        0, 1, 0x7f, 3
+    );
+
+    trajectoryScaleY = shootem_cue_trajectories[info->posIdx][1][0];
+    trajectoryRotation = shootem_cue_trajectories[info->posIdx][1][1];
+
+    set_affine_stretch_rotation(info->trajectoryAffineGroup,
+        0x100, trajectoryScaleY,
+        trajectoryRotation
+    );
 }
 
 
 void shootem_cue_miss(struct Cue *cue, struct ShootemCue *info) {
+    s16 trajectoryScaleY, trajectoryRotation;
+
     info->state = SHOOTEM_CUE_STATE_MISS;
+
     sprite_set_x_y(gSpriteHandler, info->sprite, 120, 64);
     sprite_set_anim(gSpriteHandler,
         info->sprite, anim_shootem_cue_target_miss,
         0, 1, 0x7f, 3
+    );
+
+    sprite_set_anim(gSpriteHandler,
+        info->trajectorySprite, anim_shootem_trajectory_miss,
+        0, 1, 0x7f, 3
+    );
+
+    trajectoryScaleY = shootem_cue_trajectories[info->posIdx][2][0];
+    trajectoryRotation = shootem_cue_trajectories[info->posIdx][2][1];
+
+    set_affine_stretch_rotation(info->trajectoryAffineGroup,
+        0x100, trajectoryScaleY,
+        trajectoryRotation
     );
 }

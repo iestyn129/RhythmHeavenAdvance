@@ -34,6 +34,7 @@ struct ShootemEngineData {
 
 struct ShootemCue {
 	u32 type;
+	u16 posIdx;
 	s16 sprite;
 
 	u32 state;
@@ -63,7 +64,7 @@ extern void shootem_engine_update();
 extern void cannon_init(struct Cannon* cannon);
 extern void cannon_delete(struct Cannon* cannon);
 extern void cannon_update(struct Cannon* cannon);
-extern void cannon_shoot(const struct Cannon* cannon);
+extern void cannon_shoot(const struct Cannon* cannon, u32 cooldown);
 
 extern void shootem_wait_for_input();
 extern void shootem_start_loop();
