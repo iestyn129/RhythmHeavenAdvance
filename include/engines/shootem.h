@@ -7,15 +7,20 @@
 #define SHOOTEM_HURT_LEN ticks_to_frames(0x24) + 1
 
 enum ShootemCuesEnum {
-	SHOOTEM_CUE_TARGET
+	SHOOTEM_CUE_TARGET,
+	SHOOTEM_CUE_ENEMY,
+
+	SHOOTEM_CUE_COUNT
 };
 
 enum ShootemCueState {
 	SHOOTEM_CUE_STATE_FAR,
-	SHOOTEM_CUE_STATE_NEAR,
 	SHOOTEM_CUE_STATE_HIT,
+	SHOOTEM_CUE_STATE_NEAR,
 	SHOOTEM_CUE_STATE_BARELY,
-	SHOOTEM_CUE_STATE_MISS
+	SHOOTEM_CUE_STATE_MISS,
+
+	SHOOTEM_CUE_STATE_COUNT
 };
 
 struct ShootemEngineData {
@@ -52,6 +57,7 @@ struct ShootemCue {
 extern struct CompressedData *shootem_buffered_textures[];
 extern struct GraphicsTable *shootem_gfx_tables[];
 
+extern struct Animation* shootem_cue_animations[SHOOTEM_CUE_COUNT][SHOOTEM_CUE_STATE_COUNT];
 extern s16 shootem_cue_positions[9][2];
 extern s16 shootem_cue_trajectories[9][3][2];
 extern s32 shootem_cannon_hurt_offsets[6];

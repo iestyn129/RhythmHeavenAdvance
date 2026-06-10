@@ -66,6 +66,23 @@ struct GraphicsTable *shootem_gfx_tables[] = {
 	shootem_gfx_table
 };
 
+struct Animation* shootem_cue_animations[SHOOTEM_CUE_COUNT][SHOOTEM_CUE_STATE_COUNT] = {
+	{
+		anim_shootem_cue_target_idle,
+		anim_shootem_cue_target_hit,
+		anim_shootem_cue_target_near,
+		anim_shootem_cue_target_barely,
+		anim_shootem_cue_target_miss
+	},
+	{
+		anim_shootem_cue_enemy_idle,
+		anim_shootem_cue_enemy_hit,
+		anim_shootem_cue_enemy_near,
+		anim_shootem_cue_enemy_barely,
+		anim_shootem_cue_enemy_miss
+	}
+};
+
 s16 shootem_cue_positions[9][2] = {
 	{ -80, -48 },
 	{ 80, -48 },
@@ -117,7 +134,31 @@ struct CueDefinition shootem_cue_target = {
 	/* Miss Condition  */ NULL
 };
 
+struct CueDefinition shootem_cue_enemy = {
+	/* Unknown Param.  */ 0,
+	/* Input Buttons   */ PRESS_BUTTON(A_BUTTON),
+	/* Total Duration  */ 0x60,
+	/* Hit Window      */ -0x03, 0x03,
+	/* Barely Window   */ -0x05, 0x05,
+	/* Tempo-Dependent */ FALSE,
+	/* Force-Delete    */ FALSE,
+	/* Size in Memory  */ sizeof(struct ShootemCue),
+	/* Func. Spawn     */ shootem_cue_spawn,
+	/* Spawn Parameter */ SHOOTEM_CUE_ENEMY,
+	/* Func. Update    */ shootem_cue_update,
+	/* Func. Despawn   */ shootem_cue_despawn,
+	/* Func. Hit       */ shootem_cue_hit,
+	/* Func. Barely    */ shootem_cue_barely,
+	/* Func. Miss      */ shootem_cue_miss,
+	/* SFX Spawn       */ &s_f_shootem_spawn_seqData,
+	/* SFX Hit         */ &s_f_shootem_hit_seqData,
+	/* SFX Barely      */ &s_f_shootem_hit_seqData,
+	/* SFX Miss        */ &s_f_shootem_miss_seqData,
+	/* Miss Condition  */ NULL
+};
+
 struct CueDefinition *shootem_cue_index[] = {
 	&shootem_cue_target,
+	&shootem_cue_enemy,
 	END_OF_CUE_INDEX
 };

@@ -8,8 +8,7 @@
 
     @ Cues
     .set CUE_TARGET, 0x00
-    @.set CUE_ENEMY, 0x01
-    @.set CUE_STEPPER, 0x02
+    .set CUE_ENEMY, 0x01
 .endm
 
 

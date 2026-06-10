@@ -71,7 +71,7 @@ script script_shootem_main
     set_results_header D_lockstep_header
     disable_play_inputs
     rest 24
-    set_tempo 142
+    set_tempo 124@142
     set_music_volume 200
     play_music s_renshu_bgm1_seqData
     start_perfect_campaign
@@ -83,13 +83,13 @@ script script_shootem_main
         run beatscript_disable_loops
         shootem_start_loop
 
-				shootem_spawn_cue_pos CUE_TARGET, 0
+				shootem_spawn_cue_pos CUE_ENEMY, 0
     		rest 6
-				shootem_spawn_cue_pos CUE_TARGET, 1
+				shootem_spawn_cue_pos CUE_ENEMY, 1
     		rest 6
-				shootem_spawn_cue_pos CUE_TARGET, 2
+				shootem_spawn_cue_pos CUE_ENEMY, 2
     		rest 6
-				shootem_spawn_cue_pos CUE_TARGET, 3
+				shootem_spawn_cue_pos CUE_ENEMY, 3
     		rest 6
 				shootem_spawn_cue_pos CUE_TARGET, 4
     		rest 6
@@ -99,7 +99,7 @@ script script_shootem_main
     		rest 6
 				shootem_spawn_cue_pos CUE_TARGET, 7
     		rest 6
-				shootem_spawn_cue_pos CUE_TARGET, 8
+				shootem_spawn_cue_pos CUE_ENEMY, 8
     		rest 24
     		rest 24
 

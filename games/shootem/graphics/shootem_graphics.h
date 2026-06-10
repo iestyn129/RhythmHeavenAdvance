@@ -15,6 +15,12 @@ extern struct Animation anim_shootem_cue_target_near[];
 extern struct Animation anim_shootem_cue_target_barely[];
 extern struct Animation anim_shootem_cue_target_miss[];
 
+extern struct Animation anim_shootem_cue_enemy_idle[];
+extern struct Animation anim_shootem_cue_enemy_hit[];
+extern struct Animation anim_shootem_cue_enemy_near[];
+extern struct Animation anim_shootem_cue_enemy_barely[];
+extern struct Animation anim_shootem_cue_enemy_miss[];
+
 extern struct Animation anim_shootem_trajectory_hit[];
 extern struct Animation anim_shootem_trajectory_miss[];
 

@@ -226,13 +226,14 @@ void shootem_cue_spawn(struct Cue *cue, struct ShootemCue *info, u32 type) {
     trajectoryScaleY = shootem_cue_trajectories[info->posIdx][0][0];
     trajectoryRotation = shootem_cue_trajectories[info->posIdx][0][1];
 
+    info->state = SHOOTEM_CUE_STATE_FAR;
+
     info->sprite = sprite_create(gSpriteHandler,
-        anim_shootem_cue_target_idle, 0,
+        shootem_cue_animations[info->type][info->state], 0,
         (s16)(120 + cueX), (s16)(80 + cueY), 0x4700,
         1, 0, 1
     );
 
-    info->state = SHOOTEM_CUE_STATE_FAR;
     info->barelyXOffset = 0;
     info->barelyYOffset = 0;
     info->barelyXAcceleration = 0;
@@ -270,7 +271,7 @@ u32 shootem_cue_update(struct Cue *cue, struct ShootemCue *info, u32 runningTime
 
                 sprite_set_x_y(gSpriteHandler, info->sprite, 120, 64);
                 sprite_set_anim(gSpriteHandler,
-                    info->sprite, anim_shootem_cue_target_barely,
+                    info->sprite, shootem_cue_animations[info->type][info->state],
                     0, 1, 0x7f, 3
                 );
 
@@ -312,7 +313,7 @@ void shootem_cue_hit(struct Cue *cue, struct ShootemCue *info, u32 pressed, u32 
 
     sprite_set_x_y(gSpriteHandler, info->sprite, 120, 64);
     sprite_set_anim(gSpriteHandler,
-        info->sprite, anim_shootem_cue_target_hit,
+        info->sprite, shootem_cue_animations[info->type][info->state],
         0, 1, 0x7f, 3
     );
 
@@ -340,7 +341,7 @@ void shootem_cue_barely(struct Cue *cue, struct ShootemCue *info, u32 pressed, u
     info->state = SHOOTEM_CUE_STATE_NEAR;
     sprite_set_x_y(gSpriteHandler, info->sprite, 120, 64);
     sprite_set_anim(gSpriteHandler,
-        info->sprite, anim_shootem_cue_target_near,
+        info->sprite, shootem_cue_animations[info->type][info->state],
         0, 1, 0x03, 2
     );
 
@@ -368,7 +369,7 @@ void shootem_cue_miss(struct Cue *cue, struct ShootemCue *info) {
 
     sprite_set_x_y(gSpriteHandler, info->sprite, 120, 64);
     sprite_set_anim(gSpriteHandler,
-        info->sprite, anim_shootem_cue_target_miss,
+        info->sprite, shootem_cue_animations[info->type][info->state],
         0, 1, 0x7f, 3
     );
 
