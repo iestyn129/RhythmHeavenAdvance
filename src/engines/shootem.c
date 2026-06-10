@@ -83,6 +83,12 @@ void cannon_init(struct Cannon* cannon) {
         anim_shootem_cannon_idle, 0,
         120, 80, 0x4800,
         1, 0, 0
+        );
+
+    cannon->laserSprite = sprite_create(gSpriteHandler,
+        anim_shootem_laser_idle, 0,
+        120, 80, 0x4A00,
+        1, 0, 0
     );
 
     cannon->faceSprite = sprite_create(gSpriteHandler,
@@ -91,11 +97,7 @@ void cannon_init(struct Cannon* cannon) {
         0, 0, 0
     );
 
-    cannon->laserSprite = sprite_create(gSpriteHandler,
-        anim_shootem_laser_idle, 0,
-        120, 80, 0x4A00,
-        1, 0, 0
-    );
+    cannon->hurt = 0;
 }
 
 
@@ -106,7 +108,55 @@ void cannon_delete(struct Cannon* cannon) {
 }
 
 
-void cannon_update(struct Cannon* cannon) {}
+void cannon_update(struct Cannon* cannon) {
+    s32 cannonOffset, time, count, pos, index, frac;
+    s8 destCel;
+
+    if (cannon->hurt != 0) {
+        cannon->hurt--;
+
+        time = FIXED_POINT_DIV(cannon->hurt, SHOOTEM_HURT_LEN);
+        count = ARRAY_COUNT(shootem_cannon_hurt_offsets);
+
+        *(volatile s32*)(ExternWorkRAMBase + 0x3FFD0) = cannon->hurt;
+        *(volatile s32*)(ExternWorkRAMBase + 0x3FFE0) = INT_TO_FIXED(SHOOTEM_HURT_LEN);
+        *(volatile s32*)(ExternWorkRAMBase + 0x3FFF0) = time;
+
+        if (time <= 0) {
+            cannonOffset = shootem_cannon_hurt_offsets[0];
+        } else if (time >= 0x100) {
+            cannonOffset = shootem_cannon_hurt_offsets[count - 1];
+        } else {
+            pos = FIXED_POINT_MUL(time, INT_TO_FIXED(count - 1));
+            index = FIXED_TO_INT(pos);
+            frac = pos - INT_TO_FIXED(index);
+            
+            cannonOffset = FIXED_TO_INT(
+                INT_TO_FIXED(shootem_cannon_hurt_offsets[index]) + FIXED_POINT_MUL(
+                    INT_TO_FIXED(
+                        shootem_cannon_hurt_offsets[index + 1] -
+                        shootem_cannon_hurt_offsets[index]
+                    ), frac
+                )
+            );
+        }
+
+        sprite_set_x_y(gSpriteHandler,
+            cannon->cannonSprite, (s16)(120 + cannonOffset), 80
+        );
+        sprite_set_x_y(gSpriteHandler,
+            cannon->faceSprite, (s16)(120 + cannonOffset), 80
+        );
+
+        if (cannon->hurt == 0) {
+            destCel = 0;
+        } else {
+            destCel = 1;
+        }
+
+        sprite_set_anim_cel(gSpriteHandler, cannon->faceSprite, destCel);
+    }
+}
 
 
 void cannon_shoot(const struct Cannon* cannon, u32 cooldown) {
@@ -304,6 +354,7 @@ void shootem_cue_barely(struct Cue *cue, struct ShootemCue *info, u32 pressed, u
 
 
 void shootem_cue_miss(struct Cue *cue, struct ShootemCue *info) {
+    struct Cannon* cannon = &gShootem->cannon;
     s16 trajectoryScaleY, trajectoryRotation;
 
     info->state = SHOOTEM_CUE_STATE_MISS;
@@ -326,4 +377,6 @@ void shootem_cue_miss(struct Cue *cue, struct ShootemCue *info) {
         0x100, trajectoryScaleY,
         trajectoryRotation
     );
+
+    cannon->hurt = SHOOTEM_HURT_LEN;
 }

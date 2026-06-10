@@ -4,6 +4,8 @@
 #include "engines.h"
 #include "games/shootem/graphics/shootem_graphics.h"
 
+#define SHOOTEM_HURT_LEN ticks_to_frames(0x24)
+
 enum ShootemCuesEnum {
 	SHOOTEM_CUE_TARGET
 };
@@ -28,6 +30,7 @@ struct ShootemEngineData {
 		s16 cannonSprite;
 		s16 faceSprite;
 		s16 laserSprite;
+		u16 hurt;
 	} cannon;
 };
 
@@ -51,6 +54,7 @@ extern struct GraphicsTable *shootem_gfx_tables[];
 
 extern s16 shootem_cue_positions[9][2];
 extern s16 shootem_cue_trajectories[9][3][2];
+extern s32 shootem_cannon_hurt_offsets[6];
 
 extern void shootem_init_gfx3();
 extern void shootem_init_gfx2();

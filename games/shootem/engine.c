@@ -85,6 +85,10 @@ s16 shootem_cue_trajectories[9][3][2] = {
 	{ { 0x100, 0x00 }, { 0x00, 0x00 }, { 0x200, 0x00 } }
 };
 
+s32 shootem_cannon_hurt_offsets[6] = {
+	0, 3, -3, 2, -1, 1
+};
+
 struct CueDefinition shootem_cue_target = {
 	/* Unknown Param.  */ 0,
 	/* Input Buttons   */ PRESS_BUTTON(A_BUTTON),
