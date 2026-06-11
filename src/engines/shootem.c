@@ -71,7 +71,7 @@ void shootem_engine_start(const u32 version) {
     shootem_init_gfx1();
     scene_show_obj_layer();
     scene_set_bg_layer_display(BG_LAYER_0, TRUE, 0, 0, 0, 28, BGCNT_PRIORITY(3));
-    scene_set_bg_layer_display(BG_LAYER_1, TRUE, 0, 0, 0, 29, BGCNT_PRIORITY(2));
+    scene_set_bg_layer_display(BG_LAYER_1, TRUE, 5, 0, 0, 29, BGCNT_PRIORITY(2));
     scene_set_bg_layer_display(BG_LAYER_2, FALSE, 0, 0, 0, 30, BGCNT_PRIORITY(1));
 
     cannon_init(&gShootem->cannon);
@@ -100,7 +100,7 @@ void shootem_engine_update() {
     }
 
     gShootem->starfieldOffset--;
-    scene_set_bg_layer_pos(BG_LAYER_1, 0, gShootem->starfieldOffset);
+    scene_set_bg_layer_pos(BG_LAYER_1, 5, gShootem->starfieldOffset);
 
     if (!(gShootem->starfieldOffset & 7)) {
         shootem_init_starfield_row(((gShootem->starfieldOffset & 0xFF) >> 3) + 20);
