@@ -74,25 +74,18 @@ script script_shootem_main
     set_tempo 142
     set_music_volume 200
     play_music s_renshu_bgm1_seqData
-    start_perfect_campaign
     enable_play_inputs
     enable_pause_menu
     rest 6
 
-    loop_start
-        run beatscript_disable_loops
-        shootem_start_loop
-
-				call shootem_practice_pat01
-				call shootem_practice_pat01
-				call shootem_practice_pat02
-				call shootem_practice_pat02
-
-        shootem_end_loop
-    loop_end
+    call shootem_practice_pat01
+		call shootem_practice_pat01
+		call shootem_practice_pat02
+		call shootem_practice_pat02
 
 		rest 192
 
+    start_perfect_campaign
 		call shootem_4_pat01
 		call shootem_4_pat01
 		call shootem_4_pat01
@@ -129,7 +122,7 @@ script script_shootem_main
 
 		call shootem_3_pat01
 
-		rest 192
+		rest 96
 
     stop_tracking_perfect_campaign
     disable_pause_menu

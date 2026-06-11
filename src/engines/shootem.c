@@ -9,7 +9,13 @@
 
 
 void shootem_init_gfx3() {
+    u16 i;
 	func_0800c604(0);
+
+    for (i = 0; i < 32; i++) {
+        shootem_init_starfield_row(i);
+    }
+
 	gameplay_start_screen_fade_in();
 }
 
@@ -32,6 +38,27 @@ void shootem_init_gfx1() {
 }
 
 
+void shootem_init_starfield_row(u16 row) {
+    TilemapEntry* starfieldTilemap = BG_MAP_BASE(29 * 0x800);
+    const s32 count = ARRAY_COUNT(shootem_stars_tile_indexes);
+    s32 i;
+
+    if (row >= 32) {
+        row &= 31;
+    }
+
+    row *= 32;
+
+    for (i = row; i < (row + 32); i++) {
+        starfieldTilemap[i] =
+            TILEMAP_TILE_INDEX(shootem_stars_tile_indexes[agb_random(count)]) |
+            TILEMAP_HFLIP(agb_random(2)) |
+            TILEMAP_VFLIP(agb_random(2)) |
+            TILEMAP_PALETTE(0);
+    }
+}
+
+
 void shootem_engine_start(const u32 version) {
     gShootem->version = version;
     gShootem->awaitingInput = FALSE;
@@ -39,11 +66,13 @@ void shootem_engine_start(const u32 version) {
     gShootem->shootCooldown = 0;
     gShootem->nextCuePosIdx = 0;
     gShootem->cueBarelyDirection = 0;
+    gShootem->starfieldOffset = 0;
 
     shootem_init_gfx1();
     scene_show_obj_layer();
-    scene_set_bg_layer_display(BG_LAYER_0, TRUE, 0, 0, 0, 28, 3);
-    scene_set_bg_layer_display(BG_LAYER_2, FALSE, 0, 0, 0, 30, 1);
+    scene_set_bg_layer_display(BG_LAYER_0, TRUE, 0, 0, 0, 28, BGCNT_PRIORITY(3));
+    scene_set_bg_layer_display(BG_LAYER_1, TRUE, 0, 0, 0, 29, BGCNT_PRIORITY(2));
+    scene_set_bg_layer_display(BG_LAYER_2, FALSE, 0, 0, 0, 30, BGCNT_PRIORITY(1));
 
     cannon_init(&gShootem->cannon);
 
@@ -54,6 +83,8 @@ void shootem_engine_start(const u32 version) {
 void shootem_engine_stop() {
     cannon_delete(&gShootem->cannon);
     scene_hide_bg_layer(0);
+    scene_hide_bg_layer(1);
+    scene_hide_bg_layer(2);
 }
 
 
@@ -66,6 +97,13 @@ void shootem_engine_update() {
             set_pause_beatscript_scene(FALSE);
             gShootem->awaitingInput = FALSE;
         }
+    }
+
+    gShootem->starfieldOffset--;
+    scene_set_bg_layer_pos(BG_LAYER_1, 0, gShootem->starfieldOffset);
+
+    if (!(gShootem->starfieldOffset & 7)) {
+        shootem_init_starfield_row(((gShootem->starfieldOffset & 0xFF) >> 3) + 20);
     }
 
     if (gShootem->shootCooldown != 0) {
@@ -84,7 +122,7 @@ void cannon_init(struct Cannon* cannon) {
         anim_shootem_cannon_idle, 0,
         120, 80, 0x4800,
         1, 0, 0
-        );
+    );
 
     cannon->laserSprite = sprite_create(gSpriteHandler,
         anim_shootem_laser_idle, 0,
@@ -124,10 +162,6 @@ void cannon_update(struct Cannon* cannon) {
 
         time = FIXED_POINT_DIV(cannon->hurt, SHOOTEM_HURT_LEN);
         count = ARRAY_COUNT(shootem_cannon_hurt_offsets);
-
-        *(volatile s32*)(ExternWorkRAMBase + 0x3FFD0) = cannon->hurt;
-        *(volatile s32*)(ExternWorkRAMBase + 0x3FFE0) = INT_TO_FIXED(SHOOTEM_HURT_LEN);
-        *(volatile s32*)(ExternWorkRAMBase + 0x3FFF0) = time;
 
         if (time <= 0) {
             cannonOffset = shootem_cannon_hurt_offsets[0];
