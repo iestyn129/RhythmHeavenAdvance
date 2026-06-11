@@ -84,22 +84,52 @@ script script_shootem_main
         shootem_start_loop
 
 				call shootem_practice_pat01
+				call shootem_practice_pat01
 				call shootem_practice_pat02
-				call shootem_4_pat01
-				call shootem_2_pat01
-				call shootem_4_pat02
-				call shootem_5_pat01
-				call shootem_8_pat01
-				call shootem_6_pat01
-				call shootem_4_pat03
-				call shootem_7_pat01
-				call shootem_4_pat04
-				call shootem_5_pat02
-				call shootem_6_pat02
-				call shootem_3_pat01
+				call shootem_practice_pat02
 
         shootem_end_loop
     loop_end
+
+		rest 192
+
+		call shootem_4_pat01
+		call shootem_4_pat01
+		call shootem_4_pat01
+		call shootem_2_pat01
+
+		call shootem_4_pat02
+		call shootem_4_pat02
+		call shootem_4_pat02
+		call shootem_4_pat02
+
+		rest 192
+
+		call shootem_5_pat01
+		call shootem_8_pat01
+		call shootem_5_pat01
+		call shootem_6_pat01
+
+		call shootem_4_pat03
+		call shootem_4_pat03
+		call shootem_4_pat03
+		call shootem_4_pat03
+
+		rest 192
+
+		call shootem_8_pat01
+		call shootem_8_pat01
+		call shootem_8_pat01
+		call shootem_7_pat01
+
+		call shootem_4_pat04
+		call shootem_5_pat02
+		call shootem_5_pat02
+		call shootem_6_pat02
+
+		call shootem_3_pat01
+
+		rest 192
 
     stop_tracking_perfect_campaign
     disable_pause_menu
