@@ -7,6 +7,10 @@
 struct KarateKicksEngineData {
 	u8 version;
 	u8 awaitingInput;
+
+	struct KarateKicksJoe {
+		s16 sprite;
+	} joe;
 };
 
 struct KarateKicksCue {
@@ -23,6 +27,10 @@ extern void karate_kicks_init_gfx1();
 extern void karate_kicks_engine_start(u32 version);
 extern void karate_kicks_engine_stop();
 extern void karate_kicks_engine_update();
+
+extern void karate_kicks_joe_init(struct KarateKicksJoe* joe);
+extern void karate_kicks_joe_delete(struct KarateKicksJoe* joe);
+extern void karate_kicks_joe_update(struct KarateKicksJoe* joe);
 
 extern void karate_kicks_wait_for_input();
 

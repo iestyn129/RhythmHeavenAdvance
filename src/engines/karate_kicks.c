@@ -39,11 +39,14 @@ void karate_kicks_engine_start(const u32 version) {
     scene_show_obj_layer();
     scene_set_bg_layer_display(BG_LAYER_0, TRUE, 0, 0, 0, 28, BGCNT_PRIORITY(3));
 
+    karate_kicks_joe_init(&gKarateKicks->joe);
+
     gameplay_set_input_buttons(A_BUTTON, A_BUTTON);
 }
 
 
 void karate_kicks_engine_stop() {
+    karate_kicks_joe_delete(&gKarateKicks->joe);
     scene_hide_bg_layer(0);
 }
 
@@ -56,7 +59,28 @@ void karate_kicks_engine_update() {
             gKarateKicks->awaitingInput = FALSE;
         }
     }
+
+    karate_kicks_joe_update(&gKarateKicks->joe);
 }
+
+
+void karate_kicks_joe_init(struct KarateKicksJoe* joe) {
+    joe->sprite = sprite_create(gSpriteHandler,
+        anim_karate_kicks_joe_kick, 0,
+        160, 88, 0x4800,
+        1, 0, 0
+    );
+
+    sprite_set_base_palette(gSpriteHandler, joe->sprite, 3);
+}
+
+
+void karate_kicks_joe_delete(struct KarateKicksJoe* joe) {
+	sprite_delete(gSpriteHandler, joe->sprite);
+}
+
+
+void karate_kicks_joe_update(struct KarateKicksJoe* joe) {}
 
 
 void karate_kicks_wait_for_input() {
