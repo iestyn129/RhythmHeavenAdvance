@@ -89,14 +89,16 @@ void shootem_engine_stop() {
 
 
 void shootem_engine_update() {
-    if (D_03004afc & SELECT_BUTTON) {
-        gShootem->loopCounter++;
-
+    if (D_03004afc & A_BUTTON) {
         if (gShootem->awaitingInput) {
             gameplay_set_input_buttons(A_BUTTON, 0);
             set_pause_beatscript_scene(FALSE);
             gShootem->awaitingInput = FALSE;
         }
+    }
+
+    if (D_03004afc & SELECT_BUTTON) {
+        gShootem->loopCounter++;
     }
 
     gShootem->starfieldOffset--;
