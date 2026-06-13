@@ -33,14 +33,26 @@ script script_karate_kicks_prologue
     load_game karate_kicks_prologue_engine, 0
     run stop_all_soundplayers
     rest 24
-    play_sfx s_jingle_march_seqData
-    rest 24
-    rest 24
-    rest 24
-    rest 24
-    rest 24
-    rest 24
-    rest 24
+    play_sfx s_jingle_karate_seqData
+    run karate_kicks_set_frame, 1
+    rest 6
+    run karate_kicks_set_frame, 2
+    rest 6
+    run karate_kicks_set_frame, 3
+    rest 6
+    run karate_kicks_set_frame, 4
+    rest 126
+
+    play_sfx s_intro_uh_seqData
+    run karate_kicks_set_frame, 5
+    rest 3
+    run karate_kicks_set_frame, 6
+    rest 3
+    run karate_kicks_set_frame, 7
+    rest 3
+    run karate_kicks_set_frame, 8
+    rest 18
+
     run func_08006d80, 0
     set_game_fade_in_time 16
 return
@@ -81,7 +93,14 @@ script script_karate_kicks_main
     loop_start
     		run beatscript_enable_loops @ disable loop
 
-        rest 96
+				beat_anim
+        rest 24
+				beat_anim
+        rest 24
+				beat_anim
+        rest 24
+				beat_anim
+        rest 24
 
         @ exit loop if
     loop_end

@@ -3,6 +3,9 @@
 extern struct CueDefinition *karate_kicks_cue_index[];
 
 EngineEvent karate_kicks_common_events[] = {
+	karate_kicks_common_beat_animation,
+	NULL,
+	NULL,
 	END_OF_COMMON_EVENT_LIST
 };
 

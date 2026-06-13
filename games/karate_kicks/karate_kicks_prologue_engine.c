@@ -29,7 +29,7 @@ struct GraphicsTable karate_kicks_prologue_gfx_table[] = {
     /* OBJ Palette */ {
         /* Src.  */ karate_kicks_prologue_obj_pal,
         /* Dest. */ OBJ_PALETTE_BUFFER(0),
-        /* Size  */ 0x20
+        /* Size  */ 0x40
     },
     END_OF_GRAPHICS_TABLE
 };

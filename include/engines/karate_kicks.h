@@ -10,6 +10,8 @@ struct KarateKicksEngineData {
 
 	struct KarateKicksJoe {
 		s16 sprite;
+
+		u8 skipBeat;
 		u16 chargeTimer;
 		u8 isCharged;
 	} joe;
@@ -29,6 +31,8 @@ extern void karate_kicks_init_gfx1();
 extern void karate_kicks_engine_start(u32 version);
 extern void karate_kicks_engine_stop();
 extern void karate_kicks_engine_update();
+
+extern void karate_kicks_common_beat_animation();
 
 extern void karate_kicks_joe_init(struct KarateKicksJoe* joe);
 extern void karate_kicks_joe_delete(struct KarateKicksJoe* joe);

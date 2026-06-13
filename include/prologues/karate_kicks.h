@@ -5,6 +5,7 @@
 
 struct KarateKicksPrologueEngineData {
 	u8 ver;
+	s16 sprite;
 };
 
 extern struct CompressedData *karate_kicks_prologue_buffered_textures[];

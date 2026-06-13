@@ -38,6 +38,12 @@ void karate_kicks_prologue_engine_start(const u32 ver) {
     karate_kicks_gfx_init_00();
     scene_show_obj_layer();
     scene_set_bg_layer_display(BG_LAYER_0, TRUE, 0, 0, 0, 28, BGCNT_PRIORITY(1));
+
+    gPrologueEngineData->sprite = sprite_create(gSpriteHandler,
+        anim_karate_kicks_prologue_title, 0,
+        120, 80, 0,
+        0, 0, 0
+    );
 }
 
 
@@ -51,5 +57,5 @@ void karate_kicks_prologue_engine_stop() {}
 
 
 void karate_kicks_set_frame(const u32 frame) {
-    //sprite_set_anim_cel(gSpriteHandler, gPrologueEngineData->textSprite, frame);
+    sprite_set_anim_cel(gSpriteHandler, gPrologueEngineData->sprite, (s8)frame);
 }

@@ -64,6 +64,24 @@ void karate_kicks_engine_update() {
 }
 
 
+void karate_kicks_common_beat_animation() {
+    struct KarateKicksJoe* joe = &gKarateKicks->joe;
+
+    if (
+        sprite_get_current_cel(gSpriteHandler, joe->sprite) ==
+        sprite_get_total_cels(gSpriteHandler, joe->sprite) - 1 &&
+        !joe->skipBeat && !joe->isCharged && !joe->chargeTimer
+    ) {
+        sprite_set_anim(gSpriteHandler,
+            joe->sprite, anim_karate_kicks_joe_beat, 0,
+            1, 0x7f, 0
+        );
+    }
+
+    joe->skipBeat = FALSE;
+}
+
+
 void karate_kicks_joe_init(struct KarateKicksJoe* joe) {
     joe->sprite = sprite_create(gSpriteHandler,
         anim_karate_kicks_joe_ready, 0,
@@ -74,6 +92,7 @@ void karate_kicks_joe_init(struct KarateKicksJoe* joe) {
     sprite_set_base_palette(gSpriteHandler, joe->sprite, 2);
     sprite_set_callback(gSpriteHandler, joe->sprite, karate_kicks_joe_sprite_callback, (u32)joe);
 
+    joe->skipBeat = FALSE;
     joe->isCharged = FALSE;
     joe->chargeTimer = 0;
 }
@@ -158,6 +177,8 @@ void karate_kicks_input_event(const u32 pressed, u32 released) {
         joe->isCharged = FALSE;
         joe->chargeTimer = 0;
     }
+
+    joe->skipBeat = TRUE;
 }
 
 
