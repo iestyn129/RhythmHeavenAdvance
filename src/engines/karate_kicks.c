@@ -125,26 +125,29 @@ void karate_kicks_input_event(const u32 pressed, u32 released) {
 
     if (pressed & A_BUTTON) {
         sprite_set_anim(gSpriteHandler,
-            joe->sprite, anim_karate_kicks_joe_punch, 0,
+            joe->sprite, anim_karate_kicks_joe_jab, 0,
             1, 0x7f, 4
         );
+        play_sound(&s_f_karate_kicks_punch_seqData);
 
         joe->chargeTimer = ticks_to_frames(14);
     }
 
     if (pressed & B_BUTTON) {
         sprite_set_anim(gSpriteHandler,
-            joe->sprite, anim_karate_kicks_joe_jab, 0,
+            joe->sprite, anim_karate_kicks_joe_punch, 0,
             1, 0x7f, 4
         );
+        play_sound(&s_f_karate_kicks_punch_seqData);
     }
 
     if (released & A_BUTTON) {
         if (joe->isCharged) {
             sprite_set_anim(gSpriteHandler,
                 joe->sprite, anim_karate_kicks_joe_kick, 0,
-                1, 0x7f, 4
+                1, 0x7f, 0
             );
+            play_sound(&s_f_karate_kicks_kick_seqData);
         } else if (sprite_get_anim(gSpriteHandler, joe->sprite) == anim_karate_kicks_joe_charge) {
             sprite_set_anim(gSpriteHandler,
                 joe->sprite, anim_karate_kicks_joe_charge_stop, 0,

@@ -6164,6 +6164,14 @@
         {
             "sample": "shootem_sample_miss.wav",
             "pitch": "C5"
+        },
+        {
+            "sample": "karate_kicks_sample_punch.wav",
+            "pitch": "C5"
+        },
+        {
+            "sample": "karate_kicks_sample_kick.wav",
+            "pitch": "C5"
         }
     ]
 }

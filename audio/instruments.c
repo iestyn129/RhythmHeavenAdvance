@@ -70,5 +70,6 @@
 #include "instruments/instruments_space_dance_en.inc.c"
 #include "instruments/instruments_bank_lockstep.inc.c"
 #include "instruments/instruments_bank_shootem.inc.c"
+#include "instruments/instruments_bank_karate_kicks.inc.c"
 #include "instrument_banks.inc.c"
 #include "instrument_bank_list.inc.c"

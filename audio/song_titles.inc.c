@@ -785,3 +785,6 @@ char s_f_shootem_shot_seqName[] = "";
 char s_f_shootem_spawn_seqName[] = "";
 char s_f_shootem_hit_seqName[] = "";
 char s_f_shootem_miss_seqName[] = "";
+
+char s_f_karate_kicks_punch_seqName[] = "";
+char s_f_karate_kicks_kick_seqName[] = "";

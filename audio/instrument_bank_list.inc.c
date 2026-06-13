@@ -81,7 +81,7 @@ union Instrument *instrument_banks[] = {
     /* 079 */ NULL,
     /* 080 */ inst_bank_lockstep,
     /* 081 */ inst_bank_shootem,
-    /* 082 */ NULL,
+    /* 082 */ inst_bank_karate_kicks,
     /* 083 */ NULL,
     /* 084 */ NULL,
     /* 085 */ NULL,

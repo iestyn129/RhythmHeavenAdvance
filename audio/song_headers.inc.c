@@ -1,6 +1,7 @@
 #include "audio/sequence_group/space_dance_song_headers.inc.c"
 #include "audio/sequence_group/lockstep_song_headers.inc.c"
 #include "audio/sequence_group/shootem_song_headers.inc.c"
+#include "audio/sequence_group/karate_kicks_song_headers.inc.c"
 
 extern const u8 s_karate_extra_bgm_mid[];
 struct SongHeader s_karate_extra_bgm_seqData = {

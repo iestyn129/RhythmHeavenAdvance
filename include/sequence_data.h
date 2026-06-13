@@ -816,3 +816,6 @@ extern struct SongHeader s_f_shootem_shot_seqData;
 extern struct SongHeader s_f_shootem_spawn_seqData;
 extern struct SongHeader s_f_shootem_hit_seqData;
 extern struct SongHeader s_f_shootem_miss_seqData;
+
+extern struct SongHeader s_f_karate_kicks_punch_seqData;
+extern struct SongHeader s_f_karate_kicks_kick_seqData;
