@@ -788,3 +788,16 @@ char s_f_shootem_miss_seqName[] = "";
 
 char s_f_karate_kicks_punch_seqName[] = "";
 char s_f_karate_kicks_kick_seqName[] = "";
+char s_f_karate_kicks_kicks_spawn_seqName[] = "";
+char s_f_karate_kicks_kicks_spawn_off_seqName[] = "";
+char s_f_karate_kicks_kicks_spawn_bulb_seqName[] = "";
+char s_f_karate_kicks_kicks_spawn_barrel_seqName[] = "";
+char s_f_karate_kicks_kicks_hit_seqName[] = "";
+char s_f_karate_kicks_kicks_hit_bulb_seqName[] = "";
+char s_f_karate_kicks_kicks_hit_barrel_seqName[] = "";
+char s_f_karate_kicks_kicks_hit_bomb_seqName[] = "";
+char s_f_karate_kicks_kicks_miss_seqName[] = "";
+char s_f_karate_kicks_kicks_voice_punch_seqName[] = "";
+char s_f_karate_kicks_kicks_voice_kick_seqName[] = "";
+char s_f_karate_kicks_kicks_voice_hit_seqName[] = "";
+char s_f_karate_kicks_kicks_voice_three_seqName[] = "";

@@ -819,3 +819,16 @@ extern struct SongHeader s_f_shootem_miss_seqData;
 
 extern struct SongHeader s_f_karate_kicks_punch_seqData;
 extern struct SongHeader s_f_karate_kicks_kick_seqData;
+extern struct SongHeader s_f_karate_kicks_kicks_spawn_seqData;
+extern struct SongHeader s_f_karate_kicks_kicks_spawn_off_seqData;
+extern struct SongHeader s_f_karate_kicks_kicks_spawn_bulb_seqData;
+extern struct SongHeader s_f_karate_kicks_kicks_spawn_barrel_seqData;
+extern struct SongHeader s_f_karate_kicks_kicks_hit_seqData;
+extern struct SongHeader s_f_karate_kicks_kicks_hit_bulb_seqData;
+extern struct SongHeader s_f_karate_kicks_kicks_hit_barrel_seqData;
+extern struct SongHeader s_f_karate_kicks_kicks_hit_bomb_seqData;
+extern struct SongHeader s_f_karate_kicks_kicks_miss_seqData;
+extern struct SongHeader s_f_karate_kicks_kicks_voice_punch_seqData;
+extern struct SongHeader s_f_karate_kicks_kicks_voice_kick_seqData;
+extern struct SongHeader s_f_karate_kicks_kicks_voice_hit_seqData;
+extern struct SongHeader s_f_karate_kicks_kicks_voice_three_seqData;

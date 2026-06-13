@@ -6172,6 +6172,58 @@
         {
             "sample": "karate_kicks_sample_kick.wav",
             "pitch": "C5"
+        },
+        {
+            "sample": "karate_kicks_sample_spawn.wav",
+            "pitch": "C5"
+        },
+        {
+            "sample": "karate_kicks_sample_spawn_off.wav",
+            "pitch": "C5"
+        },
+        {
+            "sample": "karate_kicks_sample_spawn_bulb.wav",
+            "pitch": "C5"
+        },
+        {
+            "sample": "karate_kicks_sample_spawn_barrel.wav",
+            "pitch": "C5"
+        },
+        {
+            "sample": "karate_kicks_sample_hit.wav",
+            "pitch": "C5"
+        },
+        {
+            "sample": "karate_kicks_sample_hit_bulb.wav",
+            "pitch": "C5"
+        },
+        {
+            "sample": "karate_kicks_sample_hit_barrel.wav",
+            "pitch": "C5"
+        },
+        {
+            "sample": "karate_kicks_sample_hit_bomb.wav",
+            "pitch": "C5"
+        },
+        {
+            "sample": "karate_kicks_sample_miss.wav",
+            "pitch": "C5"
+        },
+        {
+            "sample": "karate_kicks_sample_voice_punch.wav",
+            "pitch": "C5"
+        },
+        {
+            "sample": "karate_kicks_sample_voice_kick.wav",
+            "pitch": "C5"
+        },
+        {
+            "sample": "karate_kicks_sample_voice_hit.wav",
+            "pitch": "C5"
+        },
+        {
+            "sample": "karate_kicks_sample_voice_three.wav",
+            "pitch": "C5"
         }
     ]
 }

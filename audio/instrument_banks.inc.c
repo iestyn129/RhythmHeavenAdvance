@@ -2111,7 +2111,20 @@ union Instrument inst_bank_shootem[] = {
 };
 
 union Instrument inst_bank_karate_kicks[] = {
-    /* 0 */ { .pcm = &instrument_pcm_karate_kicks_punch },
-    /* 1 */ { .pcm = &instrument_pcm_karate_kicks_kick },
-    NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,
+    /* 00 */ { .pcm = &instrument_pcm_karate_kicks_punch },
+    /* 01 */ { .pcm = &instrument_pcm_karate_kicks_kick },
+    /* 02 */ { .pcm = &instrument_pcm_karate_kicks_spawn },
+    /* 03 */ { .pcm = &instrument_pcm_karate_kicks_spawn_off },
+    /* 04 */ { .pcm = &instrument_pcm_karate_kicks_spawn_bulb },
+    /* 05 */ { .pcm = &instrument_pcm_karate_kicks_spawn_barrel },
+    /* 06 */ { .pcm = &instrument_pcm_karate_kicks_hit },
+    /* 07 */ { .pcm = &instrument_pcm_karate_kicks_hit_bulb },
+    /* 08 */ { .pcm = &instrument_pcm_karate_kicks_hit_barrel },
+    /* 09 */ { .pcm = &instrument_pcm_karate_kicks_hit_bomb },
+    /* 10 */ { .pcm = &instrument_pcm_karate_kicks_miss },
+    /* 11 */ { .pcm = &instrument_pcm_karate_kicks_voice_punch },
+    /* 12 */ { .pcm = &instrument_pcm_karate_kicks_voice_kick },
+    /* 13 */ { .pcm = &instrument_pcm_karate_kicks_voice_hit },
+    /* 14 */ { .pcm = &instrument_pcm_karate_kicks_voice_three },
+    NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,
 };
