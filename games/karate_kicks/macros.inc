@@ -4,7 +4,8 @@
     .set WAIT_FOR_INPUT, 0x00
 
     @ Cues
-    @.set CUE_TARGET, 0x00
+    .set CUE_POT, 0x00
+    .set CUE_BULB, 0x01
 .endm
 
 

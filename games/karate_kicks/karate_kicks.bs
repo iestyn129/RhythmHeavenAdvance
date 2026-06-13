@@ -93,50 +93,22 @@ script script_karate_kicks_main
     loop_start
     		run beatscript_enable_loops @ disable loop
 
+        spawn_cue CUE_POT
 				beat_anim
-				play_sfx s_f_karate_kicks_punch_seqData
         rest 24
 				beat_anim
-				play_sfx s_f_karate_kicks_kick_seqData
         rest 24
 				beat_anim
-				play_sfx s_f_karate_kicks_kicks_spawn_seqData
         rest 24
 				beat_anim
-				play_sfx s_f_karate_kicks_kicks_spawn_off_seqData
+        rest 24
+
+        spawn_cue CUE_BULB
+				beat_anim
         rest 24
 				beat_anim
-				play_sfx s_f_karate_kicks_kicks_spawn_bulb_seqData
         rest 24
 				beat_anim
-				play_sfx s_f_karate_kicks_kicks_spawn_barrel_seqData
-        rest 24
-				beat_anim
-				play_sfx s_f_karate_kicks_kicks_hit_seqData
-        rest 24
-				beat_anim
-				play_sfx s_f_karate_kicks_kicks_hit_bulb_seqData
-        rest 24
-				beat_anim
-				play_sfx s_f_karate_kicks_kicks_hit_barrel_seqData
-        rest 24
-				beat_anim
-				play_sfx s_f_karate_kicks_kicks_hit_bomb_seqData
-        rest 24
-				beat_anim
-				play_sfx s_f_karate_kicks_kicks_miss_seqData
-        rest 24
-				beat_anim
-				play_sfx s_f_karate_kicks_kicks_voice_punch_seqData
-        rest 24
-				beat_anim
-				play_sfx s_f_karate_kicks_kicks_voice_kick_seqData
-        rest 24
-				beat_anim
-				play_sfx s_f_karate_kicks_kicks_voice_hit_seqData
-        rest 24
-				beat_anim
-				play_sfx s_f_karate_kicks_kicks_voice_three_seqData
         rest 24
 				beat_anim
         rest 24
