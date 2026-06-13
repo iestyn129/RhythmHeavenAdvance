@@ -71,12 +71,20 @@ script script_karate_kicks_main
     set_results_header D_lockstep_header
     disable_play_inputs
     rest 24
-    set_tempo 142
+    set_tempo 128
     set_music_volume 200
     play_music s_renshu_bgm1_seqData
     enable_play_inputs
     enable_pause_menu
     rest 6
+
+    loop_start
+    		run beatscript_enable_loops @ disable loop
+
+        rest 96
+
+        @ exit loop if
+    loop_end
 
     karate_kicks_wait_for_input
 

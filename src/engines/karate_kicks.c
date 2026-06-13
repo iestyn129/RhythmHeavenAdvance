@@ -41,7 +41,7 @@ void karate_kicks_engine_start(const u32 version) {
 
     karate_kicks_joe_init(&gKarateKicks->joe);
 
-    gameplay_set_input_buttons(A_BUTTON, A_BUTTON);
+    gameplay_set_input_buttons(A_BUTTON | B_BUTTON, A_BUTTON);
 }
 
 
@@ -54,7 +54,7 @@ void karate_kicks_engine_stop() {
 void karate_kicks_engine_update() {
     if (D_03004afc & SELECT_BUTTON) {
         if (gKarateKicks->awaitingInput) {
-            gameplay_set_input_buttons(A_BUTTON, 0);
+            gameplay_set_input_buttons(A_BUTTON | B_BUTTON, A_BUTTON);
             set_pause_beatscript_scene(FALSE);
             gKarateKicks->awaitingInput = FALSE;
         }
@@ -66,12 +66,16 @@ void karate_kicks_engine_update() {
 
 void karate_kicks_joe_init(struct KarateKicksJoe* joe) {
     joe->sprite = sprite_create(gSpriteHandler,
-        anim_karate_kicks_joe_kick, 0,
+        anim_karate_kicks_joe_ready, 0,
         160, 88, 0x4800,
-        1, 0, 0
+        1, 0x7f, 0
     );
 
-    sprite_set_base_palette(gSpriteHandler, joe->sprite, 3);
+    sprite_set_base_palette(gSpriteHandler, joe->sprite, 2);
+    sprite_set_callback(gSpriteHandler, joe->sprite, karate_kicks_joe_sprite_callback, (u32)joe);
+
+    joe->isCharged = FALSE;
+    joe->chargeTimer = 0;
 }
 
 
@@ -80,7 +84,32 @@ void karate_kicks_joe_delete(struct KarateKicksJoe* joe) {
 }
 
 
-void karate_kicks_joe_update(struct KarateKicksJoe* joe) {}
+void karate_kicks_joe_update(struct KarateKicksJoe* joe) {
+    if (joe->chargeTimer) {
+        joe->chargeTimer--;
+
+        if (joe->chargeTimer <= 0) {
+            joe->isCharged = TRUE;
+        }
+    }
+}
+
+
+void karate_kicks_joe_sprite_callback(struct SpriteHandler *handler, s16 id, u32 arg) {
+    struct KarateKicksJoe* joe = (struct KarateKicksJoe*)arg;
+
+    if (joe->chargeTimer) {
+        sprite_set_anim(handler,
+            id, anim_karate_kicks_joe_charge, 0,
+            1, 0x7f, 0
+        );
+    } else {
+        sprite_set_anim(handler,
+            id, anim_karate_kicks_joe_to_ready, 0,
+            1, 0x7f, 0
+        );
+    }
+}
 
 
 void karate_kicks_wait_for_input() {
@@ -91,7 +120,42 @@ void karate_kicks_wait_for_input() {
 }
 
 
-void karate_kicks_input_event(const u32 pressed, u32 released) {}
+void karate_kicks_input_event(const u32 pressed, u32 released) {
+    struct KarateKicksJoe* joe = &gKarateKicks->joe;
+
+    if (pressed & A_BUTTON) {
+        sprite_set_anim(gSpriteHandler,
+            joe->sprite, anim_karate_kicks_joe_punch, 0,
+            1, 0x7f, 4
+        );
+
+        joe->chargeTimer = ticks_to_frames(14);
+    }
+
+    if (pressed & B_BUTTON) {
+        sprite_set_anim(gSpriteHandler,
+            joe->sprite, anim_karate_kicks_joe_jab, 0,
+            1, 0x7f, 4
+        );
+    }
+
+    if (released & A_BUTTON) {
+        if (joe->isCharged) {
+            sprite_set_anim(gSpriteHandler,
+                joe->sprite, anim_karate_kicks_joe_kick, 0,
+                1, 0x7f, 4
+            );
+        } else if (sprite_get_anim(gSpriteHandler, joe->sprite) == anim_karate_kicks_joe_charge) {
+            sprite_set_anim(gSpriteHandler,
+                joe->sprite, anim_karate_kicks_joe_charge_stop, 0,
+                1, 0x7f, 0
+            );
+        }
+
+        joe->isCharged = FALSE;
+        joe->chargeTimer = 0;
+    }
+}
 
 
 void karate_kicks_cue_spawn(struct Cue *cue, struct KarateKicksCue *info, u32 type) {

@@ -10,6 +10,8 @@ struct KarateKicksEngineData {
 
 	struct KarateKicksJoe {
 		s16 sprite;
+		u16 chargeTimer;
+		u8 isCharged;
 	} joe;
 };
 
@@ -31,6 +33,7 @@ extern void karate_kicks_engine_update();
 extern void karate_kicks_joe_init(struct KarateKicksJoe* joe);
 extern void karate_kicks_joe_delete(struct KarateKicksJoe* joe);
 extern void karate_kicks_joe_update(struct KarateKicksJoe* joe);
+extern void karate_kicks_joe_sprite_callback(struct SpriteHandler *handler, s16 id, u32 arg);
 
 extern void karate_kicks_wait_for_input();
 
