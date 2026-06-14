@@ -18,6 +18,11 @@ struct Animation anim_karate_kicks_object_shadow[] = {
     /* 001 */ END_ANIMATION,
 };
 
+struct Animation anim_karate_kicks_hit_effect[] = {
+    /* 000 */ { karate_kicks_hit_effect_cel, 2 },
+    /* 001 */ END_ANIMATION,
+};
+
 struct Animation anim_karate_kicks_joe_ready[] = {
     /* 000 */ { karate_kicks_joe_ready_cel, 24 },
     /* 001 */ END_ANIMATION,

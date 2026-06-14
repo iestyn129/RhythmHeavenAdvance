@@ -73,6 +73,7 @@ extern void karate_kicks_joe_delete(struct KarateKicksJoe* joe);
 extern void karate_kicks_joe_update(struct KarateKicksJoe* joe);
 extern void karate_kicks_joe_punch(struct KarateKicksJoe* joe, struct Animation* anim);
 extern u8 karate_kicks_joe_kick(struct KarateKicksJoe* joe);
+extern void karate_kicks_joe_set_palette(struct KarateKicksJoe* joe, s8 basePalette);
 extern void karate_kicks_joe_sprite_callback(struct SpriteHandler *handler, s16 id, u32 arg);
 
 extern void karate_kicks_wait_for_input();
