@@ -108,7 +108,6 @@ script script_karate_kicks_main
 				beat_anim
         rest 24
     		play_sfx s_f_karate_kicks_kicks_voice_punch_seqData
-        spawn_cue CUE_BOMB
 				beat_anim
         rest 18
     		play_sfx s_f_karate_kicks_kicks_voice_kick_seqData

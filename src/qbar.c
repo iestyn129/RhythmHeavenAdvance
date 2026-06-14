@@ -4,8 +4,6 @@
 #include "code_08001360.h"
 #include "lib_0804ca80.h"
 
-#define CUE_HIT_OFFSET(cue) (s32)cue->duration - (s32)cue->runningTime
-
 
 void qbar_init(struct QBarData* qbarData) {
 	qbarData->isShowing = FALSE;
@@ -140,7 +138,7 @@ void qbar_set_cue(struct QBarData* qbarData, struct Cue* cue) {
 	qbar_check_gfx(qbarData);
 
 	if (cueOffset <= 5 && cueOffset >= -5) {
-		destCel = cueOffset + 6;
+		destCel = (s8)(cueOffset + 6);
 	}
 
 	//*(volatile u32*)(ExternWorkRAMBase + 0x3FFE0) = destCel;

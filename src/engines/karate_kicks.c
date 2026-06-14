@@ -405,6 +405,15 @@ void karate_kicks_cue_hit(struct Cue *cue, struct KarateKicksCue *info, u32 pres
     u8 kicked;
 
     if (released) {
+        kicked = karate_kicks_joe_kick(joe);
+
+        if (!kicked) {
+            gameplay_ignore_this_cue_result();
+            gameplay_add_cue_result(0, CUE_RESULT_MISS, 0);
+
+            return;
+        }
+
         anim = anim_karate_kicks_joe_kick;
     } else {
         switch (info->type) {
@@ -422,10 +431,10 @@ void karate_kicks_cue_hit(struct Cue *cue, struct KarateKicksCue *info, u32 pres
         }
     }
 
-    if (info->type == KARATE_KICKS_OBJECT_BOMB) {
-        kicked = karate_kicks_joe_kick(joe);
+    info->beenBarelied = FALSE;
+    info->beenHit = TRUE;
 
-        info->beenHit = TRUE;
+    if (info->type == KARATE_KICKS_OBJECT_BOMB) {
         info->hitObjXSpeed = -0x18;
         info->hitObjYSpeed = -0x480;
         info->hitObjYAcceleration = 0x14;
@@ -433,10 +442,14 @@ void karate_kicks_cue_hit(struct Cue *cue, struct KarateKicksCue *info, u32 pres
     } else {
         karate_kicks_joe_punch(joe, anim);
 
-        info->beenHit = TRUE;
         info->hitObjXSpeed = -0x800;
         info->hitObjYSpeed = -0x200;
         info->objRotation = -0x10;
+    }
+
+    if (info->type == KARATE_KICKS_OBJECT_BARREL) {
+        gameplay_set_next_cue_duration(frames_to_ticks(ticks_to_frames(0x12) - CUE_HIT_OFFSET(cue)));
+        gameplay_spawn_cue(KARATE_KICKS_OBJECT_BOMB);
     }
 }
 
@@ -446,35 +459,45 @@ void karate_kicks_cue_barely(struct Cue *cue, struct KarateKicksCue *info, u32 p
     struct Animation* anim;
     u8 kicked;
 
-    info->beenBarelied = TRUE;
+    if (released) {
+        kicked = karate_kicks_joe_kick(joe);
 
-    switch (info->type) {
-        case KARATE_KICKS_OBJECT_BARREL:
-            anim = anim_karate_kicks_joe_punch;
-            break;
-        case KARATE_KICKS_OBJECT_BOMB:
-            anim = anim_karate_kicks_joe_kick;
-            break;
-        case KARATE_KICKS_OBJECT_POT:
-        case KARATE_KICKS_OBJECT_BULB:
-        default:
-            anim = anim_karate_kicks_joe_jab;
-            break;
+        if (!kicked) {
+            gameplay_ignore_this_cue_result();
+            gameplay_add_cue_result(0, CUE_RESULT_MISS, 0);
+
+            return;
+        }
+
+        anim = anim_karate_kicks_joe_kick;
+    } else {
+        switch (info->type) {
+            case KARATE_KICKS_OBJECT_BARREL:
+                anim = anim_karate_kicks_joe_punch;
+                break;
+            case KARATE_KICKS_OBJECT_BOMB:
+                anim = anim_karate_kicks_joe_kick;
+                break;
+            case KARATE_KICKS_OBJECT_POT:
+            case KARATE_KICKS_OBJECT_BULB:
+            default:
+                anim = anim_karate_kicks_joe_jab;
+                break;
+        }
     }
+
+    info->beenBarelied = TRUE;
+    info->beenHit = TRUE;
 
     switch (info->type) {
         case KARATE_KICKS_OBJECT_BARREL:
             karate_kicks_joe_punch(joe, anim);
 
-            info->beenHit = TRUE;
             info->hitObjXSpeed = -0x800;
             info->hitObjYSpeed = -0x200;
             info->objRotation = -0x10;
             break;
         case KARATE_KICKS_OBJECT_BOMB:
-            kicked = karate_kicks_joe_kick(joe);
-
-            info->beenHit = TRUE;
             info->hitObjXSpeed = -0x40;
             info->hitObjYSpeed = -0x200;
             info->hitObjYAcceleration = 0x20;
@@ -491,6 +514,11 @@ void karate_kicks_cue_barely(struct Cue *cue, struct KarateKicksCue *info, u32 p
             info->hitObjYAcceleration = 0x20;
             info->objRotation = 4;
             break;
+    }
+
+    if (info->type == KARATE_KICKS_OBJECT_BARREL) {
+        gameplay_set_next_cue_duration(frames_to_ticks(ticks_to_frames(0x12) - CUE_HIT_OFFSET(cue)));
+        gameplay_spawn_cue(KARATE_KICKS_OBJECT_BOMB);
     }
 }
 

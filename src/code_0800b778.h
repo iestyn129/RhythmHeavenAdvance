@@ -353,6 +353,7 @@ extern void func_0800c390_stub(void);
 extern u32 func_0800c394(void);
 extern u32 func_0800c398(void);
 extern s32 ticks_to_frames(u32); // Convert Script Tatums to Real-Time Frames
+extern s32 frames_to_ticks(u32 frames); // Convert Real-Time Frames to Script Tatums
 extern u32 get_current_mem_id(void); // Get Current Memory ID / SubScene
 extern void set_current_mem_id(u32 memID); // Set Current Memory ID / SubScene
 extern void func_0800c3e4_stub(void);

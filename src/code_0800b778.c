@@ -827,6 +827,14 @@ s32 ticks_to_frames(u32 beats) {
 }
 
 
+// Convert Real-Time Frames to Script Tatums
+s32 frames_to_ticks(u32 frames) {
+    return FIXED_TO_INT(
+        FIXED_POINT_MUL(INT_TO_FIXED(frames), D_030053c0.deltaTime)
+    );
+}
+
+
 // Get Current Active Thread (Memory ID / SubScene)
 u32 get_current_mem_id() {
     return D_03001310;
