@@ -29,6 +29,7 @@ struct KarateKicksEngineData {
 struct KarateKicksCue {
 	u32 type;
 	u8 beenHit;
+	u8 beenBarelied;
 	u8 beenMissed;
 
 	s8 objAffineGroup;
@@ -80,6 +81,8 @@ extern void karate_kicks_input_event(u32 pressed, u32 released);
 
 extern void karate_kicks_cue_spawn(struct Cue* cue, struct KarateKicksCue* info, u32 type);
 extern u32 karate_kicks_cue_update(struct Cue* cue, struct KarateKicksCue* info, u32 runningTime, u32 duration);
+extern void karate_kicks_cue_update_launched(struct KarateKicksCue* info);
+extern void karate_kicks_cue_update_punched(struct KarateKicksCue* info);
 extern void karate_kicks_cue_despawn(struct Cue* cue, struct KarateKicksCue* info);
 extern void karate_kicks_cue_hit(struct Cue* cue, struct KarateKicksCue* info, u32 pressed, u32 released);
 extern void karate_kicks_cue_barely(struct Cue* cue, struct KarateKicksCue* info, u32 pressed, u32 released);

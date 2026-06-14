@@ -197,6 +197,8 @@ void karate_kicks_cue_spawn(struct Cue *cue, struct KarateKicksCue *info, u32 ty
 
     info->type = type;
     info->beenHit = FALSE;
+    info->beenBarelied = FALSE;
+    info->beenMissed = FALSE;
 
     info->objAffineGroup = (s8)scene_affine_group_alloc();
     info->objSprite = sprite_create(gSpriteHandler,
@@ -240,24 +242,31 @@ void karate_kicks_cue_spawn(struct Cue *cue, struct KarateKicksCue *info, u32 ty
 
         gameplay_get_previous_cue_info(next_cue, &next_cue, (void**)&next_cue_info);
     }
+
+    if (info->type == KARATE_KICKS_OBJECT_BOMB) {
+        info->objXPosition = INT_TO_FIXED(76);
+        info->objYPosition = INT_TO_FIXED(50);
+        info->objZPosition = 0x4900;
+        info->objYLandPosition = 133;
+
+        info->hitObjXSpeed = 0x40;
+        info->hitObjYSpeed = -0x200;
+        info->hitObjYAcceleration = 0x34;
+
+        info->objScale = 0x100;
+    }
 }
 
 
 u32 karate_kicks_cue_update(struct Cue *cue, struct KarateKicksCue *info, u32 runningTime, u32 duration) {
-    struct KarateKicksJoe* joe = &gKarateKicks->joe;
-    s32 beatsOffset, y;
-
     if (runningTime > ticks_to_frames(0x78)) {
         return TRUE;
     }
 
-    if (info->beenHit) {
-        info->hitObjXSpeed += info->hitObjXAcceleration;
-        info->hitObjYSpeed += info->hitObjYAcceleration;
+    info->passedBeats = Div(INT_TO_FIXED(runningTime), (s32)duration);
 
-        info->objXPosition += (s32)info->hitObjXSpeed;
-        info->objYPosition += (s32)info->hitObjYSpeed;
-        info->objAngle += info->objRotation;
+    if (info->beenHit) {
+        karate_kicks_cue_update_punched(info);
 
         if (FIXED_TO_INT(info->objXPosition) < -0x20) {
             return TRUE;
@@ -271,11 +280,13 @@ u32 karate_kicks_cue_update(struct Cue *cue, struct KarateKicksCue *info, u32 ru
             info->objRotation = 0;
         }
     } else {
-        info->passedBeats = Div(INT_TO_FIXED(runningTime), (s32)duration);
-
-        if (info->passedBeats > 0x200) {
+        if (info->passedBeats > 0x200 || FIXED_TO_INT(info->objYPosition) > info->objYLandPosition) {
             info->beenHit = TRUE;
-            info->objAngle += agb_random(16);
+            info->beenBarelied = TRUE;
+
+            if (info->type != KARATE_KICKS_OBJECT_BOMB) {
+                info->objAngle += agb_random(16);
+            }
 
             play_sound(&s_f_karate_kicks_kicks_miss_seqData);
 
@@ -289,6 +300,53 @@ u32 karate_kicks_cue_update(struct Cue *cue, struct KarateKicksCue *info, u32 ru
             }
         }
 
+        karate_kicks_cue_update_launched(info);
+    }
+
+    if (info->passedBeats < 0x80) {
+        sprite_set_visible(gSpriteHandler, info->objSprite, FALSE);
+        sprite_set_visible(gSpriteHandler, info->shadowSprite, FALSE);
+    }
+
+    sprite_set_x_y_z(gSpriteHandler,
+        info->objSprite,
+        FIXED_TO_INT(info->objXPosition),
+        FIXED_TO_INT(info->objYPosition),
+        info->objZPosition + info->passedBeats
+    );
+    sprite_set_x_y_z(gSpriteHandler,
+        info->shadowSprite,
+        FIXED_TO_INT(info->objXPosition),
+        (s16)info->objYLandPosition,
+        info->objZPosition + info->passedBeats + 0x200
+    );
+
+    set_affine_scale_rotation(
+        info->objAffineGroup,
+        info->objScale, info->objAngle
+    );
+    set_affine_scale_rotation(
+        info->shadowAffineGroup,
+        (s16)(info->objScale + 0x20 * (info->type == KARATE_KICKS_OBJECT_BOMB)), 0
+    );
+
+    sprite_set_visible(gSpriteHandler, info->objSprite, TRUE);
+    sprite_set_visible(gSpriteHandler, info->shadowSprite, TRUE);
+
+    return FALSE;
+}
+
+void karate_kicks_cue_update_launched(struct KarateKicksCue* info) {
+    s32 beatsOffset, y;
+
+    if (info->type == KARATE_KICKS_OBJECT_BOMB) {
+        info->hitObjXSpeed += info->hitObjXAcceleration;
+        info->hitObjYSpeed += info->hitObjYAcceleration;
+
+        info->objXPosition += (s32)info->hitObjXSpeed;
+        info->objYPosition += (s32)info->hitObjYSpeed;
+        info->objAngle += info->objRotation;
+    } else {
         beatsOffset = info->passedBeats - 0x100;
 
         y = 81;
@@ -316,36 +374,20 @@ u32 karate_kicks_cue_update(struct Cue *cue, struct KarateKicksCue *info, u32 ru
             info->objScale = 0x220;
         }
     }
+}
 
-    if (info->passedBeats < 0x80) {
-        sprite_set_visible(gSpriteHandler, info->objSprite, FALSE);
-        sprite_set_visible(gSpriteHandler, info->shadowSprite, FALSE);
+
+void karate_kicks_cue_update_punched(struct KarateKicksCue* info) {
+    if (info->type == KARATE_KICKS_OBJECT_BOMB && !info->beenBarelied) {
+        info->objScale = (s16)Div(INT_TO_FIXED(256.0), info->passedBeats);
     }
 
-    sprite_set_x_y_z(gSpriteHandler,
-        info->objSprite,
-        FIXED_TO_INT(info->objXPosition),
-        FIXED_TO_INT(info->objYPosition),
-        info->objZPosition + info->passedBeats
-    );
-    sprite_set_x_y(gSpriteHandler,
-        info->shadowSprite,
-        FIXED_TO_INT(info->objXPosition), (s16)info->objYLandPosition
-    );
+    info->hitObjXSpeed += info->hitObjXAcceleration;
+    info->hitObjYSpeed += info->hitObjYAcceleration;
 
-    set_affine_scale_rotation(
-        info->objAffineGroup,
-        info->objScale, info->objAngle
-    );
-    set_affine_scale_rotation(
-        info->shadowAffineGroup,
-        info->objScale, 0
-    );
-
-    sprite_set_visible(gSpriteHandler, info->objSprite, TRUE);
-    sprite_set_visible(gSpriteHandler, info->shadowSprite, TRUE);
-
-    return FALSE;
+    info->objXPosition += (s32)info->hitObjXSpeed;
+    info->objYPosition += (s32)info->hitObjYSpeed;
+    info->objAngle += info->objRotation;
 }
 
 
@@ -384,9 +426,10 @@ void karate_kicks_cue_hit(struct Cue *cue, struct KarateKicksCue *info, u32 pres
         kicked = karate_kicks_joe_kick(joe);
 
         info->beenHit = TRUE;
-        info->hitObjXSpeed = -0x800;
-        info->hitObjYSpeed = -0x200;
-        info->objRotation = -0x10;
+        info->hitObjXSpeed = -0x18;
+        info->hitObjYSpeed = -0x480;
+        info->hitObjYAcceleration = 0x14;
+        info->objRotation = 0x04;
     } else {
         karate_kicks_joe_punch(joe, anim);
 
@@ -402,6 +445,8 @@ void karate_kicks_cue_barely(struct Cue *cue, struct KarateKicksCue *info, u32 p
     struct KarateKicksJoe* joe = &gKarateKicks->joe;
     struct Animation* anim;
     u8 kicked;
+
+    info->beenBarelied = TRUE;
 
     switch (info->type) {
         case KARATE_KICKS_OBJECT_BARREL:
