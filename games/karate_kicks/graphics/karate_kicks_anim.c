@@ -8,6 +8,8 @@
 struct Animation anim_karate_kicks_object[] = {
     /* 000 */ { karate_kicks_object_pot_cel, 1 },
     /* 001 */ { karate_kicks_object_bulb_cel, 1 },
+    /* 001 */ { karate_kicks_object_barrel_cel, 1 },
+    /* 001 */ { karate_kicks_object_bomb_cel, 1 },
     /* 002 */ END_ANIMATION,
 };
 

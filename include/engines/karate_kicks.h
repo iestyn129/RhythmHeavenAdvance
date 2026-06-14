@@ -7,6 +7,8 @@
 enum KarateKicksObjectsEnum {
 	KARATE_KICKS_OBJECT_POT,
 	KARATE_KICKS_OBJECT_BULB,
+	KARATE_KICKS_OBJECT_BARREL,
+	KARATE_KICKS_OBJECT_BOMB,
 
 	KARATE_KICKS_OBJECT_COUNT
 };
@@ -69,7 +71,7 @@ extern void karate_kicks_joe_init(struct KarateKicksJoe* joe);
 extern void karate_kicks_joe_delete(struct KarateKicksJoe* joe);
 extern void karate_kicks_joe_update(struct KarateKicksJoe* joe);
 extern void karate_kicks_joe_punch(struct KarateKicksJoe* joe, struct Animation* anim);
-extern void karate_kicks_joe_release(struct KarateKicksJoe* joe);
+extern u8 karate_kicks_joe_kick(struct KarateKicksJoe* joe);
 extern void karate_kicks_joe_sprite_callback(struct SpriteHandler *handler, s16 id, u32 arg);
 
 extern void karate_kicks_wait_for_input();

@@ -98,16 +98,21 @@ script script_karate_kicks_main
         rest 24
 				beat_anim
         rest 24
-				beat_anim
-        rest 24
-				beat_anim
-        rest 24
-
         spawn_cue CUE_BULB
 				beat_anim
         rest 24
 				beat_anim
         rest 24
+
+        spawn_cue CUE_BARREL
+				beat_anim
+        rest 24
+    		play_sfx s_f_karate_kicks_kicks_voice_punch_seqData
+        spawn_cue CUE_BOMB
+				beat_anim
+        rest 18
+    		play_sfx s_f_karate_kicks_kicks_voice_kick_seqData
+        rest 6
 				beat_anim
         rest 24
 				beat_anim

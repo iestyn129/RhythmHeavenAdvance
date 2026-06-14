@@ -12,6 +12,19 @@ AnimationCel karate_kicks_object_bulb_cel[] = {
     /* 001 */ 0x4000, 0x81f0, 0x2380
 };
 
+AnimationCel karate_kicks_object_barrel_cel[] = {
+    /* Len */ 2,
+    /* 000 */ 0x40f0, 0x81f0, 0x2370,
+    /* 001 */ 0x4000, 0x81f0, 0x2374
+};
+
+AnimationCel karate_kicks_object_bomb_cel[] = {
+    /* Len */ 3,
+    /* 000 */ 0x40f0, 0x81f0, 0x238c,
+    /* 001 */ 0x4000, 0x41f0, 0x23b0,
+    /* 002 */ 0x4008, 0x41f0, 0x23b4
+};
+
 AnimationCel karate_kicks_object_shadow_cel[] = {
     /* Len */ 1,
     /* 000 */ 0x4000, 0x81f0, 0x2388

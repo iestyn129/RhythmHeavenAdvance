@@ -127,14 +127,17 @@ void karate_kicks_joe_punch(struct KarateKicksJoe* joe, struct Animation* anim) 
 }
 
 
-void karate_kicks_joe_release(struct KarateKicksJoe* joe) {
+u8 karate_kicks_joe_kick(struct KarateKicksJoe* joe) {
+    u8 kicked = FALSE;
+
     if (joe->isCharged) {
         sprite_set_anim(gSpriteHandler,
             joe->sprite, anim_karate_kicks_joe_kick, 0,
             1, 0x7f, 0
         );
-
         play_sound(&s_f_karate_kicks_kick_seqData);
+
+        kicked = TRUE;
     } else if (sprite_get_anim(gSpriteHandler, joe->sprite) == anim_karate_kicks_joe_charge) {
         sprite_set_anim(gSpriteHandler,
             joe->sprite, anim_karate_kicks_joe_charge_stop, 0,
@@ -145,6 +148,8 @@ void karate_kicks_joe_release(struct KarateKicksJoe* joe) {
     joe->isCharged = FALSE;
     joe->chargeTimer = 0;
     joe->skipBeat = TRUE;
+
+    return kicked;
 }
 
 
@@ -181,7 +186,7 @@ void karate_kicks_input_event(const u32 pressed, u32 released) {
     }
 
     if (released & A_BUTTON) {
-        karate_kicks_joe_release(joe);
+        karate_kicks_joe_kick(joe);
     }
 }
 
@@ -355,11 +360,18 @@ void karate_kicks_cue_despawn(struct Cue *cue, struct KarateKicksCue *info) {
 void karate_kicks_cue_hit(struct Cue *cue, struct KarateKicksCue *info, u32 pressed, u32 released) {
     struct KarateKicksJoe* joe = &gKarateKicks->joe;
     struct Animation* anim;
+    u8 kicked;
 
     if (released) {
         anim = anim_karate_kicks_joe_kick;
     } else {
         switch (info->type) {
+            case KARATE_KICKS_OBJECT_BARREL:
+                anim = anim_karate_kicks_joe_punch;
+                break;
+            case KARATE_KICKS_OBJECT_BOMB:
+                anim = anim_karate_kicks_joe_kick;
+                break;
             case KARATE_KICKS_OBJECT_POT:
             case KARATE_KICKS_OBJECT_BULB:
             default:
@@ -368,38 +380,73 @@ void karate_kicks_cue_hit(struct Cue *cue, struct KarateKicksCue *info, u32 pres
         }
     }
 
-    karate_kicks_joe_punch(joe, anim);
+    if (info->type == KARATE_KICKS_OBJECT_BOMB) {
+        kicked = karate_kicks_joe_kick(joe);
 
-    info->beenHit = TRUE;
-    info->hitObjXSpeed = -0x800;
-    info->hitObjYSpeed = -0x200;
-    info->objRotation = -0x10;
+        info->beenHit = TRUE;
+        info->hitObjXSpeed = -0x800;
+        info->hitObjYSpeed = -0x200;
+        info->objRotation = -0x10;
+    } else {
+        karate_kicks_joe_punch(joe, anim);
+
+        info->beenHit = TRUE;
+        info->hitObjXSpeed = -0x800;
+        info->hitObjYSpeed = -0x200;
+        info->objRotation = -0x10;
+    }
 }
 
 
 void karate_kicks_cue_barely(struct Cue *cue, struct KarateKicksCue *info, u32 pressed, u32 released) {
     struct KarateKicksJoe* joe = &gKarateKicks->joe;
     struct Animation* anim;
+    u8 kicked;
 
-    if (released) {
-        anim = anim_karate_kicks_joe_kick;
-    } else {
-        switch (info->type) {
-            case KARATE_KICKS_OBJECT_POT:
-            case KARATE_KICKS_OBJECT_BULB:
-            default:
-                anim = anim_karate_kicks_joe_jab;
-                break;
-        }
+    switch (info->type) {
+        case KARATE_KICKS_OBJECT_BARREL:
+            anim = anim_karate_kicks_joe_punch;
+            break;
+        case KARATE_KICKS_OBJECT_BOMB:
+            anim = anim_karate_kicks_joe_kick;
+            break;
+        case KARATE_KICKS_OBJECT_POT:
+        case KARATE_KICKS_OBJECT_BULB:
+        default:
+            anim = anim_karate_kicks_joe_jab;
+            break;
     }
 
-    karate_kicks_joe_punch(joe, anim);
+    switch (info->type) {
+        case KARATE_KICKS_OBJECT_BARREL:
+            karate_kicks_joe_punch(joe, anim);
 
-    info->beenHit = TRUE;
-    info->hitObjXSpeed = -0x40;
-    info->hitObjYSpeed = -0x200;
-    info->hitObjYAcceleration = 0x20;
-    info->objRotation = 4;
+            info->beenHit = TRUE;
+            info->hitObjXSpeed = -0x800;
+            info->hitObjYSpeed = -0x200;
+            info->objRotation = -0x10;
+            break;
+        case KARATE_KICKS_OBJECT_BOMB:
+            kicked = karate_kicks_joe_kick(joe);
+
+            info->beenHit = TRUE;
+            info->hitObjXSpeed = -0x40;
+            info->hitObjYSpeed = -0x200;
+            info->hitObjYAcceleration = 0x20;
+            info->objRotation = 4;
+            break;
+        case KARATE_KICKS_OBJECT_POT:
+        case KARATE_KICKS_OBJECT_BULB:
+        default:
+            karate_kicks_joe_punch(joe, anim);
+
+            info->beenHit = TRUE;
+            info->hitObjXSpeed = -0x40;
+            info->hitObjYSpeed = -0x200;
+            info->hitObjYAcceleration = 0x20;
+            info->objRotation = 4;
+            break;
+    }
 }
 
 

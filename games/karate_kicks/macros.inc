@@ -6,6 +6,8 @@
     @ Cues
     .set CUE_POT, 0x00
     .set CUE_BULB, 0x01
+    .set CUE_BARREL, 0x02
+    .set CUE_BOMB, 0x03
 .endm
 
 
