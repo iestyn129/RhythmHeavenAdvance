@@ -89,7 +89,6 @@ void karate_kicks_joe_init(struct KarateKicksJoe* joe) {
         1, 0x7f, 0
     );
 
-    sprite_set_base_palette(gSpriteHandler, joe->sprite, 2);
     sprite_set_callback(gSpriteHandler, joe->sprite, karate_kicks_joe_sprite_callback, (u32)joe);
 
     joe->skipBeat = FALSE;
@@ -400,7 +399,7 @@ void karate_kicks_cue_despawn(struct Cue *cue, struct KarateKicksCue *info) {
     struct KarateKicksJoe* joe = &gKarateKicks->joe;
 
     if (info->type == KARATE_KICKS_OBJECT_BOMB) {
-        karate_kicks_joe_set_palette(joe, 2);
+        karate_kicks_joe_set_palette(joe, 0);
     }
 
     sprite_delete(gSpriteHandler, info->objSprite);
@@ -466,14 +465,14 @@ void karate_kicks_cue_hit(struct Cue *cue, struct KarateKicksCue *info, u32 pres
     );
 
     if (info->type == KARATE_KICKS_OBJECT_BOMB) {
-        sprite_set_base_palette(gSpriteHandler, hitEffectSprite, 5);
-        karate_kicks_joe_set_palette(joe, 2);
+        sprite_set_base_palette(gSpriteHandler, hitEffectSprite, 2);
+        karate_kicks_joe_set_palette(joe, 0);
     }
 
     if (info->type == KARATE_KICKS_OBJECT_BARREL) {
         gameplay_set_next_cue_duration(frames_to_ticks(ticks_to_frames(0x12) - CUE_HIT_OFFSET(cue)));
         gameplay_spawn_cue(KARATE_KICKS_OBJECT_BOMB);
-        karate_kicks_joe_set_palette(joe, 3);
+        karate_kicks_joe_set_palette(joe, 1);
     }
 }
 
@@ -549,7 +548,7 @@ void karate_kicks_cue_barely(struct Cue *cue, struct KarateKicksCue *info, u32 p
 
         gameplay_set_next_cue_duration(frames_to_ticks(ticks_to_frames(0x12) - CUE_HIT_OFFSET(cue)));
         gameplay_spawn_cue(KARATE_KICKS_OBJECT_BOMB);
-        karate_kicks_joe_set_palette(joe, 3);
+        karate_kicks_joe_set_palette(joe, 1);
     }
 }
 
