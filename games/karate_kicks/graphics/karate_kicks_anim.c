@@ -16,9 +16,8 @@ struct Animation anim_karate_kicks_object[] = {
 struct Animation anim_karate_kicks_barrel_parts[] = {
     /* 000 */ { karate_kicks_barrel_head_cel, 1 },
     /* 001 */ { karate_kicks_barrel_hoop_cel, 1 },
-    /* 002 */ { karate_kicks_barrel_stave_cel00, 1 },
-    /* 003 */ { karate_kicks_barrel_stave_cel01, 1 },
-    /* 004 */ END_ANIMATION,
+    /* 002 */ { karate_kicks_barrel_stave_cel, 1 },
+    /* 003 */ END_ANIMATION,
 };
 
 struct Animation anim_karate_kicks_object_shadow[] = {

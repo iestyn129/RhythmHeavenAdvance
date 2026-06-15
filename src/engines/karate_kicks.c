@@ -589,14 +589,14 @@ void karate_kicks_cue_barrel_parts_spawn(struct KarateKicksBarrelPart* parts, s3
         );
         assign_sprite_affine_param(part->sprite, part->affineGroup);
 
-        part->xPosition = baseX + defaultX;
-        part->yPosition = baseY + defaultY;
+        part->xPosition = baseX + defaultX + (-1 + agb_random(3));
+        part->yPosition = baseY + defaultY + (-1 + agb_random(3));
 
-        part->xSpeed = defaultXSpeed;
-        part->ySpeed = defaultYSpeed;
+        part->xSpeed = defaultXSpeed + -1 * agb_random(3);
+        part->ySpeed = defaultYSpeed + -1 * agb_random(3);
 
-        part->angle = (s8)defaultAngle;
-        part->rotation = (s8)defaultRotation;
+        part->angle = (s8)(defaultAngle + (-1 + agb_random(3)));
+        part->rotation = (s8)(defaultRotation + (-1 + agb_random(3)));
     }
 }
 
