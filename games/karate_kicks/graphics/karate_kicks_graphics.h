@@ -4,8 +4,10 @@
 #include "graphics.h"
 
 extern struct Animation anim_karate_kicks_object[];
+extern struct Animation anim_karate_kicks_barrel_parts[];
 extern struct Animation anim_karate_kicks_object_shadow[];
 extern struct Animation anim_karate_kicks_hit_effect[];
+
 extern struct Animation anim_karate_kicks_joe_ready[];
 extern struct Animation anim_karate_kicks_joe_beat[];
 extern struct Animation anim_karate_kicks_joe_jab[];
