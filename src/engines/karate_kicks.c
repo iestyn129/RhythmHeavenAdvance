@@ -376,8 +376,20 @@ void karate_kicks_cue_update_launched(struct KarateKicksCue* info) {
 
         info->objScale = (s16)Div(INT_TO_FIXED(256.0), info->passedBeats);
 
-        if (info->objScale > 0x220) {
-            info->objScale = 0x220;
+        switch (info->type) {
+            case KARATE_KICKS_OBJECT_POT:
+            case KARATE_KICKS_OBJECT_BULB:
+                if (info->objScale > 0x220) {
+                    info->objScale = 0x220;
+                }
+                break;
+            case KARATE_KICKS_OBJECT_BARREL:
+                if (info->objScale > 0x200) {
+                    info->objScale = 0x200;
+                }
+                break;
+            default:
+                break;
         }
     }
 }
