@@ -331,7 +331,9 @@ u32 karate_kicks_cue_update(struct Cue *cue, struct KarateKicksCue *info, u32 ru
     );
     set_affine_scale_rotation(
         info->shadowAffineGroup,
-        (s16)(info->objScale + 0x20 * (info->type == KARATE_KICKS_OBJECT_BOMB)), 0
+        (s16)(info->objScale + 0x20 * (
+            info->type == KARATE_KICKS_OBJECT_BARREL || info->type == KARATE_KICKS_OBJECT_BOMB
+        )), 0
     );
 
     sprite_set_visible(gSpriteHandler, info->objSprite, TRUE);
