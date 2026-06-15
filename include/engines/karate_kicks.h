@@ -43,14 +43,14 @@ struct KarateKicksCue {
 
 	s16 objScale;
 	s8 objAngle;
-	u8 objRotation;
+	s8 objRotation;
 
 	s32 objYLandPosition;
 
-	u32 hitObjXSpeed;
-	u32 hitObjYSpeed;
-	u32 hitObjXAcceleration;
-	u32 hitObjYAcceleration;
+	s32 hitObjXSpeed;
+	s32 hitObjYSpeed;
+	s32 hitObjXAcceleration; // i know acceleration is a vector quantity, but there's no equivalent word for
+	s32 hitObjYAcceleration; // its scalar form in the english language, and these are long enough already
 
 	u16 passedBeats;
 };
@@ -82,9 +82,11 @@ extern void karate_kicks_input_event(u32 pressed, u32 released);
 
 extern void karate_kicks_cue_spawn(struct Cue* cue, struct KarateKicksCue* info, u32 type);
 extern u32 karate_kicks_cue_update(struct Cue* cue, struct KarateKicksCue* info, u32 runningTime, u32 duration);
+extern void karate_kicks_cue_update_physics(struct KarateKicksCue* info);
 extern void karate_kicks_cue_update_launched(struct KarateKicksCue* info);
-extern void karate_kicks_cue_update_punched(struct KarateKicksCue* info);
 extern void karate_kicks_cue_despawn(struct Cue* cue, struct KarateKicksCue* info);
 extern void karate_kicks_cue_hit(struct Cue* cue, struct KarateKicksCue* info, u32 pressed, u32 released);
 extern void karate_kicks_cue_barely(struct Cue* cue, struct KarateKicksCue* info, u32 pressed, u32 released);
+extern void karate_kicks_cue_pressed(struct Cue* cue, struct KarateKicksCue* info, u32 pressed);
+extern u8 karate_kicks_cue_released(struct Cue* cue, struct KarateKicksCue* info, u32 released);
 extern void karate_kicks_cue_miss(struct Cue* cue, struct KarateKicksCue* info);
