@@ -13,15 +13,6 @@ void qbar_init(struct QBarData* qbarData) {
 void qbar_init_gfx(struct QBarData* qbarData) {
 	u32 memID;
 
-	dma3_set(
-		qbar_obj_raw_4bpp, OBJ_TILESET_BASE(0x20 * QBAR_BASE_TILE),
-		0x180, 0x10, 0x200
-	);
-	dma3_set(
-		qbar_pal, OBJ_PALETTE_BUFFER(QBAR_BASE_PALETTE),
-		0x20, 0x10, 0x200
-	);
-
 	memID = sprite_handler_get_mem_id(gSpriteHandler);
 	sprite_handler_set_mem_id(gSpriteHandler, QBAR_MEM_ID);
 
@@ -40,6 +31,17 @@ void qbar_init_gfx(struct QBarData* qbarData) {
 	sprite_id_set_base_tile(gSpriteHandler, QBAR_MEM_ID, QBAR_BASE_TILE);
 	sprite_id_set_base_palette(gSpriteHandler, QBAR_MEM_ID, QBAR_BASE_PALETTE);
 	sprite_handler_set_mem_id(gSpriteHandler, memID);
+}
+
+void qbar_write_gfx(struct QBarData* qBarData) {
+	dma3_set(
+		qbar_obj_raw_4bpp, OBJ_TILESET_BASE(0x20 * QBAR_BASE_TILE),
+		0x180, 0x10, 0x200
+	);
+	dma3_set(
+		qbar_pal, OBJ_PALETTE_BUFFER(QBAR_BASE_PALETTE),
+		0x20, 0x10, 0x200
+	);
 }
 
 void qbar_delete(struct QBarData* qbarData) {
@@ -75,18 +77,22 @@ void qbar_check_gfx(struct QBarData* qbarData) {
 
 	for (i = 0; i < 0x20; i++) {
 		if (qbar_obj_raw_4bpp[i] != ((volatile u8*)OBJ_TILESET_BASE(0x20 * QBAR_BASE_TILE))[i]) {
-			qbar_init_gfx(qbarData);
+			qbar_write_gfx(qbarData);
 			break;
 		}
 	}
 }
 
 
-void qbar_show_bar(struct QBarData* qbarData, const u8 showBar) {
+void qbar_show_bar(struct QBarData* qbarData, u8 showBar) {
+	#ifdef DISABLE_QBAR
+	showBar = FALSE;
+	#endif
+
 	qbarData->isShowing = showBar;
 
 	if (qbarData->isShowing) {
-		qbar_init_gfx(qbarData);
+		qbar_write_gfx(qbarData);
 	}
 
 	sprite_set_visible(gSpriteHandler, qbarData->barCueSprite, qbarData->isShowing);

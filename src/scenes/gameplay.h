@@ -74,7 +74,7 @@ struct GameplaySceneData {
     u8  mercyEnabled;
     u8  forgivableMisses;
     u8  autoplayEnabled;
-	struct QBarData* qBarData;
+	struct QBarData qBarData;
 };
 
 

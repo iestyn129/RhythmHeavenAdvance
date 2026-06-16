@@ -4,6 +4,7 @@
 #include "cues.h"
 
 #define CUE_HIT_OFFSET(cue) ((s32)cue->duration - (s32)cue->runningTime)
+#define DISABLE_QBAR // remember to comment out when not needed
 
 #define QBAR_MEM_ID 17
 #define QBAR_BASE_TILE 948
@@ -17,6 +18,7 @@ struct QBarData {
 
 extern void qbar_init(struct QBarData* qbarData);
 extern void qbar_init_gfx(struct QBarData* qbarData);
+extern void qbar_write_gfx(struct QBarData* qbarData);
 extern void qbar_delete(struct QBarData* qbarData);
 extern void qbar_update(struct QBarData* qbarData, struct Cue* cues);
 extern void qbar_check_gfx(struct QBarData* qbarData);

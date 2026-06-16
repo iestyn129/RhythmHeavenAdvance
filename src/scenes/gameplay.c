@@ -198,8 +198,7 @@ void gameplay_start_scene(void) {
     }
     score_results_set_grade_thresholds(NULL);
 
-    gGameplay->qBarData = mem_heap_alloc(sizeof (struct QBarData));
-    qbar_init(gGameplay->qBarData);
+    qbar_init(&gGameplay->qBarData);
 }
 
 
@@ -319,7 +318,7 @@ void gameplay_update_scene(void) {
         }
     }
 
-    qbar_update(gGameplay->qBarData, gGameplay->cues);
+    qbar_update(&gGameplay->qBarData, gGameplay->cues);
 }
 
 
@@ -474,7 +473,7 @@ s32 gameplay_run_engine_event(const struct GameEngine *engine, s32 id) {
 void gameplay_inputs_enabled(u32 enable) {
     gGameplay->playInputsEnabled = enable;
 
-    qbar_show_bar(gGameplay->qBarData, gGameplay->playInputsEnabled);
+    qbar_show_bar(&gGameplay->qBarData, gGameplay->playInputsEnabled);
 }
 
 
@@ -734,10 +733,7 @@ void gameplay_stop_scene(void) {
         }
     }
 
-    if (gGameplay->qBarData != NULL) {
-        qbar_delete(gGameplay->qBarData);
-        mem_heap_dealloc(gGameplay->qBarData);
-    }
+    qbar_delete(&gGameplay->qBarData);
 
     func_08008628();
     func_08004058();
@@ -779,7 +775,7 @@ void gameplay_init_cues(void) {
 void gameplay_set_marking_criteria(u32 criteria) {
     gGameplay->currentMarkingCriteria = criteria;
 
-    qbar_set_marking_criteria(gGameplay->qBarData, criteria);
+    qbar_set_marking_criteria(&gGameplay->qBarData, criteria);
 }
 
 
