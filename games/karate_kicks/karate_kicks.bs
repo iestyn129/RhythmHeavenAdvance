@@ -85,7 +85,7 @@ script script_karate_kicks_main
     rest 24
     set_tempo 128
     set_music_volume 200
-    play_music s_renshu_bgm1_seqData
+    play_music s_renshu_bgm3_seqData
     enable_play_inputs
     enable_pause_menu
     rest 6
