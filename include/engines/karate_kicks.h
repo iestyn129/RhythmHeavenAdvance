@@ -24,6 +24,7 @@ enum KarateKicksBarrelPartsEnum {
 struct KarateKicksEngineData {
 	u8 version;
 	u8 awaitingInput;
+	u16 loopCounter;
 
 	struct KarateKicksJoe {
 		s16 sprite;
@@ -101,6 +102,8 @@ extern void karate_kicks_joe_set_palette(struct KarateKicksJoe* joe, s8 basePale
 extern void karate_kicks_joe_sprite_callback(struct SpriteHandler *handler, s16 id, u32 arg);
 
 extern void karate_kicks_wait_for_input();
+extern void karate_kicks_start_loop();
+extern void karate_kicks_end_loop();
 
 extern void karate_kicks_input_event(u32 pressed, u32 released);
 

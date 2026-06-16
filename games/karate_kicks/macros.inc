@@ -2,6 +2,8 @@
 .macro load_karate_kicks_labels
     @ Game Events
     .set WAIT_FOR_INPUT, 0x00
+    .set START_LOOP, 0x01
+    .set END_LOOP, 0x02
 
     @ Cues
     .set CUE_POT, 0x00
@@ -26,4 +28,14 @@
 @ [Event 0x00]
 .macro karate_kicks_wait_for_input
     karate_kicks_event WAIT_FOR_INPUT, 0
+.endm
+
+@ [Event 0x01]
+.macro karate_kicks_start_loop
+    karate_kicks_event START_LOOP, 0
+.endm
+
+@ [Event 0x02]
+.macro karate_kicks_end_loop
+    karate_kicks_event END_LOOP, 0
 .endm

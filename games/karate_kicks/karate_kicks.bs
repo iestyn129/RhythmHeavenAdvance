@@ -90,41 +90,76 @@ script script_karate_kicks_main
     enable_pause_menu
     rest 6
 
+		karate_kicks_start_loop
     loop_start
-    		run beatscript_enable_loops @ disable loop
+    		run beatscript_disable_loops
 
-        spawn_cue CUE_POT
-				beat_anim
-        rest 24
-				beat_anim
-        rest 24
-        spawn_cue CUE_BULB
-				beat_anim
-        rest 24
-				beat_anim
-        rest 24
+        call script_karate_kicks_pot
+				call script_karate_kicks_beat
+				call script_karate_kicks_pot_hit_three
+				call script_karate_kicks_beat
 
-        spawn_cue CUE_BARREL
-				beat_anim
-        rest 24
-    		play_sfx s_f_karate_kicks_kicks_voice_punch_seqData
-				beat_anim
-        rest 18
-    		play_sfx s_f_karate_kicks_kicks_voice_kick_seqData
-        rest 6
-				beat_anim
-        rest 24
-				beat_anim
-        rest 24
+        call script_karate_kicks_pot
+				call script_karate_kicks_beat
+				call script_karate_kicks_bulb
+				call script_karate_kicks_beat
 
-        @ exit loop if
+        call script_karate_kicks_barrel
+				call script_karate_kicks_beat
+				call script_karate_kicks_beat
+
+        karate_kicks_end_loop
     loop_end
 
-    karate_kicks_wait_for_input
-
-    stop_tracking_perfect_campaign
-    disable_pause_menu
+    beat_anim
     rest 24
+    stop_tracking_perfect_campaign
+    beat_anim
+    rest 24
+    beat_anim
+    rest 24
+    disable_pause_menu
+    beat_anim
+    rest 24
+return
+
+script script_karate_kicks_beat
+		beat_anim
+		rest 24
+return
+
+script script_karate_kicks_pot
+		spawn_cue CUE_POT
+		call script_karate_kicks_beat
+return
+
+script script_karate_kicks_bulb
+		spawn_cue CUE_BULB
+		call script_karate_kicks_beat
+return
+
+script script_karate_kicks_barrel
+		spawn_cue CUE_BARREL
+		call script_karate_kicks_beat
+		play_sfx s_f_karate_kicks_kicks_voice_punch_seqData
+		beat_anim
+		rest 18
+		play_sfx s_f_karate_kicks_kicks_voice_kick_seqData
+		rest 6
+return
+
+script script_karate_kicks_pot_hit_three
+		spawn_cue CUE_POT
+		beat_anim
+		rest 12
+		play_sfx s_f_karate_kicks_kicks_voice_hit_seqData
+		rest 12
+		play_sfx s_f_karate_kicks_kicks_voice_three_seqData
+
+		call script_karate_kicks_beat
+		call script_karate_kicks_pot
+		call script_karate_kicks_pot
+		call script_karate_kicks_pot
 return
 
 .end

@@ -10,7 +10,9 @@ EngineEvent karate_kicks_common_events[] = {
 };
 
 EngineEvent karate_kicks_engine_events[] = {
-	karate_kicks_wait_for_input
+	karate_kicks_wait_for_input,
+	karate_kicks_start_loop,
+	karate_kicks_end_loop
 };
 
 struct GameEngine karate_kicks_engine = {

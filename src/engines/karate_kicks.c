@@ -34,6 +34,8 @@ void karate_kicks_init_gfx1() {
 
 void karate_kicks_engine_start(const u32 version) {
     gKarateKicks->version = version;
+    gKarateKicks->awaitingInput = FALSE;
+    gKarateKicks->loopCounter = 0;
 
     karate_kicks_init_gfx1();
     scene_show_obj_layer();
@@ -52,12 +54,16 @@ void karate_kicks_engine_stop() {
 
 
 void karate_kicks_engine_update() {
-    if (D_03004afc & SELECT_BUTTON) {
+    if (D_03004afc & A_BUTTON) {
         if (gKarateKicks->awaitingInput) {
             gameplay_set_input_buttons(A_BUTTON, A_BUTTON);
             set_pause_beatscript_scene(FALSE);
             gKarateKicks->awaitingInput = FALSE;
         }
+    }
+
+    if (D_03004afc & SELECT_BUTTON) {
+        gKarateKicks->loopCounter++;
     }
 
     karate_kicks_joe_update(&gKarateKicks->joe);
@@ -179,6 +185,20 @@ void karate_kicks_wait_for_input() {
     set_pause_beatscript_scene(TRUE);
 
     gKarateKicks->awaitingInput = TRUE;
+}
+
+
+void karate_kicks_start_loop() {
+    gKarateKicks->loopCounter = 0;
+}
+
+
+void karate_kicks_end_loop() {
+    if (gKarateKicks->loopCounter != 0) {
+        beatscript_disable_loops();
+    } else {
+        beatscript_enable_loops();
+    }
 }
 
 
