@@ -6,20 +6,20 @@
 @ Karate Man Kicks! - Script Entry Point
 
 script script_karate_kicks_entry
-    set_tempo 124
-    rest 24
-    call script_karate_kicks_prologue
-    set_game_fade_in_time 16
-    load_karate_kicks
-    enable_play_inputs
-    start_tracking_inputs
-    call script_karate_kicks_main
-    disable_pause_menu
-    disable_play_inputs
-    fade_music_out 48
-    fade_screen_out 12, BLACK
-    rest 24
-    rest 24
+	set_tempo 124
+	rest 24
+	call script_karate_kicks_prologue
+	set_game_fade_in_time 16
+	load_karate_kicks
+	enable_play_inputs
+	start_tracking_inputs
+	call script_karate_kicks_main
+	disable_pause_menu
+	disable_play_inputs
+	fade_music_out 48
+	fade_screen_out 12, BLACK
+	rest 24
+	rest 24
 stop
 
 define_gameplay_scene scene_karate_kicks, script_karate_kicks_entry
@@ -29,32 +29,32 @@ define_gameplay_scene scene_karate_kicks, script_karate_kicks_entry
 @ Karate Man Kicks! - Prologue
 
 script script_karate_kicks_prologue
-    set_game_fade_in_time 8
-    load_game karate_kicks_prologue_engine, 0
-    run stop_all_soundplayers
-    rest 24
-    play_sfx s_jingle_karate_seqData
-    run karate_kicks_set_frame, 1
-    rest 6
-    run karate_kicks_set_frame, 2
-    rest 6
-    run karate_kicks_set_frame, 3
-    rest 6
-    run karate_kicks_set_frame, 4
-    rest 126
+	set_game_fade_in_time 8
+	load_game karate_kicks_prologue_engine, 0
+	run stop_all_soundplayers
+	rest 24
+	play_sfx s_jingle_karate_seqData
+	run karate_kicks_set_frame, 1
+	rest 6
+	run karate_kicks_set_frame, 2
+	rest 6
+	run karate_kicks_set_frame, 3
+	rest 6
+	run karate_kicks_set_frame, 4
+	rest 126
 
-    play_sfx s_intro_uh_seqData
-    run karate_kicks_set_frame, 5
-    rest 3
-    run karate_kicks_set_frame, 6
-    rest 3
-    run karate_kicks_set_frame, 7
-    rest 3
-    run karate_kicks_set_frame, 8
-    rest 18
+	play_sfx s_intro_uh_seqData
+	run karate_kicks_set_frame, 5
+	rest 3
+	run karate_kicks_set_frame, 6
+	rest 3
+	run karate_kicks_set_frame, 7
+	rest 3
+	run karate_kicks_set_frame, 8
+	rest 18
 
-    run func_08006d80, 0
-    set_game_fade_in_time 16
+	run func_08006d80, 0
+	set_game_fade_in_time 16
 return
 
 
@@ -62,128 +62,148 @@ return
 @ Karate Man Kicks! - Marking Criteria
 
 struct karate_kicks_marking_criteria_0
-    /* Positive Remark */     .word D_lockstep_onbeat_pos
-    /* Negative Remark */     .word D_lockstep_onbeat_neg
-    /* Flags */               .hword CHECK_AVERAGE_HITS | CHECK_AVERAGE_MISSES
-    /* Pos: Required Hits */  .hword 0x80 @ 50%
-    /* Neg: Minimum Hits */   .hword 0x33 @ 20%
-    /* Neg: Maximum Misses */ .hword 0x4C @ 30%
+	/* Positive Remark */     .word D_lockstep_onbeat_pos
+	/* Negative Remark */     .word D_lockstep_onbeat_neg
+	/* Flags */               .hword CHECK_AVERAGE_HITS | CHECK_AVERAGE_MISSES
+	/* Pos: Required Hits */  .hword 0x80 @ 50%
+	/* Neg: Minimum Hits */   .hword 0x33 @ 20%
+	/* Neg: Maximum Misses */ .hword 0x4C @ 30%
 endstruct
 
 struct karate_kicks_marking_criteria
-    .word karate_kicks_marking_criteria_0
-    .word END_OF_CRITERIA
+	.word karate_kicks_marking_criteria_0
+	.word END_OF_CRITERIA
 endstruct
 
 
 @ Karate Man Kicks! - Main Script
 
 script script_karate_kicks_main
-    import_marking_criteria karate_kicks_marking_criteria
-    set_results_header D_lockstep_header
-    disable_play_inputs
-    rest 24
-    set_tempo 128
-    set_music_volume 200
-    play_music s_renshu_bgm3_seqData
-    enable_play_inputs
-    enable_pause_menu
-    rest 6
+	import_marking_criteria karate_kicks_marking_criteria
+	set_results_header D_lockstep_header
+	disable_play_inputs
+	rest 24
+	set_tempo 128
+	set_music_volume 200
+	play_music s_renshu_bgm3_seqData
+	enable_play_inputs
+	enable_pause_menu
 
-		karate_kicks_start_loop
-    loop_start
-    		run beatscript_disable_loops
+	karate_kicks_set_target_snow_amount 0x08
+	karate_kicks_set_target_snow_speed_x -0x80
+	karate_kicks_set_target_snow_speed_y -0xA0
 
-        call script_karate_kicks_pot
-				call script_karate_kicks_beat
-				call script_karate_kicks_pot_hit_three
-				call script_karate_kicks_beat
+	rest 6
 
-        call script_karate_kicks_pot
-				call script_karate_kicks_beat
-				call script_karate_kicks_bulb
-				call script_karate_kicks_beat
+	karate_kicks_start_loop
+	loop_start
+		run beatscript_disable_loops
 
-        call script_karate_kicks_barrel
-				call script_karate_kicks_beat
-				call script_karate_kicks_beat
+		call script_karate_kicks_pot
+		call script_karate_kicks_beat
+		call script_karate_kicks_pot_hit_three
+		call script_karate_kicks_beat
 
-				call script_karate_kicks_pot_on_off
-				call script_karate_kicks_pot_on_off
-				call script_karate_kicks_pot_on_off
+		karate_kicks_set_target_snow_amount 0x18
 
-				call script_karate_kicks_beat
-				call script_karate_kicks_beat
-				call script_karate_kicks_beat
-				call script_karate_kicks_beat
+		call script_karate_kicks_pot
+		call script_karate_kicks_beat
+		call script_karate_kicks_bulb
+		call script_karate_kicks_beat
 
-        karate_kicks_end_loop
-    loop_end
+		call script_karate_kicks_barrel
 
-    beat_anim
-    rest 24
-    stop_tracking_perfect_campaign
-    beat_anim
-    rest 24
-    beat_anim
-    rest 24
-    disable_pause_menu
-    beat_anim
-    rest 24
+		karate_kicks_set_target_snow_speed_x -0x480
+		karate_kicks_set_target_snow_speed_y -0x180
+
+		call script_karate_kicks_beat
+		call script_karate_kicks_beat
+
+		call script_karate_kicks_pot_on_off
+		call script_karate_kicks_pot_on_off
+		call script_karate_kicks_pot_on_off
+
+		karate_kicks_set_target_snow_amount 0x08
+
+		call script_karate_kicks_beat
+		call script_karate_kicks_beat
+		call script_karate_kicks_beat
+		call script_karate_kicks_beat
+
+		karate_kicks_set_target_snow_speed_x -0x80
+		karate_kicks_set_target_snow_speed_y -0xA0
+
+		karate_kicks_end_loop
+	loop_end
+
+	karate_kicks_set_target_snow_amount 0x100
+	karate_kicks_set_target_snow_speed_x -0x1000
+	karate_kicks_set_target_snow_speed_y -0x700
+
+	beat_anim
+	rest 24
+	stop_tracking_perfect_campaign
+	beat_anim
+	rest 24
+	beat_anim
+	rest 24
+	disable_pause_menu
+	beat_anim
+	rest 24
 return
 
 script script_karate_kicks_beat
-		beat_anim
-		rest 24
+	beat_anim
+	rest 24
 return
 
 script script_karate_kicks_pot
-		spawn_cue CUE_POT
-		call script_karate_kicks_beat
+	spawn_cue CUE_POT
+	call script_karate_kicks_beat
 return
 
 script script_karate_kicks_pot_off
-		spawn_cue CUE_POT_OFF
-		rest 12
-		beat_anim
-		rest 12
+	spawn_cue CUE_POT_OFF
+	rest 12
+	beat_anim
+	rest 12
 return
 
 script script_karate_kicks_pot_on_off
-		call script_karate_kicks_pot
-		rest 12
-		call script_karate_kicks_pot_off
-		rest 12
-		call script_karate_kicks_beat
+	call script_karate_kicks_pot
+	rest 12
+	call script_karate_kicks_pot_off
+	rest 12
+	call script_karate_kicks_beat
 return
 
 script script_karate_kicks_bulb
-		spawn_cue CUE_BULB
-		call script_karate_kicks_beat
+	spawn_cue CUE_BULB
+	call script_karate_kicks_beat
 return
 
 script script_karate_kicks_barrel
-		spawn_cue CUE_BARREL
-		call script_karate_kicks_beat
-		play_sfx s_f_karate_kicks_kicks_voice_punch_seqData
-		beat_anim
-		rest 18
-		play_sfx s_f_karate_kicks_kicks_voice_kick_seqData
-		rest 6
+	spawn_cue CUE_BARREL
+	call script_karate_kicks_beat
+	play_sfx s_f_karate_kicks_kicks_voice_punch_seqData
+	beat_anim
+	rest 18
+	play_sfx s_f_karate_kicks_kicks_voice_kick_seqData
+	rest 6
 return
 
 script script_karate_kicks_pot_hit_three
-		spawn_cue CUE_POT
-		beat_anim
-		rest 12
-		play_sfx s_f_karate_kicks_kicks_voice_hit_seqData
-		rest 12
-		play_sfx s_f_karate_kicks_kicks_voice_three_seqData
+	spawn_cue CUE_POT
+	beat_anim
+	rest 12
+	play_sfx s_f_karate_kicks_kicks_voice_hit_seqData
+	rest 12
+	play_sfx s_f_karate_kicks_kicks_voice_three_seqData
 
-		call script_karate_kicks_beat
-		call script_karate_kicks_pot
-		call script_karate_kicks_pot
-		call script_karate_kicks_pot
+	call script_karate_kicks_beat
+	call script_karate_kicks_pot
+	call script_karate_kicks_pot
+	call script_karate_kicks_pot
 return
 
 .end

@@ -6,13 +6,6 @@
 
 #define SHOOTEM_HURT_LEN ticks_to_frames(0x24) + 1
 
-#define TILEMAP_TILE_INDEX(x) ((x) & 0x3FF)
-#define TILEMAP_HFLIP(x) ((x & 1) << 10)
-#define TILEMAP_VFLIP(x) ((x & 1) << 11)
-#define TILEMAP_PALETTE(x) (((x) & 0xF) << 12)
-
-typedef u16 TilemapEntry;
-
 enum ShootemCuesEnum {
 	SHOOTEM_CUE_TARGET,
 	SHOOTEM_CUE_ENEMY,

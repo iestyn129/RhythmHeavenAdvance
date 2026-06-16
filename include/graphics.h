@@ -16,6 +16,13 @@
 #define GET_BG_TILESET_ADDR(tileset, ofs) ((u16 *)(VRAMBase + ((tileset) << 14) + (ofs)))
 #define GET_BG_MAP_ADDR(map, x, y)        (((u16 *)VRAMBase) + ((map) << 10) + (x) + ((y) << 5))
 
+#define TILEMAP_TILE_INDEX(x) ((x) & 0x3FF)
+#define TILEMAP_HFLIP(x) ((x & 1) << 10)
+#define TILEMAP_VFLIP(x) ((x & 1) << 11)
+#define TILEMAP_PALETTE(x) (((x) & 0xF) << 12)
+
+typedef u16 TilemapEntry;
+
 enum BGLayersEnum {
     BG_LAYER_0,
     BG_LAYER_1,

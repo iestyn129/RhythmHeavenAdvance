@@ -26,6 +26,15 @@ struct KarateKicksEngineData {
 	u8 awaitingInput;
 	u16 loopCounter;
 
+	u8 snowAmount;
+	u8 targetSnowAmount;
+	s32 snowOffsetX;
+	s32 snowOffsetY;
+	s32 snowSpeedX;
+	s32 snowSpeedY;
+	s32 targetSnowSpeedX;
+	s32 targetSnowSpeedY;
+
 	struct KarateKicksJoe {
 		s16 sprite;
 
@@ -83,9 +92,13 @@ extern struct GraphicsTable* karate_kicks_gfx_tables[];
 
 extern s32 karate_kicks_barrel_part_defaults[KARATE_KICKS_NUM_BARREL_PARTS][7];
 
+extern inline s32 approach_exp(s32 value, s32 target, u8 shift);
+
 extern void karate_kicks_init_gfx3();
 extern void karate_kicks_init_gfx2();
 extern void karate_kicks_init_gfx1();
+
+extern void karate_kicks_init_snow_row(u16 row);
 
 extern void karate_kicks_engine_start(u32 version);
 extern void karate_kicks_engine_stop();
@@ -104,6 +117,9 @@ extern void karate_kicks_joe_sprite_callback(struct SpriteHandler *handler, s16 
 extern void karate_kicks_wait_for_input();
 extern void karate_kicks_start_loop();
 extern void karate_kicks_end_loop();
+extern void karate_kicks_set_target_snow_amount(u8 targetSnowAmount);
+extern void karate_kicks_set_target_snow_speed_x(s32 targetSnowSpeedX);
+extern void karate_kicks_set_target_snow_speed_y(s32 targetSnowSpeedY);
 
 extern void karate_kicks_input_event(u32 pressed, u32 released);
 

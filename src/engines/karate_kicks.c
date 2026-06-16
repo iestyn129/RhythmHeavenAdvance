@@ -8,8 +8,31 @@
 #define gKarateKicks ((struct KarateKicksEngineData*)gCurrentEngineData)
 
 
+inline s32 approach_exp(s32 value, const s32 target, const u8 shift) {
+    const s32 delta = target - value;
+
+    if (delta == 0) {
+        return value;
+    }
+
+    value += delta >> shift;
+
+    if (value == value - (delta >> shift)) {
+        value += delta > 0 ? 1 : -1;
+    }
+
+    return value;
+}
+
+
 void karate_kicks_init_gfx3() {
+    u16 i;
 	func_0800c604(0);
+
+    for (i = 0; i < 32; i++) {
+        karate_kicks_init_snow_row(i);
+    }
+
 	gameplay_start_screen_fade_in();
 }
 
@@ -32,14 +55,50 @@ void karate_kicks_init_gfx1() {
 }
 
 
+void karate_kicks_init_snow_row(u16 row) {
+    TilemapEntry* snowTilemap = BG_MAP_BASE(29 * 0x800);
+    s32 i, tileIdx;
+
+    if (row >= 32) {
+        row &= 31;
+    }
+
+    row *= 32;
+
+    for (i = row; i < row + 32; i++) {
+        tileIdx = 0;
+
+        if (agb_random(0x100) < gKarateKicks->snowAmount) {
+            tileIdx = 2 + agb_random(4);
+        }
+
+        snowTilemap[i] =
+            TILEMAP_TILE_INDEX(tileIdx) |
+            TILEMAP_HFLIP(agb_random(2)) |
+            TILEMAP_VFLIP(agb_random(2)) |
+            TILEMAP_PALETTE(0);
+    }
+}
+
+
 void karate_kicks_engine_start(const u32 version) {
     gKarateKicks->version = version;
     gKarateKicks->awaitingInput = FALSE;
     gKarateKicks->loopCounter = 0;
 
+    gKarateKicks->snowAmount = 0;
+    gKarateKicks->targetSnowAmount = 0;
+    gKarateKicks->snowOffsetX = 0;
+    gKarateKicks->snowOffsetY = 0;
+    gKarateKicks->snowSpeedX = 0;
+    gKarateKicks->snowSpeedY = 0;
+    gKarateKicks->targetSnowSpeedX = 0;
+    gKarateKicks->targetSnowSpeedY = 0;
+
     karate_kicks_init_gfx1();
     scene_show_obj_layer();
     scene_set_bg_layer_display(BG_LAYER_0, TRUE, 0, 0, 0, 28, BGCNT_PRIORITY(3));
+    scene_set_bg_layer_display(BG_LAYER_1, TRUE, 0, 0, 0, 29, BGCNT_PRIORITY(0));
 
     karate_kicks_joe_init(&gKarateKicks->joe);
 
@@ -50,10 +109,13 @@ void karate_kicks_engine_start(const u32 version) {
 void karate_kicks_engine_stop() {
     karate_kicks_joe_delete(&gKarateKicks->joe);
     scene_hide_bg_layer(0);
+    scene_hide_bg_layer(1);
 }
 
 
 void karate_kicks_engine_update() {
+    s16 snowX, snowY;
+
     if (D_03004afc & A_BUTTON) {
         if (gKarateKicks->awaitingInput) {
             gameplay_set_input_buttons(A_BUTTON, A_BUTTON);
@@ -65,6 +127,36 @@ void karate_kicks_engine_update() {
     if (D_03004afc & SELECT_BUTTON) {
         gKarateKicks->loopCounter++;
     }
+
+    gKarateKicks->snowOffsetX += gKarateKicks->snowSpeedX;
+    gKarateKicks->snowOffsetY += gKarateKicks->snowSpeedY;
+
+    snowX = FIXED_TO_INT(gKarateKicks->snowOffsetX);
+    snowY = FIXED_TO_INT(gKarateKicks->snowOffsetY);
+
+    scene_set_bg_layer_pos(BG_LAYER_1, snowX, snowY);
+
+    if (!(snowY & 7)) {
+        karate_kicks_init_snow_row(((snowY & 0xFF) >> 3) + 20);
+    }
+
+    gKarateKicks->snowAmount = approach_exp(
+        gKarateKicks->snowAmount,
+        gKarateKicks->targetSnowAmount,
+        3
+    );
+
+    gKarateKicks->snowSpeedX = approach_exp(
+        gKarateKicks->snowSpeedX,
+        gKarateKicks->targetSnowSpeedX,
+        5
+    );
+
+    gKarateKicks->snowSpeedY = approach_exp(
+        gKarateKicks->snowSpeedY,
+        gKarateKicks->targetSnowSpeedY,
+        5
+    );
 
     karate_kicks_joe_update(&gKarateKicks->joe);
 }
@@ -199,6 +291,21 @@ void karate_kicks_end_loop() {
     } else {
         beatscript_enable_loops();
     }
+}
+
+
+void karate_kicks_set_target_snow_amount(const u8 targetSnowAmount) {
+    gKarateKicks->targetSnowAmount = targetSnowAmount;
+}
+
+
+void karate_kicks_set_target_snow_speed_x(const s32 targetSnowSpeedX) {
+    gKarateKicks->targetSnowSpeedX = targetSnowSpeedX;
+}
+
+
+void karate_kicks_set_target_snow_speed_y(const s32 targetSnowSpeedY) {
+    gKarateKicks->targetSnowSpeedY = targetSnowSpeedY;
 }
 
 

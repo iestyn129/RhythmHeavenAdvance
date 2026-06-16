@@ -81,7 +81,7 @@ Palette karate_kicks_bg_pal[] = {
 	/* palette 00 */ {
 		/* 00 */ TO_RGB555(0x7880b8),
 		/* 01 */ TO_RGB555(0x000000),
-		/* 02 */ TO_RGB555(0x000000),
+		/* 02 */ TO_RGB555(0xf8f8f8),
 		/* 03 */ TO_RGB555(0x000000),
 		/* 04 */ TO_RGB555(0x000000),
 		/* 05 */ TO_RGB555(0x000000),

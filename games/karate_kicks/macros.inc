@@ -4,6 +4,9 @@
     .set WAIT_FOR_INPUT, 0x00
     .set START_LOOP, 0x01
     .set END_LOOP, 0x02
+    .set SET_TARGET_SNOW_AMOUNT, 0x03
+    .set SET_TARGET_SNOW_SPEED_X, 0x04
+    .set SET_TARGET_SNOW_SPEED_Y, 0x05
 
     @ Cues
     .set CUE_POT, 0x00
@@ -39,4 +42,19 @@
 @ [Event 0x02]
 .macro karate_kicks_end_loop
     karate_kicks_event END_LOOP, 0
+.endm
+
+@ [Event 0x03]
+.macro karate_kicks_set_target_snow_amount targetAmount
+    karate_kicks_event SET_TARGET_SNOW_AMOUNT, \targetAmount
+.endm
+
+@ [Event 0x04]
+.macro karate_kicks_set_target_snow_speed_x targetSpeedX
+    karate_kicks_event SET_TARGET_SNOW_SPEED_X, \targetSpeedX
+.endm
+
+@ [Event 0x05]
+.macro karate_kicks_set_target_snow_speed_y targetSpeedY
+    karate_kicks_event SET_TARGET_SNOW_SPEED_Y, \targetSpeedY
 .endm

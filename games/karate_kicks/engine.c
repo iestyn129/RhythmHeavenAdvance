@@ -12,7 +12,10 @@ EngineEvent karate_kicks_common_events[] = {
 EngineEvent karate_kicks_engine_events[] = {
 	karate_kicks_wait_for_input,
 	karate_kicks_start_loop,
-	karate_kicks_end_loop
+	karate_kicks_end_loop,
+	karate_kicks_set_target_snow_amount,
+	karate_kicks_set_target_snow_speed_x,
+	karate_kicks_set_target_snow_speed_y
 };
 
 struct GameEngine karate_kicks_engine = {
