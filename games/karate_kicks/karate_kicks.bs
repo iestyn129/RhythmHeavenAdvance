@@ -108,6 +108,15 @@ script script_karate_kicks_main
 				call script_karate_kicks_beat
 				call script_karate_kicks_beat
 
+				call script_karate_kicks_pot_on_off
+				call script_karate_kicks_pot_on_off
+				call script_karate_kicks_pot_on_off
+
+				call script_karate_kicks_beat
+				call script_karate_kicks_beat
+				call script_karate_kicks_beat
+				call script_karate_kicks_beat
+
         karate_kicks_end_loop
     loop_end
 
@@ -130,6 +139,21 @@ return
 
 script script_karate_kicks_pot
 		spawn_cue CUE_POT
+		call script_karate_kicks_beat
+return
+
+script script_karate_kicks_pot_off
+		spawn_cue CUE_POT_OFF
+		rest 12
+		beat_anim
+		rest 12
+return
+
+script script_karate_kicks_pot_on_off
+		call script_karate_kicks_pot
+		rest 12
+		call script_karate_kicks_pot_off
+		rest 12
 		call script_karate_kicks_beat
 return
 

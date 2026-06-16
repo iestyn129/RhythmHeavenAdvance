@@ -99,6 +99,29 @@ struct CueDefinition karate_kicks_cue_pot = {
 	/* Miss Condition  */ NULL
 };
 
+struct CueDefinition karate_kicks_cue_pot_off = {
+	/* Unknown Param.  */ 0,
+	/* Input Buttons   */ PRESS_BUTTON(A_BUTTON),
+	/* Total Duration  */ 0x18,
+	/* Hit Window      */ -0x03, 0x03,
+	/* Barely Window   */ -0x05, 0x05,
+	/* Tempo-Dependent */ FALSE,
+	/* Force-Delete    */ FALSE,
+	/* Size in Memory  */ sizeof(struct KarateKicksCue),
+	/* Func. Spawn     */ karate_kicks_cue_spawn,
+	/* Spawn Parameter */ KARATE_KICKS_OBJECT_POT,
+	/* Func. Update    */ karate_kicks_cue_update,
+	/* Func. Despawn   */ karate_kicks_cue_despawn,
+	/* Func. Hit       */ karate_kicks_cue_hit,
+	/* Func. Barely    */ karate_kicks_cue_barely,
+	/* Func. Miss      */ karate_kicks_cue_miss,
+	/* SFX Spawn       */ &s_f_karate_kicks_kicks_spawn_off_seqData,
+	/* SFX Hit         */ &s_f_karate_kicks_kicks_hit_seqData,
+	/* SFX Barely      */ &s_witch_donats_seqData,
+	/* SFX Miss        */ NULL,
+	/* Miss Condition  */ NULL
+};
+
 struct CueDefinition karate_kicks_cue_bulb = {
 	/* Unknown Param.  */ 0,
 	/* Input Buttons   */ PRESS_BUTTON(A_BUTTON),
@@ -173,5 +196,6 @@ struct CueDefinition *karate_kicks_cue_index[] = {
 	&karate_kicks_cue_bulb,
 	&karate_kicks_cue_barrel,
 	&karate_kicks_cue_bomb,
+	&karate_kicks_cue_pot_off,
 	END_OF_CUE_INDEX
 };
