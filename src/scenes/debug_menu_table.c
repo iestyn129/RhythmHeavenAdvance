@@ -521,9 +521,9 @@ struct DebugMenuEntry debug_menu_entry_table[] = {
         /* Epil. */ TRUE
     },
     /* Lockstep */ {
-        &scene_lockstep,
-        "‚k‚‚ƒ‚‹‚“‚”‚…‚",
-        TRUE
+       /* Scene */ &scene_lockstep,
+       /* Label */ "‚k‚‚ƒ‚‹‚“‚”‚…‚",
+       /* Epil. */ TRUE
     },
     /* Shoot-'em-up */ {
         /* Scene */ &scene_shootem,
@@ -533,6 +533,11 @@ struct DebugMenuEntry debug_menu_entry_table[] = {
     /* Karate Man Kicks! */ {
         /* Scene */ &scene_karate_kicks,
         /* Label */ "‚j‚‚’‚‚”‚…@‚l‚‚@‚j‚‰‚ƒ‚‹‚“I",
+        /* Epil. */ TRUE
+    },
+    /* Glee Club */ {
+        /* Scene */ &scene_glee,
+        /* Label */ "‚f‚Œ‚…‚…@‚b‚Œ‚•‚‚",
         /* Epil. */ TRUE
     },
     /* Remix 1 */ {

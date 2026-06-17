@@ -1,0 +1,90 @@
+.include "include/beatscript.inc"
+.include "games/glee/macros.inc"
+
+
+.section .script.entry
+@ Glee Club - Script Entry Point
+
+script script_glee_entry
+	set_tempo 124
+	rest 24
+	call script_glee_prologue
+	set_game_fade_in_time 16
+	load_glee
+	enable_play_inputs
+	start_tracking_inputs
+	call script_glee_main
+	disable_pause_menu
+	disable_play_inputs
+	fade_music_out 48
+	fade_screen_out 12, BLACK
+	rest 24
+	rest 24
+stop
+
+define_gameplay_scene scene_glee, script_glee_entry
+
+
+.section .script.prologue
+@ Glee Club - Prologue
+
+script script_glee_prologue
+	set_game_fade_in_time 8
+	load_game glee_prologue_engine, 0
+	run stop_all_soundplayers
+	rest 24
+	play_sfx s_jingle_tap_seqData
+	rest 156
+
+	run func_08006d80, 0
+    rest 18
+	set_game_fade_in_time 16
+return
+
+
+.section .script.main
+@ Glee Club - Marking Criteria
+
+struct glee_marking_criteria_0
+	/* Positive Remark */     .word D_lockstep_onbeat_pos
+	/* Negative Remark */     .word D_lockstep_onbeat_neg
+	/* Flags */               .hword CHECK_AVERAGE_HITS | CHECK_AVERAGE_MISSES
+	/* Pos: Required Hits */  .hword 0x80 @ 50%
+	/* Neg: Minimum Hits */   .hword 0x33 @ 20%
+	/* Neg: Maximum Misses */ .hword 0x4C @ 30%
+endstruct
+
+struct glee_marking_criteria
+	.word glee_marking_criteria_0
+	.word END_OF_CRITERIA
+endstruct
+
+
+@ Glee Club - Main Script
+
+script script_glee_main
+	import_marking_criteria glee_marking_criteria
+	set_results_header D_lockstep_header
+	disable_play_inputs
+	rest 24
+	set_tempo 124
+	set_music_volume 200
+	play_music s_renshu_bgm1_seqData
+	enable_play_inputs
+	enable_pause_menu
+	rest 6
+
+	loop_start
+		run beatscript_enable_loops
+
+		rest 96
+	loop_end
+
+	rest 24
+	stop_tracking_perfect_campaign
+	rest 48
+	disable_pause_menu
+	rest 24
+return
+
+.end
