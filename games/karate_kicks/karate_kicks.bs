@@ -92,8 +92,9 @@ script script_karate_kicks_main
 	karate_kicks_set_target_snow_amount 0x08
 	karate_kicks_set_target_snow_speed_x -0x80
 	karate_kicks_set_target_snow_speed_y -0xA0
-
 	rest 6
+
+	rest 768
 
 	karate_kicks_start_loop
 	loop_start
@@ -120,10 +121,11 @@ script script_karate_kicks_main
 		call script_karate_kicks_beat
 
 		call script_karate_kicks_pot_on_off
-		call script_karate_kicks_pot_on_off
-		call script_karate_kicks_pot_on_off
 
 		karate_kicks_set_target_snow_amount 0x08
+
+		call script_karate_kicks_pot_on_off
+		call script_karate_kicks_pot_on_off
 
 		call script_karate_kicks_beat
 		call script_karate_kicks_beat
