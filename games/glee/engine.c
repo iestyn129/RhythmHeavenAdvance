@@ -47,7 +47,7 @@ struct GraphicsTable glee_gfx_table[] = {
 	{
 		glee_obj_pal,
 		OBJ_PALETTE_BUFFER(0),
-		0x20 * 9
+		0x20 * 1
 	},
 	END_OF_GRAPHICS_TABLE
 };
