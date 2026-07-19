@@ -33,11 +33,14 @@ void cars_init_gfx1() {
 
 void cars_engine_start(const u32 version) {
     gCars->version = version;
+    gCars->roadOffset = 0;
+    gCars->roadSpeed = -0x400;
+    gCars->targetRoadSpeed = 0;
 
     cars_init_gfx1();
     scene_show_obj_layer();
     scene_set_bg_layer_display(BG_LAYER_0, TRUE, 0, 0, 0, 28, BGCNT_PRIORITY(3));
-    scene_set_bg_layer_display(BG_LAYER_1, TRUE, 0, 0, 0, 29, BGCNT_PRIORITY(2));
+    scene_set_bg_layer_display(BG_LAYER_1, TRUE, 0, 0, 0, 29, BGCNT_PRIORITY(1));
 
     revlino_init(&gCars->revRed, anim_cars_revlino_red, 0, 27);
     revlino_init(&gCars->revGrey, anim_cars_revlino_grey, -76, 27);
@@ -56,6 +59,10 @@ void cars_engine_stop() {
 
 
 void cars_engine_update() {
+    gCars->roadOffset += gCars->roadSpeed;
+
+    scene_set_bg_layer_pos(BG_LAYER_1, FIXED_TO_INT(gCars->roadOffset), 0);
+
     revlino_update(&gCars->revRed);
 }
 

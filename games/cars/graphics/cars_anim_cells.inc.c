@@ -42,20 +42,20 @@ AnimationCel cars_wheel_cel01[] = {
 
 AnimationCel cars_wheel_cel02[] = {
 	/* Len */ 1,
-	/* 000 */ 0x00f8, 0x61f8, 0x0048
+	/* 000 */ 0x00f8, 0x41f8, 0x000a
 };
 
 AnimationCel cars_wheel_cel03[] = {
 	/* Len */ 1,
-	/* 000 */ 0x00f8, 0x51f8, 0x0008
+	/* 000 */ 0x00f8, 0x41f8, 0x004a
 };
 
 AnimationCel cars_wheel_cel04[] = {
 	/* Len */ 1,
-	/* 000 */ 0x00f8, 0x41f8, 0x000a
+	/* 000 */ 0x00f8, 0x41f8, 0x000c
 };
 
 AnimationCel cars_wheel_cel05[] = {
 	/* Len */ 1,
-	/* 000 */ 0x00f8, 0x51f8, 0x000a
+	/* 000 */ 0x00f8, 0x41f8, 0x004c
 };

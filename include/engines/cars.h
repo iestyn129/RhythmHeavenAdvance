@@ -6,6 +6,9 @@
 
 struct CarsEngineData {
 	u8 version;
+	s32 roadOffset;
+	s32 roadSpeed;
+	s32 targetRoadSpeed;
 
 	struct Revlino {
 		s16 carSprite;
