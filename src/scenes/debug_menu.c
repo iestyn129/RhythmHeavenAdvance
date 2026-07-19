@@ -19,7 +19,7 @@ void debug_menu_scene_init_memory(void) {
     u32 i;
 
     for (i = 0; entries[i].scene != NULL; i++) {
-        if (entries[i].scene == &scene_title) {
+        if (entries[i].scene == &scene_cars) {
             sMenuPage = i / DEBUG_MENU_ENTRY_PER_PAGE;
             sMenuRow = i % DEBUG_MENU_ENTRY_PER_PAGE;
             return;

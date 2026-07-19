@@ -548,6 +548,11 @@ struct DebugMenuEntry debug_menu_entry_table[] = {
         /* Label */ "‚f‚Œ‚…‚…@‚b‚Œ‚•‚‚",
         /* Epil. */ TRUE
     },
+    /* Stop N Go N Stop */ {
+        /* Scene */ &scene_cars,
+        /* Label */ "‚r‚”‚‚@‚m@‚f‚@‚m@‚r‚”‚‚",
+        /* Epil. */ TRUE
+    },
     /* Remix 1 */ {
         /* Scene */ &scene_remix_1,
         /* Label */ "‚q‚…‚‚‰‚˜@‚P",

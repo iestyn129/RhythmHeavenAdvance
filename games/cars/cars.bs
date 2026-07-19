@@ -1,0 +1,90 @@
+.include "include/beatscript.inc"
+.include "games/cars/macros.inc"
+
+
+.section .script.entry
+@ Stop N Go N Stop - Script Entry Point
+
+script script_cars_entry
+	set_tempo 124
+	rest 24
+	@call script_cars_prologue
+	set_game_fade_in_time 16
+	load_cars
+	enable_play_inputs
+	start_tracking_inputs
+	call script_cars_main
+	disable_pause_menu
+	disable_play_inputs
+	fade_music_out 48
+	fade_screen_out 12, BLACK
+	rest 24
+	rest 24
+stop
+
+define_gameplay_scene scene_cars, script_cars_entry
+
+
+.section .script.prologue
+@ Stop N Go N Stop - Prologue
+
+script script_cars_prologue
+	set_game_fade_in_time 8
+	load_game cars_prologue_engine, 0
+	run stop_all_soundplayers
+	rest 24
+	play_sfx s_jingle_tap_seqData
+	rest 156
+
+	run func_08006d80, 0
+    rest 18
+	set_game_fade_in_time 16
+return
+
+
+.section .script.main
+@ Stop N Go N Stop - Marking Criteria
+
+struct cars_marking_criteria_0
+	/* Positive Remark */     .word D_lockstep_onbeat_pos
+	/* Negative Remark */     .word D_lockstep_onbeat_neg
+	/* Flags */               .hword CHECK_AVERAGE_HITS | CHECK_AVERAGE_MISSES
+	/* Pos: Required Hits */  .hword 0x80 @ 50%
+	/* Neg: Minimum Hits */   .hword 0x33 @ 20%
+	/* Neg: Maximum Misses */ .hword 0x4C @ 30%
+endstruct
+
+struct cars_marking_criteria
+	.word cars_marking_criteria_0
+	.word END_OF_CRITERIA
+endstruct
+
+
+@ Stop N Go N Stop - Main Script
+
+script script_cars_main
+	import_marking_criteria cars_marking_criteria
+	set_results_header D_lockstep_header
+	disable_play_inputs
+	rest 24
+	set_tempo 124
+	set_music_volume 200
+	play_music s_renshu_bgm1_seqData
+	enable_play_inputs
+	enable_pause_menu
+	rest 6
+
+	loop_start
+		run beatscript_enable_loops
+
+		rest 96
+	loop_end
+
+	rest 24
+	stop_tracking_perfect_campaign
+	rest 48
+	disable_pause_menu
+	rest 24
+return
+
+.end
