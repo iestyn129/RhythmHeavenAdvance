@@ -56,6 +56,7 @@ struct GameplaySceneData {
     u16 textButtonPressFilter;
     u16 textButtonReleaseFilter;
     s16 perfectSprite;
+    s16 barSprite;
     u8  goingForPerfect;
     u8  assessPerfectInputs;
     u8  perfectFailed;

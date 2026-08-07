@@ -1075,7 +1075,48 @@ s32 gameplay_calculate_input_timing(struct Cue *cue, u16 pressed, u16 released, 
 void gameplay_register_hit_barely(struct Cue *cue, s32 timingLevel, s32 offset, u32 pressed, u32 released) {
     struct CueDefinition *cueDef = &cue->data;
     CueHitEvent hitEvent;
+    struct Animation* timingAnim;
     u32 rumbleIntensity;
+
+    switch (timingLevel) {
+        case CUE_TIMING_MISS | CUE_TIMING_BARELY:
+            if (offset > 3) {
+                timingAnim = anim_gameplay_bar_miss_R1;
+            } else if (offset > 0) {
+                timingAnim = anim_gameplay_bar_miss_R2;
+            } else if (offset < -3) {
+                timingAnim = anim_gameplay_bar_miss_L1;
+            } else {
+                timingAnim = anim_gameplay_bar_miss_L2;
+            }
+            break;
+        case CUE_TIMING_HIT:
+            if (offset == 0) {
+                timingAnim = anim_gameplay_bar_perfect;
+            } else if (offset == 1) {
+                timingAnim = anim_gameplay_bar_ok_R3;
+            } else if (offset == 2) {
+                timingAnim = anim_gameplay_bar_ok_R2;
+            } else if (offset >= 3) {
+                timingAnim = anim_gameplay_bar_ok_R1;
+            } else if (offset == -1) {
+                timingAnim = anim_gameplay_bar_ok_L3;
+            } else if (offset == -2) {
+                timingAnim = anim_gameplay_bar_ok_L2;
+            } else {
+                timingAnim = anim_gameplay_bar_ok_L1;
+            }
+            break;
+        default: // should never happen
+            timingAnim = anim_gameplay_bar_idle;
+            break;
+    }
+
+    sprite_set_anim(gSpriteHandler,
+        gGameplay->barSprite,
+        timingAnim,
+        0, 1, 0x7f, 0
+    );
 
     gGameplay->ignoreThisCueResult = FALSE;
     cue->unk48_b0 = TRUE;
@@ -1341,7 +1382,8 @@ void gameplay_init_overlay(void) {
     gGameplay->pauseOptionsSprite = sprite_create(gSpriteHandler, anim_gameplay_pause_option1, 0, 120, 80, 0, 1, 0, 0x8000);
     gGameplay->skipTutorialSprite = sprite_create(gSpriteHandler, anim_gameplay_skip_icon, 0, 120, 80, 0, 0, 0, 0x8000);
     gGameplay->aButtonSprite = sprite_create(gSpriteHandler, anim_gameplay_text_button_black, 0, 64, 64, 0x64, 1, 0, 0x8000);
-    gGameplay->perfectSprite = sprite_create(gSpriteHandler, anim_gameplay_perfect_icon, 0, 230, 10, 0x5A, 1, 0x7f, 0x8000);
+    gGameplay->perfectSprite = sprite_create(gSpriteHandler, anim_gameplay_perfect_icon, 0, 10, 10, 0x5A, 1, 0x7f, 0x8000);
+    gGameplay->barSprite = sprite_create(gSpriteHandler, anim_gameplay_bar_idle, 0, 210, 2, 0x5A, 1, 0x7f, 0x8000);
     sprite_set_paused(gSpriteHandler, gGameplay->pauseSprite, 1);
     sprite_set_paused(gSpriteHandler, gGameplay->pauseOptionsSprite, 1);
     sprite_id_set_base_tile(gSpriteHandler, 16, 960);

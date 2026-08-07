@@ -1,5 +1,6 @@
 #include "global.h"
 #include "riq_main_scene.h"
+#include "gameplay.h"
 
 #include "src/main.h"
 #include "src/code_08001360.h"
@@ -8,6 +9,8 @@
 #include "src/task_pool.h"
 #include "src/memory_heap.h"
 #include "src/lib_0804ca80.h"
+
+#define gGameplay ((struct GameplaySceneData *)gCurrentSceneData)
 
 static u8 D_0300155c;
 
@@ -209,6 +212,7 @@ void func_0801daf8(const struct PauseMenuDefinition *data) {
 // [func_0801db04] Enable Pause Menu
 void pause_menu_enabled(u32 enable) {
     gPauseMenu.enabled = enable;
+    sprite_set_visible(gSpriteHandler, gGameplay->barSprite, enable);
 }
 
 
