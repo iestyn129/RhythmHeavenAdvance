@@ -212,7 +212,10 @@ void func_0801daf8(const struct PauseMenuDefinition *data) {
 // [func_0801db04] Enable Pause Menu
 void pause_menu_enabled(u32 enable) {
     gPauseMenu.enabled = enable;
-    sprite_set_visible(gSpriteHandler, gGameplay->barSprite, enable);
+    sprite_set_visible(gSpriteHandler,
+        gGameplay->barSprite,
+        enable && !CHECK_ADVANCE_FLAG(D_030046a8->data.advanceFlags, ADVANCE_FLAG_NO_TIMING_BAR)
+    );
 }
 
 

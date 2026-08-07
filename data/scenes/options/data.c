@@ -68,6 +68,7 @@ const char *advance_options_label_text[] = {
 #endif
     "‚r‚ˆ‚‚—@‚c‚‰‚“‚ƒ‚Œ‚‚‰‚‚…‚’",
     "‚f‚‚‚…@‚r‚…‚Œ‚…‚ƒ‚”@‚l‚•‚“‚‰‚ƒ",
+    "‚s‚‰‚‚‰‚‚‡@‚a‚‚’",
 };
 
 const char *advance_options_desc_text[] = {
@@ -93,6 +94,10 @@ const char *advance_options_desc_text[] = {
         "\0023" "\0013" "\001C" "Game Select Music\n"
         "\0024" "\0011" "\001L" "Normal    " "\0021" "Use Game Select 2 after the credits.\n"
         "\0024" "\0011" "\001L" "Swapped   " "\0021" "Use Game Select 1 after the credits.",
+    /* TIMING BAR --------------------------- */
+        "\0023" "\0013" "\001C" "Timing Bar\n"
+        "\0024" "\0011" "\001L" "Enabled   " "\0021" "Display the timing bar.\n"
+        "\0024" "\0011" "\001L" "Disabled  " "\0021" "Do not display the timing bar.",
 };
 
 

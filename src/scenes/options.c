@@ -86,6 +86,9 @@ static const char *options_scene_bitmap_get_value(s32 entry) {
 
         case OPTIONS_BITMAP_ALT_GAME_SELECT_MUSIC:
             return CHECK_ADVANCE_FLAG(D_030046a8->data.advanceFlags, ADVANCE_FLAG_USE_ALT_GAME_SELECT_MUSIC) ? "‚r‚—‚‚‚‚…‚„" : "‚m‚‚’‚‚‚Œ";
+
+        case OPTIONS_BITMAP_NO_TIMING_BAR:
+            return CHECK_ADVANCE_FLAG(D_030046a8->data.advanceFlags, ADVANCE_FLAG_NO_TIMING_BAR) ? "‚c‚‰‚“‚‚‚‚Œ‚…‚„" : "‚d‚Ž‚‚‚‚Œ‚…‚„" ;
     }
 
     return "‚r‚g‚`‚e‚e‚x@‚e‚t‚b‚j‚d‚c@‚t‚o";
@@ -715,6 +718,19 @@ static void options_scene_update_main_bitmap(void) {
                     write_game_save_data();
                     options_scene_bitmap_refresh_line(OPTIONS_BITMAP_ALT_GAME_SELECT_MUSIC);
                     if (CHECK_ADVANCE_FLAG(D_030046a8->data.advanceFlags, ADVANCE_FLAG_USE_ALT_GAME_SELECT_MUSIC)) {
+                        play_sound(&s_menu_kettei2_seqData);
+                        rumble_play_menu_confirm();
+                    } else {
+                        play_sound(&s_menu_cancel3_seqData);
+                        rumble_play_menu_cancel();
+                    }
+                    break;
+
+                case OPTIONS_BITMAP_NO_TIMING_BAR:
+                    TOGGLE_ADVANCE_FLAG(D_030046a8->data.advanceFlags, ADVANCE_FLAG_NO_TIMING_BAR);
+                    write_game_save_data();
+                    options_scene_bitmap_refresh_line(OPTIONS_BITMAP_NO_TIMING_BAR);
+                    if (CHECK_ADVANCE_FLAG(D_030046a8->data.advanceFlags, ADVANCE_FLAG_NO_TIMING_BAR)) {
                         play_sound(&s_menu_kettei2_seqData);
                         rumble_play_menu_confirm();
                     } else {
