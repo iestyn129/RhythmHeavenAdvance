@@ -200,7 +200,8 @@ $(OUTPUT).gba	:	$(OUTPUT).elf
 
 $(OUTPUT).elf	:	$(OFILES) | $(BUILD)/$(LD_SCRIPT)
 	$(V)echo "Building ROM..."
-	$(V)$(LD) $(OFILES) tools/agbcc/lib/libgcc.a tools/agbcc/lib/libc.a -T $(BUILD)/$(LD_SCRIPT) -Wl,--no-warn-rwx-segments,-Map $(@:.elf=.map) -nostartfiles -o $@
+	$(V)printf '%s\n' $(OFILES) tools/agbcc/lib/libgcc.a tools/agbcc/lib/libc.a > $(BUILD)/linker.rsp
+	$(V)$(LD) @$(BUILD)/linker.rsp -T $(BUILD)/$(LD_SCRIPT) -Wl,--no-warn-rwx-segments,-Map $(@:.elf=.map) -nostartfiles -o $@
 
 
 # Binary data
