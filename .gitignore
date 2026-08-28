@@ -21,6 +21,5 @@ ctx.c
 bitesthedust.py
 
 .DS_Store
-CMakeLists.txt
 cmake-build-debug/*
 stuff/
