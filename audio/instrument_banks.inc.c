@@ -120,23 +120,12 @@ union Instrument inst_bank_04[] = {
     /* 036 */ NULL,                            NULL,                            NULL,                            NULL,
     /* 040 */ { .pcm = &instrument_pcm_0109 }, { .pcm = &instrument_pcm_0110 }, { .pcm = &instrument_pcm_0111 }, { .pcm = &instrument_pcm_0112 },
     /* 044 */ { .pcm = &instrument_pcm_0113 }, { .pcm = &instrument_pcm_0114 }, { .pcm = &instrument_pcm_0115 }, { .pcm = &instrument_pcm_0116 },
-    #ifdef SFX
     /* 048 */ NULL,                            { .pcm = &instrument_pcm_0117 }, { .pcm = &instrument_pcm_0118 }, NULL,
     /* 052 */ NULL,                            NULL,                            NULL,                            NULL,
-    #else
-    /* 048 */ NULL,                            { .pcm = &instrument_pcm_0117 }, { .pcm = &instrument_pcm_0118 }, { .pcm = &instrument_pcm_0119 },
-    /* 052 */ { .pcm = &instrument_pcm_0120 }, NULL,                            NULL,                            NULL,
-    #endif
     /* 056 */ NULL,                            NULL,                            NULL,                            NULL,
-    #ifdef SFX
-    /* 060 */ { .pcm = &instrument_pcm_moRn }, { .pcm = &instrument_pcm_moLn }, NULL,                            NULL,
-    /* 064 */ { .pcm = &instrument_pcm_moA2 }, { .pcm = &instrument_pcm_moA3 }, NULL,                            NULL,
-    /* 068 */ { .pcm = &instrument_pcm_moFf }, NULL,                            NULL,                            NULL,
-    #else
-    /* 060 */ { .pcm = &instrument_pcm_moRn }, { .pcm = &instrument_pcm_moLn }, NULL,                            NULL,
-    /* 064 */ { .pcm = &instrument_pcm_moA2 }, { .pcm = &instrument_pcm_moA3 }, NULL,                            NULL,
+    /* 060 */ NULL,                            NULL,                            NULL,                            NULL,
+    /* 064 */ NULL,                            NULL,                            NULL,                            NULL,
     /* 068 */ NULL,                            NULL,                            NULL,                            NULL,
-    #endif
     /* 072 */ NULL,                            NULL,                            NULL,                            NULL,
     /* 076 */ NULL,                            NULL,                            NULL,                            NULL,
     /* 080 */ NULL,                            NULL,                            NULL,                            NULL,
@@ -2083,48 +2072,4 @@ union Instrument inst_bank_space_dance_en[] = {
     /* 116 */ NULL,                            NULL,                            NULL,                            NULL,
     /* 120 */ NULL,                            NULL,                            NULL,                            NULL,
     /* 124 */ NULL,                            NULL,                            NULL,                            NULL
-};
-
-union Instrument inst_bank_lockstep[] = {
-    /* 0 */ { .pcm = &instrument_pcm_lockstep_step },
-    /* 1 */ { .pcm = &instrument_pcm_lockstep_shot_r },
-    /* 2 */ { .pcm = &instrument_pcm_lockstep_shot_l },
-    /* 3 */ { .pcm = &instrument_pcm_lockstep_hai },
-    /* 4 */ { .pcm = &instrument_pcm_lockstep_ah },
-    /* 5 */ { .pcm = &instrument_pcm_lockstep_high },
-    /* 6 */ { .pcm = &instrument_pcm_lockstep_hoh },
-    /* 7 */ { .pcm = &instrument_pcm_lockstep_mhm },
-    /* 8 */ { .pcm = &instrument_pcm_lockstep_hah },
-    /* 9 */ { .pcm = &instrument_pcm_lockstep_bass },
-    /* 10 */ { .pcm = &instrument_pcm_lockstep_miss },
-    /* 11 */ { .pcm = &instrument_psg_lockstep_lead },
-    NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,
-    /* 127 */ { .pcm = &instrument_rhy_lockstep_drum47 },
-};
-
-union Instrument inst_bank_shootem[] = {
-    /* 0 */ { .pcm = &instrument_pcm_shootem_shot },
-    /* 1 */ { .pcm = &instrument_pcm_shootem_spawn },
-    /* 2 */ { .pcm = &instrument_pcm_shootem_hit },
-    /* 3 */ { .pcm = &instrument_pcm_shootem_miss },
-    NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,
-};
-
-union Instrument inst_bank_karate_kicks[] = {
-    /* 00 */ { .pcm = &instrument_pcm_karate_kicks_punch },
-    /* 01 */ { .pcm = &instrument_pcm_karate_kicks_kick },
-    /* 02 */ { .pcm = &instrument_pcm_karate_kicks_spawn },
-    /* 03 */ { .pcm = &instrument_pcm_karate_kicks_spawn_off },
-    /* 04 */ { .pcm = &instrument_pcm_karate_kicks_spawn_bulb },
-    /* 05 */ { .pcm = &instrument_pcm_karate_kicks_spawn_barrel },
-    /* 06 */ { .pcm = &instrument_pcm_karate_kicks_hit },
-    /* 07 */ { .pcm = &instrument_pcm_karate_kicks_hit_bulb },
-    /* 08 */ { .pcm = &instrument_pcm_karate_kicks_hit_barrel },
-    /* 09 */ { .pcm = &instrument_pcm_karate_kicks_hit_bomb },
-    /* 10 */ { .pcm = &instrument_pcm_karate_kicks_miss },
-    /* 11 */ { .pcm = &instrument_pcm_karate_kicks_voice_punch },
-    /* 12 */ { .pcm = &instrument_pcm_karate_kicks_voice_kick },
-    /* 13 */ { .pcm = &instrument_pcm_karate_kicks_voice_hit },
-    /* 14 */ { .pcm = &instrument_pcm_karate_kicks_voice_three },
-    NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,
 };
