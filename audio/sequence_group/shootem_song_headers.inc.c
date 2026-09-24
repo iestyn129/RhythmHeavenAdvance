@@ -7,7 +7,7 @@ struct SongHeader s_f_shootem_shot_seqData = {
 	/* Priority      */ 80,
 	/* unk8          */ 0x40,
 	/* Song Title    */ s_f_shootem_shot_seqName,
-	/* Song Number   */ 91
+	/* Song Number   */ 122
 };
 
 extern const u8 s_f_shootem_spawn_mid[];
@@ -19,7 +19,7 @@ struct SongHeader s_f_shootem_spawn_seqData = {
 	/* Priority      */ 80,
 	/* unk8          */ 0x40,
 	/* Song Title    */ s_f_shootem_spawn_seqName,
-	/* Song Number   */ 92
+	/* Song Number   */ 123
 };
 
 extern const u8 s_f_shootem_hit_mid[];
@@ -31,7 +31,7 @@ struct SongHeader s_f_shootem_hit_seqData = {
 	/* Priority      */ 80,
 	/* unk8          */ 0x40,
 	/* Song Title    */ s_f_shootem_hit_seqName,
-	/* Song Number   */ 93
+	/* Song Number   */ 124
 };
 
 extern const u8 s_f_shootem_miss_mid[];
@@ -43,5 +43,5 @@ struct SongHeader s_f_shootem_miss_seqData = {
 	/* Priority      */ 80,
 	/* unk8          */ 0x40,
 	/* Song Title    */ s_f_shootem_miss_seqName,
-	/* Song Number   */ 94
+	/* Song Number   */ 125
 };

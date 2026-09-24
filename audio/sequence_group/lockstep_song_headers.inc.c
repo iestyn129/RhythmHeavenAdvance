@@ -7,7 +7,7 @@ struct SongHeader s_lockstep_bgm_seqData = {
 	/* Priority      */ 50,
 	/* unk8          */ 0xFF,
 	/* Song Title    */ s_lockstep_bgm_seqName,
-	/* Song Number   */ 80
+	/* Song Number   */ 111
 };
 
 extern const u8 s_f_lockstep_step_mid[];
@@ -19,7 +19,7 @@ struct SongHeader s_f_lockstep_step_seqData = {
 	/* Priority      */ 80,
 	/* unk8          */ 0x40,
 	/* Song Title    */ s_f_lockstep_step_seqName,
-	/* Song Number   */ 81
+	/* Song Number   */ 112
 };
 
 extern const u8 s_f_lockstep_shot_r_mid[];
@@ -31,7 +31,7 @@ struct SongHeader s_f_lockstep_shot_r_seqData = {
 	/* Priority      */ 80,
 	/* unk8          */ 0x40,
 	/* Song Title    */ s_f_lockstep_shot_r_seqName,
-	/* Song Number   */ 82
+	/* Song Number   */ 113
 };
 
 extern const u8 s_f_lockstep_shot_l_mid[];
@@ -43,7 +43,7 @@ struct SongHeader s_f_lockstep_shot_l_seqData = {
 	/* Priority      */ 80,
 	/* unk8          */ 0x40,
 	/* Song Title    */ s_f_lockstep_shot_l_seqName,
-	/* Song Number   */ 83
+	/* Song Number   */ 114
 };
 
 extern const u8 s_f_lockstep_hai_mid[];
@@ -55,7 +55,7 @@ struct SongHeader s_f_lockstep_hai_seqData = {
 	/* Priority      */ 80,
 	/* unk8          */ 0x40,
 	/* Song Title    */ s_f_lockstep_hai_seqName,
-	/* Song Number   */ 84
+	/* Song Number   */ 115
 };
 
 extern const u8 s_f_lockstep_ah_mid[];
@@ -67,7 +67,7 @@ struct SongHeader s_f_lockstep_ah_seqData = {
 	/* Priority      */ 80,
 	/* unk8          */ 0x40,
 	/* Song Title    */ s_f_lockstep_ah_seqName,
-	/* Song Number   */ 85
+	/* Song Number   */ 116
 };
 
 extern const u8 s_f_lockstep_high_mid[];
@@ -79,7 +79,7 @@ struct SongHeader s_f_lockstep_high_seqData = {
 	/* Priority      */ 80,
 	/* unk8          */ 0x40,
 	/* Song Title    */ s_f_lockstep_high_seqName,
-	/* Song Number   */ 86
+	/* Song Number   */ 117
 };
 
 extern const u8 s_f_lockstep_hoh_mid[];
@@ -91,7 +91,7 @@ struct SongHeader s_f_lockstep_hoh_seqData = {
 	/* Priority      */ 80,
 	/* unk8          */ 0x40,
 	/* Song Title    */ s_f_lockstep_hoh_seqName,
-	/* Song Number   */ 87
+	/* Song Number   */ 118
 };
 
 extern const u8 s_f_lockstep_mhm_mid[];
@@ -103,7 +103,7 @@ struct SongHeader s_f_lockstep_mhm_seqData = {
 	/* Priority      */ 80,
 	/* unk8          */ 0x40,
 	/* Song Title    */ s_f_lockstep_mhm_seqName,
-	/* Song Number   */ 88
+	/* Song Number   */ 119
 };
 
 extern const u8 s_f_lockstep_hah_mid[];
@@ -115,7 +115,7 @@ struct SongHeader s_f_lockstep_hah_seqData = {
 	/* Priority      */ 80,
 	/* unk8          */ 0x40,
 	/* Song Title    */ s_f_lockstep_hah_seqName,
-	/* Song Number   */ 89
+	/* Song Number   */ 120
 };
 
 extern const u8 s_f_lockstep_miss_mid[];
@@ -127,5 +127,5 @@ struct SongHeader s_f_lockstep_miss_seqData = {
 	/* Priority      */ 80,
 	/* unk8          */ 0x40,
 	/* Song Title    */ s_f_lockstep_miss_seqName,
-	/* Song Number   */ 90
+	/* Song Number   */ 121
 };
