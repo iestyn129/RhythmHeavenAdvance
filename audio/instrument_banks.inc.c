@@ -140,10 +140,8 @@ union Instrument inst_bank_04[] = {
     /* 116 */ NULL,                            NULL,                            NULL,                            NULL,
     /* 120 */ NULL,                            NULL,                            NULL,                            NULL,
     /* 124 */ NULL,                            NULL,                            { .rhy = &instrument_rhy_0119 }, { .rhy = &instrument_rhy_0120 }
-
-// mo = Marching Orders; L = Left; R = Right; A = Attention; n = Normal; f = Fast; # = part
-
 };
+
 
 // 128 Instruments
 union Instrument inst_bank_05[] = {
@@ -255,18 +253,9 @@ union Instrument inst_bank_07[] = {
 
 // 128 Instruments
 union Instrument inst_bank_08[] = {
-#ifdef SFX
-    /* 000 */ { .pcm = &instrument_pcm_sdon }, { .pcm = &instrument_pcm_sdtw }, { .pcm = &instrument_pcm_sdth }, { .pcm = &instrument_pcm_sdgo },
-    /* 004 */ { .pcm = &instrument_pcm_mrup }, { .pcm = &instrument_pcm_0203 }, { .pcm = &instrument_pcm_0204 }, { .pcm = &instrument_pcm_0199 },
-#else
     /* 000 */ { .pcm = &instrument_pcm_0198 }, { .pcm = &instrument_pcm_0199 }, { .pcm = &instrument_pcm_0200 }, { .pcm = &instrument_pcm_0201 },
     /* 004 */ { .pcm = &instrument_pcm_0202 }, { .pcm = &instrument_pcm_0203 }, { .pcm = &instrument_pcm_0204 }, { .pcm = &instrument_pcm_0199 },
-#endif
-#ifdef SFX
-    /* 008 */ { .pcm = &instrument_pcm_sdon }, { .pcm = &instrument_pcm_sdtw }, { .pcm = &instrument_pcm_sdth }, { .pcm = &instrument_pcm_sdgo },
-#else
-    /* 008 */ { .pcm = &instrument_pcm_0198 }, { .pcm = &instrument_pcm_0199 }, { .pcm = &instrument_pcm_0200 }, { .pcm = &instrument_pcm_0201 },
-#endif
+    /* 008 */ NULL,                            NULL,                            NULL,                            NULL,
     /* 012 */ NULL,                            NULL,                            NULL,                            NULL,
     /* 016 */ NULL,                            NULL,                            NULL,                            NULL,
     /* 020 */ NULL,                            NULL,                            NULL,                            NULL,
@@ -305,7 +294,7 @@ union Instrument inst_bank_09[] = {
     /* 008 */ NULL,                            NULL,                            NULL,                            NULL,
     /* 012 */ { .pcm = &instrument_pcm_0215 }, { .pcm = &instrument_pcm_0217 }, { .pcm = &instrument_pcm_0218 }, { .pcm = &instrument_pcm_0219 },
     /* 016 */ { .pcm = &instrument_pcm_0220 }, NULL,                            { .pcm = &instrument_pcm_0221 }, { .pcm = &instrument_pcm_0222 },
-    /* 020 */ { .pcm = &instrument_pcm_0242 }, { .pcm = &instrument_pcm_2243 },                            NULL,                            NULL,
+    /* 020 */ NULL,                            NULL,                            NULL,                            NULL,
     /* 024 */ { .pcm = &instrument_pcm_0223 }, { .pcm = &instrument_pcm_0224 }, { .pcm = &instrument_pcm_0225 }, { .pcm = &instrument_pcm_0226 },
     /* 028 */ { .pcm = &instrument_pcm_0227 }, { .pcm = &instrument_pcm_0229 }, { .pcm = &instrument_pcm_0230 }, { .pcm = &instrument_pcm_0231 },
     /* 032 */ NULL,                            { .pcm = &instrument_pcm_0232 }, NULL,                            NULL,
@@ -1485,7 +1474,7 @@ union Instrument inst_bank_42[] = {
     /* 112 */ NULL,                            NULL,                            NULL,                            NULL,
     /* 116 */ NULL,                            NULL,                            NULL,                            NULL,
     /* 120 */ NULL,                            NULL,                            NULL,                            NULL,
-    /* 124 */ NULL,                            { .rhy = &instrument_rhy_0833 }, { .rhy = &instrument_rhy_0834 }, { .rhy = &instrument_rhy_0835 }
+    /* 124 */ { .rhy = &instrument_rhy_0836 }, { .rhy = &instrument_rhy_0833 }, { .rhy = &instrument_rhy_0834 }, { .rhy = &instrument_rhy_0835 }
 };
 
 // 128 Instruments
@@ -1521,7 +1510,7 @@ union Instrument inst_bank_43[] = {
     /* 112 */ NULL,                            NULL,                            NULL,                            NULL,
     /* 116 */ NULL,                            NULL,                            NULL,                            NULL,
     /* 120 */ NULL,                            NULL,                            NULL,                            NULL,
-    /* 124 */ NULL,                            { .rhy = &instrument_rhy_0850 }, { .rhy = &instrument_rhy_0851 }, { .rhy = &instrument_rhy_0852 }
+    /* 124 */ { .rhy = &instrument_rhy_0853 }, { .rhy = &instrument_rhy_0850 }, { .rhy = &instrument_rhy_0851 }, { .rhy = &instrument_rhy_0852 }
 };
 
 // 128 Instruments
@@ -1628,7 +1617,7 @@ union Instrument inst_bank_46[] = {
     /* 108 */ NULL,                            NULL,                            NULL,                            NULL,
     /* 112 */ NULL,                            NULL,                            NULL,                            NULL,
     /* 116 */ NULL,                            NULL,                            NULL,                            NULL,
-    /* 120 */ NULL,                            NULL,                            NULL,                            { .rhy = &instrument_rhy_0953 },
+    /* 120 */ NULL,                            NULL,                            { .rhy = &instrument_rhy_0958 }, { .rhy = &instrument_rhy_0953 },
     /* 124 */ { .rhy = &instrument_rhy_0954 }, { .rhy = &instrument_rhy_0955 }, { .rhy = &instrument_rhy_0956 }, { .rhy = &instrument_rhy_0957 }
 };
 
@@ -1855,7 +1844,7 @@ union Instrument inst_bank_56[] = {
     /* 064 */ { .pcm = &instrument_pcm_1544 }, { .psg = &instrument_psg_1545 }, { .pcm = &instrument_pcm_1546 }, { .pcm = &instrument_pcm_1547 },
     /* 068 */ { .pcm = &instrument_pcm_1548 }, { .pcm = &instrument_pcm_1549 }, { .pcm = &instrument_pcm_1550 }, { .pcm = &instrument_pcm_1551 },
     /* 072 */ { .pcm = &instrument_pcm_1552 }, { .pcm = &instrument_pcm_1553 }, { .pcm = &instrument_pcm_1554 }, { .pcm = &instrument_pcm_1577 },
-    /* 076 */ { .pcm = &instrument_pcm_1578 }, { .pcm = &instrument_pcm_1579 }, { .pcm = &instrument_pcm_4000 }, NULL,
+    /* 076 */ { .pcm = &instrument_pcm_1578 }, { .pcm = &instrument_pcm_1579 }, { .pcm = &instrument_pcm_4000 }, { .pcm = &instrument_pcm_4001 },
     /* 080 */ { .rhy = &instrument_rhy_1555 }, NULL,                            NULL,                            NULL,
     /* 084 */ NULL,                            { .pcm = &instrument_pcm_1556 }, { .pcm = &instrument_pcm_1557 }, { .pcm = &instrument_pcm_1558 },
     /* 088 */ { .psg = &instrument_psg_1559 }, { .pcm = &instrument_pcm_1560 }, { .psg = &instrument_psg_1561 }, { .pcm = &instrument_pcm_1562 },
@@ -1943,22 +1932,13 @@ union Instrument inst_bank_62[] = {
 union Instrument inst_bank_63[] = {
     /* 000 */ { .pcm = &instrument_pcm_1714 }, { .pcm = &instrument_pcm_1715 }, { .pcm = &instrument_pcm_1711 }, { .pcm = &instrument_pcm_1716 },
     /* 004 */ { .pcm = &instrument_pcm_1717 }, { .pcm = &instrument_pcm_1718 }, { .pcm = &instrument_pcm_1719 }, { .pcm = &instrument_pcm_1720 },
-    #ifdef SFX
-    /* 008 */ { .pcm = &instrument_pcm_1721 }, { .pcm = &instrument_pcm_mWLn }, { .pcm = &instrument_pcm_mWRn }, { .pcm = &instrument_pcm_1712 },
-    #else
     /* 008 */ { .pcm = &instrument_pcm_1721 }, NULL,                            NULL,                            { .pcm = &instrument_pcm_1712 },
-    #endif
     /* 012 */ { .pcm = &instrument_pcm_1722 }, { .pcm = &instrument_pcm_1723 }, { .pcm = &instrument_pcm_1724 }, { .pcm = &instrument_pcm_1725 },
     /* 016 */ { .pcm = &instrument_pcm_1727 }, { .pcm = &instrument_pcm_1728 }, { .pcm = &instrument_pcm_1713 }, { .pcm = &instrument_pcm_1729 },
     /* 020 */ { .pcm = &instrument_pcm_1730 }, { .pcm = &instrument_pcm_1731 }, { .pcm = &instrument_pcm_1732 }, { .pcm = &instrument_pcm_1726 },
     /* 024 */ { .pcm = &instrument_pcm_1733 }, { .pcm = &instrument_pcm_1734 }, { .pcm = &instrument_pcm_1735 }, { .pcm = &instrument_pcm_1736 },
     /* 028 */ { .pcm = &instrument_pcm_1737 }, { .pcm = &instrument_pcm_1738 }, { .pcm = &instrument_pcm_1739 }, { .pcm = &instrument_pcm_1740 },
-    #ifdef SFX
-    /* 032 */ { .pcm = &instrument_pcm_1741 }, { .pcm = &instrument_pcm_mWA2 }, { .pcm = &instrument_pcm_mWA3 }, { .pcm = &instrument_pcm_mWLf },
-    /* 036 */ { .pcm = &instrument_pcm_mWRf }
-    #else
         /* 032 */ { .pcm = &instrument_pcm_1741 }
-    #endif
 
 };
 
