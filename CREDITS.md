@@ -1,10 +1,10 @@
 # Credits
 ## Programming
-### Maintainer
+### Maintainers
 - ShaffySwitcher
 - itaific
 
-### Contribution
+### Contributors
 - Deni_iguess
 - patataofcourse
 - Conhlee
@@ -41,7 +41,7 @@
 - Various Rhythm Heaven games
 - Inspiration from Rhythm Heaven Silver
 
-### Sound Effect
+### Sound Effects
 - Various Rhythm Heaven games
 - Cherryberryfaygo
 - Nabix (& his family)
