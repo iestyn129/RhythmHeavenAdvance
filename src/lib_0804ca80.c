@@ -1312,7 +1312,7 @@ void func_0804e1c8(struct SpriteHandler *o) {
     r3 = 0;
     // Copy the OAM Dimensions
     for (r3 = 0; r3 < 24; r3++) {
-        oamDimensions[r3] = ((u8 *)D_08bd0cac)[r3 + 2];
+        oamDimensions[r3] = ((u8 *)D_08bd0cae)[r3 + 2];
     }
 
     if (o->totalCycles & 1) {
