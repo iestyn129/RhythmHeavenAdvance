@@ -1300,7 +1300,98 @@ void sprite_handler_set_global_x_y(struct SpriteHandler *handler, u16 x, u16 y) 
 
 
 // Update Sprite Library (https://decomp.me/scratch/THxdI)
-#include "asm/lib_0804ca80/asm_0804e1c8.s"
+// Update the OAM system
+void func_0804e1c8(struct SpriteHandler *o) {
+    struct struct_0804cb88 handle;
+    u32 *r9; // buffer
+    s16 r3;
+    u8 *oamDimensions;
+
+    handle.objLimit = o->objAmount;
+    oamDimensions = handle.objDim;
+    r3 = 0;
+    // Copy the OAM Dimensions
+    for (r3 = 0; r3 < 24; r3++) {
+        oamDimensions[r3] = ((u8 *)D_08bd0cac)[r3 + 2];
+    }
+
+    if (o->totalCycles & 1) {
+        r3 = o->zLinkEnd;
+        r9 = o->oamBuffer + (o->objAmount - 1) * 2;
+        handle.srcInc = -6;
+        handle.destInc = -8;
+    } else {
+        r3 = o->zLinkStart;
+        /////
+        r9 = o->oamBuffer;
+        /////
+        handle.srcInc = 6;
+        handle.destInc = 8;
+    }
+
+    while (r3 >= 0) {
+        u32 r1;
+        struct Sprite *spr; // r2/r4 dunno
+        s16 r8;
+        s16 var;
+
+        // 70/72
+        if (o->totalCycles & 1) {
+            var = o->sprites[r3].zLinkPrev;
+            r8 = var;
+        } else {
+            var = o->sprites[r3].zLinkNext;
+            r8 = var;
+        }
+
+        spr = &o->sprites[r3];
+        if (spr->visible) {
+            if (handle.objLimit >= ((struct OamCel *)spr->animation[spr->currentCel].cel)->total) {
+                // cc
+                s16 r1 = o->xPos + *(u16 *)spr->xOrigin; // ??
+                s16 r2 = o->yPos + *(u16 *)spr->yOrigin; // ??
+                u32 flags = spr->oamAttributes | (spr->zDepth >> 0xe) << 0x12; // r3
+
+                handle.src = spr->animation[spr->currentCel].cel;
+                handle.dest = r9;
+                handle.xPos = spr->xPos - r1;
+                handle.yPos = spr->yPos - r2;
+                handle.attr10 = flags;
+                handle.attr2 = (spr->basePalette << 0xc) | spr->baseTile;
+                handle.affine[0] = spr->affineParams[0];
+                handle.affine[1] = -spr->affineParams[1];
+                handle.affine[2] = -spr->affineParams[2];
+                handle.affine[3] = spr->affineParams[3];
+
+                /////
+                r2 = func_0804cb88(&handle);
+                handle.objLimit -= r2; // why the cast?
+                flags = o->totalCycles;
+                spr->xPos += 0; // ????????????
+                r9 += (flags & 1) ? (u16)r2 * -2 : (u16)r2 * 2;
+                /////
+            }
+        }
+        // 158
+        r1 = (!spr->paused) ? o->paused : 0;
+        if (!r1) {
+            if (!spr->update) {
+                if (spr->visible || spr->oamAttributes & 0x1000000) {
+                    spr->currentCelTime -= spr->animationSpeed;
+                    do {
+                        if (spr->currentCelTime > 0) break;
+                        sprite_update_anim_cel(o, r3, spr->currentCel + spr->celInc, 0);
+                    } while (spr->allocated);
+                }
+            }
+        }
+        r3 = r8;
+    }
+    // 1cc
+    o->unk20 = o->objAmount;
+    o->unk20 -= handle.objLimit;
+    o->totalCycles += 1; // why increment instead of orring the flag?
+}
 
 
 // Get Total Active Sprites
