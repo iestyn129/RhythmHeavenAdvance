@@ -127,6 +127,10 @@ extern const u8 icon_overlay_medal_bin[]; // Medal
 extern const u8 icon_overlay_new_game_bin[]; // New Game/Remix Circular Spotlight
 extern const u8 icon_overlay_blank2_bin[]; // Blank
 extern const u8 icon_overlay_perfect_bin[]; // Perfect
+extern const u8 icon_overlay_rainbow_perfect_a_bin[]; // Rainbow Perfect 1/3
+extern const u8 icon_overlay_rainbow_perfect_b_bin[]; // Rainbow Perfect 2/3
+extern const u8 icon_overlay_rainbow_perfect_c_bin[]; // Rainbow Perfect 3/3
+extern const u8 icon_overlay_rainbow_perfect_d_bin[]; // Rainbow Perfect + Night Mode
 
 /* GAME SELECT ICON OVERLAYS - PALETTES */
 

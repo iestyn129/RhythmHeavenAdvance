@@ -638,7 +638,13 @@ void init_game_select_grid_gfx(void) {
                 tileNum = 1 + (overlay * 3 * 3) + 0x100;
                 
                 // Adjust position for perfect overlay (move right 1 tile)
-                if (overlay == LEVEL_ICON_OVERLAY_PERFECT) {
+                if (
+                    (overlay == LEVEL_ICON_OVERLAY_PERFECT)           ||
+                    (overlay == LEVEL_ICON_OVERLAY_RAINBOW_PERFECT_A) ||
+                    (overlay == LEVEL_ICON_OVERLAY_RAINBOW_PERFECT_B) ||
+                    (overlay == LEVEL_ICON_OVERLAY_RAINBOW_PERFECT_C) ||
+                    (overlay == LEVEL_ICON_OVERLAY_RAINBOW_PERFECT_D)
+                 ) {
                     game_select_print_icon_maps(24, 3, tileX + 1, tileY, 3, 3, tileNum, 8);
                 } else {
                     game_select_print_icon_maps(24, 3, tileX, tileY, 3, 3, tileNum, 8);
@@ -1059,7 +1065,14 @@ void game_select_update_bg_scroll(void) {
 void game_select_set_cursor_border_z(void) {
     s32 levelState = get_level_state_with_perfect_from_grid_xy(gGameSelect->cursorX, gGameSelect->cursorY);
     // Adjust Z level to place selection border under the medal/perfect icon (if present).
-    if ((levelState == LEVEL_STATE_HAS_MEDAL) || (levelState == LEVEL_STATE_PERFECT)) {
+    if (
+        (levelState == LEVEL_STATE_HAS_MEDAL)          ||
+        (levelState == LEVEL_STATE_PERFECT)            ||
+        (levelState == LEVEL_STATE_RAINBOW_PERFECT_A)  ||
+        (levelState == LEVEL_STATE_RAINBOW_PERFECT_B)  ||
+        (levelState == LEVEL_STATE_RAINBOW_PERFECT_C)  ||
+        (levelState == LEVEL_STATE_RAINBOW_PERFECT_D)
+     ) {
         sprite_set_z(gSpriteHandler, gGameSelect->selectionBorderSprite, 0x8800);
     } else {
         sprite_set_z(gSpriteHandler, gGameSelect->selectionBorderSprite, 0x4800);
@@ -1234,7 +1247,16 @@ void game_select_read_inputs(void) {
         levelState = get_level_state_from_grid_xy(gGameSelect->cursorX, gGameSelect->cursorY);
 
         /* If the level can be opened: */
-        if ((levelState == LEVEL_STATE_OPEN) || (levelState == LEVEL_STATE_CLEARED) || (levelState == LEVEL_STATE_HAS_MEDAL) || (levelState == LEVEL_STATE_PERFECT)) {
+        if (
+            (levelState == LEVEL_STATE_OPEN)              ||
+            (levelState == LEVEL_STATE_CLEARED)           ||
+            (levelState == LEVEL_STATE_HAS_MEDAL)         ||
+            (levelState == LEVEL_STATE_PERFECT)           ||
+            (levelState == LEVEL_STATE_RAINBOW_PERFECT_A) ||
+            (levelState == LEVEL_STATE_RAINBOW_PERFECT_B) ||
+            (levelState == LEVEL_STATE_RAINBOW_PERFECT_C) ||
+            (levelState == LEVEL_STATE_RAINBOW_PERFECT_D)
+        ) {
             D_030046a8->data.gsCursorX = gGameSelect->cursorX;
             D_030046a8->data.gsCursorY = gGameSelect->cursorY;
             levelID = get_level_id_from_grid_xy(gGameSelect->cursorX, gGameSelect->cursorY);
@@ -1344,6 +1366,11 @@ void game_select_set_info_pane_to_cursor_target(void) {
         case (LEVEL_STATE_OPEN):
         case (LEVEL_STATE_CLEARED):
         case (LEVEL_STATE_HAS_MEDAL):
+        case (LEVEL_STATE_PERFECT):
+        case (LEVEL_STATE_RAINBOW_PERFECT_A):
+        case (LEVEL_STATE_RAINBOW_PERFECT_B):
+        case (LEVEL_STATE_RAINBOW_PERFECT_C):
+        case (LEVEL_STATE_RAINBOW_PERFECT_D):
             game_select_set_info_pane(get_level_id_from_grid_xy(gGameSelect->cursorX, gGameSelect->cursorY), levelState, 10);
             break;
     }
@@ -1789,7 +1816,7 @@ u32 game_select_process_level_events(void) {
     struct GameSelectGridEntry *gridEntry;
     const s8 *eventTargets;
     s16 screenX, screenY;
-    s32 x, y, state, saveState, id;
+    s32 x, y, state, id;
     s16 sprite;
 
     if (gGameSelect->levelEventPending) {
@@ -1805,7 +1832,6 @@ u32 game_select_process_level_events(void) {
 
     id = get_level_id_from_grid_xy(x, y);
     get_pixel_xy_from_grid_xy(x, y, &screenX, &screenY);
-    saveState = state;
 
     switch (state) {
         case LEVEL_STATE_OPEN:
@@ -1855,12 +1881,55 @@ u32 game_select_process_level_events(void) {
             play_sound_w_pitch_volume(&s_f_clear_game_seqData, INT_TO_FIXED(0.5), INT_TO_FIXED(2.0));
             play_sound(&s_f_get_medal_seqData);
 
-            saveState = LEVEL_STATE_HAS_MEDAL;
+            cafe_session_remove_level(id);
+            break;
+
+        case LEVEL_STATE_RAINBOW_PERFECT_A:
+            screenX += 47;
+            screenY += 68;
+            sprite = sprite_create(gSpriteHandler, anim_game_select_get_superb, 0, screenX, screenY, 0x8864, 1, 0, 3);
+            game_select_link_sprite_xy_to_bg(sprite);
+            play_sound_w_pitch_volume(&s_f_clear_game_seqData, INT_TO_FIXED(0.5), INT_TO_FIXED(2.0));
+            play_sound(&s_f_get_medal_seqData);
+
+            cafe_session_remove_level(id);
+            break;
+
+        case LEVEL_STATE_RAINBOW_PERFECT_B:
+            screenX += 47;
+            screenY += 68;
+            sprite = sprite_create(gSpriteHandler, anim_game_select_get_superb, 0, screenX, screenY, 0x8864, 1, 0, 3);
+            game_select_link_sprite_xy_to_bg(sprite);
+            play_sound_w_pitch_volume(&s_f_clear_game_seqData, INT_TO_FIXED(0.5), INT_TO_FIXED(2.0));
+            play_sound(&s_f_get_medal_seqData);
+
+            cafe_session_remove_level(id);
+            break;
+
+        case LEVEL_STATE_RAINBOW_PERFECT_C:
+            screenX += 47;
+            screenY += 68;
+            sprite = sprite_create(gSpriteHandler, anim_game_select_get_superb, 0, screenX, screenY, 0x8864, 1, 0, 3);
+            game_select_link_sprite_xy_to_bg(sprite);
+            play_sound_w_pitch_volume(&s_f_clear_game_seqData, INT_TO_FIXED(0.5), INT_TO_FIXED(2.0));
+            play_sound(&s_f_get_medal_seqData);
+
+            cafe_session_remove_level(id);
+            break;
+
+        case LEVEL_STATE_RAINBOW_PERFECT_D:
+            screenX += 47;
+            screenY += 68;
+            sprite = sprite_create(gSpriteHandler, anim_game_select_get_superb, 0, screenX, screenY, 0x8864, 1, 0, 3);
+            game_select_link_sprite_xy_to_bg(sprite);
+            play_sound_w_pitch_volume(&s_f_clear_game_seqData, INT_TO_FIXED(0.5), INT_TO_FIXED(2.0));
+            play_sound(&s_f_get_medal_seqData);
+
             cafe_session_remove_level(id);
             break;
     }
 
-    save_level_state_from_grid_xy(x, y, saveState);
+    save_level_state_from_grid_xy(x, y, state);
     game_select_set_icon_map_after_level_event(x, y);
 
     if ((x == gGameSelect->cursorX) && (y == gGameSelect->cursorY)) {
@@ -1870,7 +1939,15 @@ u32 game_select_process_level_events(void) {
 
     gridEntry = game_select_grid_data + x + (y * GS_GRID_WIDTH);
 
-    if ((state == LEVEL_STATE_CLEARED) || (state == LEVEL_STATE_HAS_MEDAL) || (state == LEVEL_STATE_PERFECT)) {
+    if (
+        (state == LEVEL_STATE_CLEARED)           ||
+        (state == LEVEL_STATE_HAS_MEDAL)         ||
+        (state == LEVEL_STATE_PERFECT)           ||
+        (state == LEVEL_STATE_RAINBOW_PERFECT_A) ||
+        (state == LEVEL_STATE_RAINBOW_PERFECT_B) ||
+        (state == LEVEL_STATE_RAINBOW_PERFECT_C) ||
+        (state == LEVEL_STATE_RAINBOW_PERFECT_D)
+    ) {
         if ((gridEntry->flags & LEVEL_EVENT_DELAY_CLEAR)) {
             gGameSelect->levelEventTimer = 60;
         }

@@ -134,7 +134,11 @@ enum LevelCompletionStatesEnum {
     /* 03 */ LEVEL_STATE_OPEN,
     /* 04 */ LEVEL_STATE_CLEARED,
     /* 05 */ LEVEL_STATE_HAS_MEDAL,
-    /* 06 */ LEVEL_STATE_PERFECT
+    /* 06 */ LEVEL_STATE_PERFECT,
+    /* 07 */ LEVEL_STATE_RAINBOW_PERFECT_A, // Rainbow Perfect 1/3
+    /* 08 */ LEVEL_STATE_RAINBOW_PERFECT_B, // Rainbow Perfect 2/3
+    /* 09 */ LEVEL_STATE_RAINBOW_PERFECT_C, // Rainbow Perfect 3/3
+    /* 10 */ LEVEL_STATE_RAINBOW_PERFECT_D, // Rainbow Perfect + Night Mode
 };
 
 
