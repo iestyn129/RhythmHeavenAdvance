@@ -125,55 +125,55 @@ struct struct_0804cb88 {
 
 struct SpriteHandler;
 struct Sprite {
-    u16 visible:1;      // Visibility Flag
-    u16 playbackType:4; // Animation Playback Type
-    u16 celTotal:8;     // Total Animation Frames
-    u16 update:1;       // Update Flag
-    u16 allocated:1;    // Allocation Flag
-    u16 paused:1;       // Pause Flag
-    s16 xPos;           // X Position
-    s16 yPos;           // Y Position
-    u16 zDepth;         // Z-Depth (the "Layer", where lower z-depths are rendered on top of higher ones)
+    u16 visible:1;       // Visibility Flag
+    u16 playbackType:4;  // Animation Playback Type
+    u16 celTotal:8;      // Total Animation Frames
+    u16 update:1;        // Update Flag
+    u16 allocated:1;     // Allocation Flag
+    u16 paused:1;        // Pause Flag
+    s16 xPos;            // X Position
+    s16 yPos;            // Y Position
+    u16 zDepth;          // Z-Depth (the "Layer", where lower z-depths are rendered on top of higher ones)
     struct Animation *animation; // Animation
-    s8 currentCel;      // Current Animation Cel
-    s8 celInc;          // Animation Direction { 1, 0, -1 }
-    s8 loopCel;         // Animation Loop Start Point
-    u32 oamAttributes;  // Attributes 1 & 0 (in a weird format..?)
-    s16 baseTile;       // Base Tile Offset
-    u8 basePalette;     // Base Palette Offset
-    s8 callbackCel;     // Animation Cel Which Triggers the Callback Function
-    s16 zLinkPrev;      // ID of Sprite with Next-Lowest Z Value
-    s16 zLinkNext;      // ID of Sprite with Next-Highest Z Value
+    s8 currentCel;       // Current Animation Cel
+    s8 celInc;           // Animation Direction { 1, 0, -1 }
+    s8 loopCel;          // Animation Loop Start Point
+    u32 oamAttributes;   // Attributes 1 & 0 (in a weird format..?)
+    s16 baseTile;        // Base Tile Offset
+    u8 basePalette;      // Base Palette Offset
+    s8 callbackCel;      // Animation Cel Which Triggers the Callback Function
+    s16 zLinkPrev;       // ID of Sprite with Next-Lowest Z Value
+    s16 zLinkNext;       // ID of Sprite with Next-Highest Z Value
     s8_8 currentCelTime; // Time Left for Current Animation Cel
     void (*callbackFunc)(struct SpriteHandler *, s16, u32, ...); // Callback Function
-    u32 callbackArg;    // Callback Argument
-    u16 totalDuration;  // Total Duration
-    u16 memID;          // Memory ID
-    s16 *xOrigin;       // World Origin X Offset
-    s16 *yOrigin;       // World Origin Y Offset
-    s16 *affineParams;  // Affine Parameters
+    u32 callbackArg;     // Callback Argument
+    u16 totalDuration;   // Total Duration
+    u16 memID;           // Memory ID
+    s16 *xOrigin;        // World Origin X Offset
+    s16 *yOrigin;        // World Origin Y Offset
+    s16 *affineParams;   // Affine Parameters
     u8_8 animationSpeed; // Animation Speed
 };
 
 struct SpriteHandler { // Size = 0x28
-    u16 objAmount;      // OAMOBJ Limit (128)
-    u16 spriteAmount;   // Sprite Limit (100)
+    u16 objAmount;          // OAMOBJ Limit (128)
+    u16 spriteAmount;       // Sprite Limit (100)
     u32 *oamBuffer;         // OAM buffer
     struct Sprite *sprites; // Sprites
-    s16 zLinkStart;     // ID of Sprite with Lowest Z Value
-    s16 zLinkEnd;       // ID of Sprite with Highest Z Value
-    s16 nextAllocID;    // Next Free Sprite ID
-    s16 lastAllocID;    // End of the Sprite Linked List
-    u16 xPos;           // Global Sprite X Offset
-    u16 yPos;           // Global Sprite Y Offset
-    u16 totalCycles;    // OAM Buffer Direction
-    u16 paused;         // Global Sprite Pause Flag
-    u16 memID;          // Current Memory ID
-    u16 unk1E;          // Unknown Unused Counter
+    s16 zLinkStart;         // ID of Sprite with Lowest Z Value
+    s16 zLinkEnd;           // ID of Sprite with Highest Z Value
+    s16 nextAllocID;        // Next Free Sprite ID
+    s16 lastAllocID;        // End of the Sprite Linked List
+    u16 xPos;               // Global Sprite X Offset
+    u16 yPos;               // Global Sprite Y Offset
+    u16 totalCycles;        // OAM Buffer Direction
+    u16 paused;             // Global Sprite Pause Flag
+    u16 memID;              // Current Memory ID
+    u16 unk1E;              // Unknown Unused Counter
     u16 unk20;
-    u32 unk22_b0:4;     // Error Type
-    u16 unk24;          // Error Memory ID
-    u16 unk26;          // Failed Action
+    u32 unk22_b0:4;         // Error Type
+    u16 unk24;              // Error Memory ID
+    u16 unk26;              // Failed Action
 };
 
 struct SpritePlaybackData {
@@ -273,7 +273,7 @@ extern void sprite_id_set_origin_x_y(struct SpriteHandler *, u16 memID, s16 *xOr
 extern void sprite_id_set_anim_speed(struct SpriteHandler *, u16 memID, u8_8 speed);
 extern void sprite_handler_set_global_pause(struct SpriteHandler *, u16 isPaused);
 extern void sprite_handler_set_global_x_y(struct SpriteHandler *, u16 x, u16 y);
-// extern void func_0804e1c8(struct SpriteHandler *); // Update Sprite Library
+extern void func_0804e1c8(struct SpriteHandler *); // Update Sprite Library
 extern s32 sprite_handler_get_total_active(struct SpriteHandler *);
 extern s32 sprite_handler_get_total_active_id(struct SpriteHandler *, u16 memID);
 
