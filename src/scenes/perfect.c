@@ -4,7 +4,9 @@
 #include "graphics/perfect/perfect_certificate_graphics.h"
 
 #include "levels.h"
+#include "src/scenes/cafe.h"
 #include "src/scenes/game_select.h"
+#include "src/scenes/results.h"
 #include "src/scenes/studio.h"
 #include "src/code_080092cc.h"
 

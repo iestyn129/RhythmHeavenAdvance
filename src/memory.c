@@ -288,32 +288,11 @@ void clear_save_data(void) {
 
 void set_playtest_save_data(void) {
     struct TengokuSaveData *data = &D_030046a8->data;
-    u32 i, perfect;
-    
+    u32 i;
+
     // unlock all levels
     for (i = 0; i < TOTAL_LEVELS; i++) {
-        switch (agb_random(10)) {
-            case 0:
-                perfect = LEVEL_STATE_PERFECT;
-                break;
-            case 1:
-                perfect = LEVEL_STATE_RAINBOW_PERFECT_A;
-                break;
-            case 2:
-                perfect = LEVEL_STATE_RAINBOW_PERFECT_B;
-                break;
-            case 3:
-                perfect = LEVEL_STATE_RAINBOW_PERFECT_C;
-                break;
-            case 4:
-                perfect = LEVEL_STATE_RAINBOW_PERFECT_D;
-                break;
-            default:
-                perfect = LEVEL_STATE_HAS_MEDAL;
-                break;
-        }
-
-        set_level_state(data, i, (i >= TOTAL_LEVELS-6) ? LEVEL_STATE_CLEARED : perfect);
+        set_level_state(data, i, (i >= TOTAL_LEVELS-6) ? LEVEL_STATE_CLEARED : LEVEL_STATE_HAS_MEDAL);
         set_level_score(data, i, DEFAULT_LEVEL_SCORE);
     }
 
