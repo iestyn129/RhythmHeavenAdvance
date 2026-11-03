@@ -86,8 +86,6 @@ enum PauseMenuOptionsEnum {
 
 extern const struct Beatscript D_089cfda4[]; // Generic Fade-Out Sequence
 
-extern u8 sReplayingCampaign;
-
 /* MAIN GAMEPLAY SCENE */
 
 
@@ -727,7 +725,7 @@ void gameplay_stop_scene(void) {
         }
         stop_all_soundplayers(); // Sound
     } else {
-        if (gGameplay->goingForPerfect && !gGameplay->perfectFailed && !sReplayingCampaign) {
+        if (gGameplay->goingForPerfect && !gGameplay->perfectFailed) {
             set_next_scene(&scene_perfect);
             set_scene_trans_target(&scene_perfect, get_scene_trans_target(&scene_epilogue));
         }

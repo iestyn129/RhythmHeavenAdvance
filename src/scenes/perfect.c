@@ -15,6 +15,7 @@
 #define CAFE_CLEAR_DIALOGUE_EXTRA_PENDING 10
 #define CAFE_CLEAR_DIALOGUE_BIG_PENDING 11
 
+extern u8 sReplayingCampaign;
 
 /* PERFECT CERTIFICATE SCENE */
 
@@ -106,6 +107,8 @@ void perfect_scene_start(void *sVar, s32 dArg) {
     u32 activeCampaignsCleared;
     u32 campaignsLeft;
     u32 giftType, giftID;
+    u8 campaignState;
+    s32 levelState;
 #ifdef TEMPOUP
     u32 extraCampaignsClearedBefore;
     u32 extraCampaignsClearedAfter;
@@ -122,8 +125,13 @@ void perfect_scene_start(void *sVar, s32 dArg) {
     if ((gPerfect->campaignID >= 0) && results_campaign_is_enabled()) {
         giftType = campaign_gifts_table[gPerfect->campaignID].type;
         giftID = campaign_gifts_table[gPerfect->campaignID].id;
+        campaignState = get_campaign_cleared(&D_030046a8->data, gPerfect->campaignID);
 
-        if (!get_campaign_cleared(&D_030046a8->data, gPerfect->campaignID)) {
+        *(volatile u32*)(ExternWorkRAMBase + 0x3FFD0) = gPerfect->campaignID;
+        *(volatile u32*)(ExternWorkRAMBase + 0x3FFE0) = sReplayingCampaign;
+        *(volatile u32*)(ExternWorkRAMBase + 0x3FFF0) = campaignState;
+
+        if (!campaignState) {
             baseCampaignsClearedBefore = get_total_base_cleared_campaigns(&D_030046a8->data);
 #ifdef TEMPOUP
             extraCampaignsClearedBefore = perfect_are_all_extra_campaigns_cleared();
@@ -173,6 +181,41 @@ void perfect_scene_start(void *sVar, s32 dArg) {
 
             cafe_session_add_perfect_level(get_level_id_from_grid_xy(D_030046a8->data.recentLevelX, D_030046a8->data.recentLevelY));
             results_save_to_cart(LEVEL_STATE_PERFECT);
+        } else if (sReplayingCampaign) {
+            D_030046a8->data.totalPerfects++;
+
+            if (
+                campaignState == CAMPAIGN_STATE_PERFECT           ||
+                campaignState == CAMPAIGN_STATE_RAINBOW_PERFECT_A ||
+                campaignState == CAMPAIGN_STATE_RAINBOW_PERFECT_B
+            ) {
+                set_campaign_cleared(&D_030046a8->data, gPerfect->campaignID, campaignState + 1);
+            }
+
+            switch (get_campaign_cleared(&D_030046a8->data, gPerfect->campaignID)) {
+                default:
+                case CAMPAIGN_STATE_PERFECT:
+                    levelState = LEVEL_STATE_PERFECT;
+                    break;
+
+                case CAMPAIGN_STATE_RAINBOW_PERFECT_A:
+                    levelState = LEVEL_STATE_RAINBOW_PERFECT_A;
+                    break;
+
+                case CAMPAIGN_STATE_RAINBOW_PERFECT_B:
+                    levelState = LEVEL_STATE_RAINBOW_PERFECT_B;
+                    break;
+
+                case CAMPAIGN_STATE_RAINBOW_PERFECT_C:
+                    levelState = LEVEL_STATE_RAINBOW_PERFECT_C;
+                    break;
+
+                case CAMPAIGN_STATE_RAINBOW_PERFECT_D:
+                    levelState = LEVEL_STATE_RAINBOW_PERFECT_D;
+                    break;
+            }
+
+            results_save_to_cart(levelState);
         }
     } else {
         gPerfect->campaignID = 0;
