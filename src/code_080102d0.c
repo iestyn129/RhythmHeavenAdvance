@@ -54,7 +54,7 @@ void reset_game_save_data(void) {
     data->totalPerfects = 0;
 
     for (i = 0; i < TOTAL_PERFECT_CAMPAIGNS; i++) {
-        set_campaign_cleared(data, i, FALSE);
+        set_campaign_cleared(data, i, CAMPAIGN_STATE_INCOMPLETE);
     }
     data->campaignState = CAMPAIGN_STATE_INACTIVE;
 

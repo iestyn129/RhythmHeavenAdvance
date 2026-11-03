@@ -538,9 +538,31 @@ s32 get_level_state_with_perfect_from_id(s32 id) {
 
 #ifdef PLUS
     // make sure you don't overlay a perfect medal on top of a regular one if the perfect event is still pending
-    if (!game_select_has_pending_perfect_event(id)
-      && get_campaign_cleared(saveData, get_campaign_from_level_id(id))) {
-        levelState = LEVEL_STATE_PERFECT;
+    if (!game_select_has_pending_perfect_event(id)) {
+        switch (get_campaign_cleared(saveData, get_campaign_from_level_id(id))) {
+            case CAMPAIGN_STATE_PERFECT:
+                levelState = LEVEL_STATE_PERFECT;
+                break;
+
+            case CAMPAIGN_STATE_RAINBOW_PERFECT_A:
+                levelState = LEVEL_STATE_RAINBOW_PERFECT_A;
+                break;
+
+            case CAMPAIGN_STATE_RAINBOW_PERFECT_B:
+                levelState = LEVEL_STATE_RAINBOW_PERFECT_B;
+                break;
+
+            case CAMPAIGN_STATE_RAINBOW_PERFECT_C:
+                levelState = LEVEL_STATE_RAINBOW_PERFECT_C;
+                break;
+
+            case CAMPAIGN_STATE_RAINBOW_PERFECT_D:
+                levelState = LEVEL_STATE_RAINBOW_PERFECT_D;
+                break;
+
+            default:
+                break;
+        }
     }
 #endif
 

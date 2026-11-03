@@ -146,7 +146,7 @@ void perfect_scene_start(void *sVar, s32 dArg) {
             }
 
             D_030046a8->data.totalPerfects++;
-            set_campaign_cleared(&D_030046a8->data, gPerfect->campaignID, TRUE);
+            set_campaign_cleared(&D_030046a8->data, gPerfect->campaignID, CAMPAIGN_STATE_PERFECT);
 
             baseCampaignsClearedAfter = get_total_base_cleared_campaigns(&D_030046a8->data);
 

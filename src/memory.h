@@ -31,6 +31,15 @@ enum AdvanceGameFlagsEnum {
     /* 02 */ ADVANCE_GAME_FLAG_NON_JP_MUSIC             = (1 << 1),
 };
 
+enum AdvancePerfectLevelEnum {
+    /* 00 */ CAMPAIGN_STATE_INCOMPLETE,
+    /* 01 */ CAMPAIGN_STATE_PERFECT,
+    /* 02 */ CAMPAIGN_STATE_RAINBOW_PERFECT_A,
+    /* 03 */ CAMPAIGN_STATE_RAINBOW_PERFECT_B,
+    /* 04 */ CAMPAIGN_STATE_RAINBOW_PERFECT_C,
+    /* 05 */ CAMPAIGN_STATE_RAINBOW_PERFECT_D
+};
+
 extern struct SaveBuffer {
     /* [0x000] Header */
     struct SaveBufferHeader {
